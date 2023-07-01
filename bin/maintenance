@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck disable=SC2164
+# shellcheck disable=SC1091,SC2164
 
 function _maint() {
 	(
@@ -63,15 +63,13 @@ function _maint() {
 
 		# Push changes of dotfiles
 		cd ~/.dotfiles
-		git stash push --include-untracked
-		git pull
-		if git stash pop; then
-			git add --all
-			git commit -m "$auto_commit_msg"
+		git add --all
+		git commit -m "$auto_commit_msg"
+		git fetch --all
+		if git rebase origin/main; then
 			git push
 		else
 			_retval="$?"
-			git checkout -f stash -- .
 		fi
 
 		exit "$_retval"
