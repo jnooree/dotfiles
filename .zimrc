@@ -1,10 +1,10 @@
 zmodule input
 zmodule utility
-zmodule git@github.com:jnooree/rcode.git
+zmodule jnooree/rcode
 zmodule zsh-users/zsh-completions --fpath src
 zmodule jnooree/conda-zsh-completion
 zmodule completion
 zmodule zsh-users/zsh-syntax-highlighting
 zmodule zsh-users/zsh-autosuggestions
-zmodule git@github.com:jnooree/zim-cfg.git -n jnooree
-zmodule git@github.com:jnooree/jnooree-zsh-theme.git -s jnooree.zsh-theme
+zmodule jnooree/zim-cfg -n jnooree
+zmodule jnooree/jnooree-zsh-theme -s jnooree.zsh-theme
