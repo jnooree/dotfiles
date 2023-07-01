@@ -118,8 +118,11 @@ for _fd in .config/htop/*; do
 done
 
 if [[ $_os_arch = *Darwin* ]]; then
-	for _fd in Library/LaunchAgents/*; do
+	while IFS= read -r -d '' _fd; do
 		to_home "$_fd"
+	done < <(find Library -type f -print0)
+
+	for _fd in Library/LaunchAgents/*; do
 		launchctl bootstrap "gui/$UID" "$HOME/$_fd"
 	done
 fi
