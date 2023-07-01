@@ -49,15 +49,30 @@ function _maint() {
 		done
 
 		# vcsh push all updates
-		local repo curr_head
+		local repo curr_head auto_commit_msg
+		auto_commit_msg="$(date +'%y%m%d - %H:%M') @ $(hostname -s)"
+
 		for repo in $(vcsh list); do
 			curr_head="$(vcsh "$repo" rev-parse --abbrev-ref HEAD)"
 
 			vcsh "$repo" pull origin "$curr_head"
 			vcsh "$repo" add -u
-			vcsh "$repo" commit -m "$(date +'%y%m%d - %H:%M') @ $(hostname -s)"
+			vcsh "$repo" commit -m "$auto_commit_msg"
 			vcsh "$repo" push
 		done
+
+		# Push changes of dotfiles
+		cd ~/.dotfiles
+		git stash push --include-untracked
+		git pull
+		if git stash pop; then
+			git add --all
+			git commit -m "$auto_commit_msg"
+			git push
+		else
+			_retval="$?"
+			git checkout -f stash -- .
+		fi
 
 		exit "$_retval"
 	)
