@@ -143,9 +143,24 @@ if [[ -z ${CODESPACES-} ]]; then
 	# Homebrew
 	ln -sfT "$HOMEBREW_PREFIX/share/zsh/functions/_git" ~/.zfunc/completion/_git
 
-	# cron
 	if [[ $_os_arch = *Linux* ]]; then
+		# cron
 		crontab ~/.config/cron/mytab
+	elif [[ -d ~/Library/CloudStorage/OneDrive-SNU/80-config/ssh ]]; then
+		mkdir -p ~/.ssh
+
+		# SSH config & keys
+		ln -sft ~/.ssh ~/Library/CloudStorage/OneDrive-SNU/80-config/ssh/config
+		cp -ft ~/.ssh ~/Library/CloudStorage/OneDrive-SNU/80-config/ssh/id_*
+
+		# Fix permissions
+		chmod 600 ~/.ssh/id_*
+		chmod 644 ~/.ssh/id_*.pub
+
+		# SSH host-specific config
+		pushd ~/.ssh
+		ln -sf ~/Library/CloudStorage/OneDrive-SNU/80-config/ssh/"config-$(hostname -s)" config.local
+		popd
 	fi
 else
 	# Codespaces automatically sets up GPG signing
