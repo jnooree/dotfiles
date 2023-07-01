@@ -101,7 +101,7 @@ shopt -s dotglob
 
 for _fd in * bin/* .config/* .config/gh/*; do
 	case "$_fd" in
-	.git | .gitignore | .config | bin | LICENSE | README.md | bootstrap.sh)
+	.git | .gitignore | .config | bin | Library | LICENSE | README.md | bootstrap.sh)
 		continue
 		;;
 	.config/htop | .config/gh)
@@ -115,6 +115,13 @@ done
 for _fd in .config/htop/*; do
 	to_home "$_fd" copy
 done
+
+if [[ $_os_arch = *Darwin* ]]; then
+	for _fd in Library/LaunchAgents/*; do
+		to_home "$_fd"
+		launchctl bootstrap "gui/$UID" "$HOME/$_fd"
+	done
+fi
 
 unset _fd
 
