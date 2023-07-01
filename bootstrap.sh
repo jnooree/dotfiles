@@ -141,23 +141,7 @@ done
 
 if [[ -z ${CODESPACES-} ]]; then
 	# Homebrew
-	brew bundle install --global --no-lock
-	"$HOMEBREW_PREFIX/opt/fzf/install"
 	ln -sfT "$HOMEBREW_PREFIX/share/zsh/functions/_git" ~/.zfunc/completion/_git
-
-	# Conda
-	set +eu
-	. ~/anaconda3/bin/activate base || exit 1
-	set -eu
-
-	mamba update -yn base mamba
-	mamba update -yn base --all
-	if ! mamba env list | grep -q default &>/dev/null; then
-		mamba create -yn default -c conda-forge \
-			python numpy scipy scikit-learn \
-			matplotlib seaborn pandas jupyter joblib tqdm \
-			rdkit openbabel autopep8
-	fi
 
 	# cron
 	if [[ $_os_arch = *Linux* ]]; then
@@ -178,6 +162,7 @@ git clone https://github.com/github/gitignore ~/opt/gitignore
 # Zim
 curl -fsSL --create-dirs -o ~/.zim/zimfw.zsh \
 	https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+zsh ~/.zim/zimfw.zsh init -q
 
 # iTerm2
 if [[ ! -r ~/.iterm2_shell_integration.zsh ]]; then
