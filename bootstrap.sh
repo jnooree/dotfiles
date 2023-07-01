@@ -53,6 +53,7 @@ function _auto_install_conda() {
 
 	curl -fsSL "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-${os_conda}-${arch}.sh" -o "$script_dest"
 	bash "$script_dest" -bup "$conda_prefix"
+	rm -rf "$(dirname "$script_dest")"
 }
 
 # Install package managers
