@@ -1,0 +1,17 @@
+
+
+# Conventional commit types:
+#
+# build: Changes that affect the build system or external dependencies
+# chore: Version bumps, dependency updates, etc.
+# ci: Changes to the CI/CD configuration files and scripts
+# docs: Documentation only changes
+# feat: A new feature
+# fix: A bug fix
+# perf: A code change that improves performance
+# refactor: A code change that neither fixes a bug nor adds a feature
+# revert: A revert commit
+# style: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+# test: Adding missing tests or correcting existing tests
+#
+# See https://www.conventionalcommits.org/en/ for details.

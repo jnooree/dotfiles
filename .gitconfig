@@ -1,0 +1,28 @@
+[user]
+	name = jnooree
+	email = jnooree@snu.ac.kr
+	signingkey = ~/.ssh/id_ed25519_sk.pub
+[push]
+	default = simple
+	followTags = true
+	autoSetupRemote = true
+[pull]
+	ff = only
+[merge]
+	ff = false
+[init]
+	defaultBranch = main
+[core]
+	quotepath = false
+	worktree = --list
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = ~/.ssh/allowed_signers
+[commit]
+	gpgsign = true
+	template = ~/.gitmessage
+[tag]
+	gpgsign = true
+[submodule]
+	recurse = true

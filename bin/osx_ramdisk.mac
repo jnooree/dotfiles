@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Size at the end is * 2048 where 2048 = 1 MB, so 1572864 = 768 MB
+# DISK=`/usr/bin/hdiutil attach -nobrowse -nomount ram://1572864`
+DISK="$(/usr/bin/hdiutil attach -nobrowse -nomount ram://$((3 * 512 * 2048)))"
+/usr/sbin/diskutil apfs create $DISK "RAMDisk"
+if [[ "$(/usr/bin/defaults read com.apple.screencapture location)" != /Volumes/RAMDisk ]]; then
+	/usr/bin/defaults write com.apple.screencapture location '/Volumes/RAMDisk'
+fi

@@ -1,0 +1,71 @@
+#!/bin/bash
+# shellcheck disable=SC2164
+
+function _maint() {
+	(
+		local _retval=0
+
+		renice 1 $$
+		cd "$HOME"
+
+		if [[ $(uname -s) = *Linux* ]]; then
+			# Backup crontab settings
+			crontab -l >".config/cron/mytab"
+		elif [[ $(uname -s) = *Darwin* ]]; then
+			# Upgrade homebrew
+			if [[ $(uname -m) = *arm64* ]]; then
+				_brew_prefix=/opt/homebrew
+			else
+				_brew_prefix=/usr/local
+			fi
+			export PATH="$_brew_prefix/bin:${PATH+:$PATH}"
+			eval "$(brew shellenv)"
+
+			brew update && brew upgrade &&
+				brew bundle dump --global --force --no-lock || _retval="$?"
+		fi
+
+		# Update python packages with anaconda
+		"$HOME/anaconda3/condabin/mamba" update -n base mamba || _retval="$?"
+		"$HOME/anaconda3/condabin/mamba" update -n base --all || _retval="$?"
+		"$HOME/anaconda3/condabin/mamba" update -n default --all || _retval="$?"
+
+		# Update custom plugins
+		local -a _folders
+		_folders=(
+			'opt/gitignore'
+		)
+
+		local _folder
+		for _folder in "${_folders[@]}"; do
+			if [[ -d "$_folder" ]]; then
+				(
+					cd "$_folder"
+					git stash push --include-untracked
+					git pull
+					git stash pop
+				)
+			fi
+		done
+
+		# vcsh push all updates
+		local repo curr_head
+		for repo in $(vcsh list); do
+			curr_head="$(vcsh "$repo" rev-parse --abbrev-ref HEAD)"
+
+			vcsh "$repo" pull origin "$curr_head"
+			vcsh "$repo" add -u
+			vcsh "$repo" commit -m "$(date +'%y%m%d - %H:%M') @ $(hostname -s)"
+			vcsh "$repo" push
+		done
+
+		exit "$_retval"
+	)
+}
+
+_now="$(date +'%y%m%d - %H:%M')"
+if ! _log="$(_maint 2>&1)"; then
+	mail -s "Maintenance error at $(hostname -s)" 'jnooree@gmail.com' <<<"$_log"
+fi
+
+printf '\nMAINTAINANCE LOG AT: %s\n%s\n' "$_now" "$_log" >>"$HOME/.maint.log"

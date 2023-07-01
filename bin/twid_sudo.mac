@@ -1,0 +1,30 @@
+#!/bin/bash
+
+if [[ $(id -u) -ne 0 ]]; then
+	echo "Must run this script as root!" >&2
+	exit 1
+fi
+
+if [[ $# -ne 1 ]]; then
+	echo "Usage: $0 <tid|watchid>" >&2
+	exit 1
+fi
+
+set -euvo pipefail
+
+# tid or watchid
+_soname="pam_$1.so"
+
+start=1
+while IFS=$'\n' read line; do
+	if grep -qP '^\s*#' <<<"$line"; then
+		((start++))
+	elif grep -qP "^auth\s+sufficient\s+$_soname\s*\$" <<<"$line"; then
+		exit
+	else
+		break
+	fi
+done </etc/pam.d/sudo
+
+theline="auth       sufficient     $_soname"
+perl -l -pi -e "print '$theline' if \$. == $start" /etc/pam.d/sudo

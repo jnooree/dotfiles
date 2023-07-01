@@ -1,0 +1,60 @@
+#!/bin/bash -eu
+
+set -o pipefail
+
+if [[ -d .gitignore ]]; then
+	echo "Error: .gitignore directory exists" >&2
+	exit 1
+fi
+
+if [[ -d "$HOME/opt/gitignore" ]]; then
+	_dir="$HOME/opt/gitignore"
+elif [[ -d "$HOME/.local/opt/gitignore" ]]; then
+	_dir="$HOME/.local/opt/gitignore"
+else
+	echo "Error: gitignore repository is not found" >&2
+	exit 1
+fi
+
+mapfile -t _gitignore < <(
+	find -L "$_dir" -type f -iname "*${1-}${1:+*}" -not -path "$_dir/.*" |
+		sed 's?'"$_dir"'/??g'
+)
+
+if [[ ${#_gitignore[@]} -eq 0 ]]; then
+	echo "Error: No such file found; check language!" >&2
+	echo "Your input was: $(printf '%q' "$1")" >&2
+	exit 1
+fi
+
+if [[ ${#_gitignore[@]} -eq 1 ]]; then
+	_template="${_gitignore[0]}"
+else
+	echo "Too many results; check and select one of them!"
+	select _template in "${_gitignore[@]}"; do
+		if [[ -z $_template ]]; then
+			echo "Error: Invalid input" >&2
+			continue
+		fi
+
+		read -rp "Copy '$_template' as .gitignore? [Y/n] " _yorn
+		if [[ -z $_yorn || $_yorn = [yY]* ]]; then
+			break
+		fi
+	done
+fi
+
+_src_comment="# From $_template"
+if [[ -f .gitignore ]]; then
+	if command rg -qUF "$(cat "$_dir/$_template")" .gitignore; then
+		echo ".gitignore already has the same rules; skipping" >&2
+		exit
+	else
+		_src_comment=$'\n'"$_src_comment"
+	fi
+fi
+
+script="echo $(printf '%q' "$_src_comment") >>.gitignore
+cat $(printf '%q' "$_dir/$_template") >>.gitignore"
+echo "$script"
+eval "$script"
