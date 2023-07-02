@@ -65,12 +65,14 @@ function _maint() {
 		cd ~/.dotfiles
 		git add --all
 		git commit -m "$auto_commit_msg"
-		git fetch --all
-		if git rebase origin/main; then
-			git push
-		else
-			_retval="$?"
-		fi
+
+		while ! git push; do
+			git fetch --all
+			if ! git rebase origin/main; then
+				_retval="$?"
+				break
+			fi
+		done
 
 		exit "$_retval"
 	)
