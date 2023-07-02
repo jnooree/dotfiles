@@ -9,9 +9,7 @@ esac
 # shellcheck disable=SC2154
 if [[ $_OS_ARCH = *Linux* ]]; then
 	ulimit -s 1048576
-fi
-
-if [[ $_OS_ARCH = *Darwin* ]]; then
+else
 	_brew_opt="$HOMEBREW_PREFIX/opt"
 
 	export PATH="$HOME/bin:$HOME/.local/bin:$_brew_opt/gnu-sed/libexec/gnubin:\
@@ -59,11 +57,10 @@ if [[ -x ~/.jenv/bin/jenv ]]; then
 fi
 
 if [[ $(hostname -s) = galaxy3 ]]; then
-	_source_if_readable "$HOME/.rvm/scripts/rvm"
+	_source_if_readable ~/.rvm/scripts/rvm
 fi
 
-FPATH="$HOME/.zfunc/completion:$HOMEBREW_PREFIX/share/zsh/site-functions\
-${FPATH+:$FPATH}"
+FPATH="$HOME/.zfunc/completion:$HOMEBREW_PREFIX/share/zsh/site-functions${FPATH+:$FPATH}"
 export NODE_PATH="$HOMEBREW_PREFIX/lib/node_modules${NODE_PATH+:$NODE_PATH}"
 
 export LS_COLORS="rs=0:di=1;36:ln=35:mh=00:pi=33:so=32:bd=34;46:cd=34;43:\
@@ -134,16 +131,13 @@ else
 fi
 export SUDO_EDITOR="$EDITOR"
 
-case "$_OS_ARCH" in
-*Linux*)
+if [[ $_OS_ARCH = *Linux* ]]; then
 	alias visudo="sudo visudo"
 	alias ufw-full-reload="sudo bash -c 'iptables -F; iptables -X; ip6tables -F; ip6tables -X; ufw disable; ufw enable'"
 	alias sinf='sinfo -N -o "%8N  %9P  %.2t  %.13C  %.8O  %.6m  %.8e  %$(( $COLUMNS - 68 ))E"'
-	;;
-*Darwin*)
+else
 	alias sdsubl="sudo '/Applications/Sublime Text.app/Contents/MacOS/sublime_text'"
-	;;
-esac
+fi
 
 if [[ -z $SSH_CONNECTION ]]; then
 	unfunction rcode
@@ -151,8 +145,8 @@ if [[ -z $SSH_CONNECTION ]]; then
 fi
 
 _source_if_readable /etc/zsh_command_not_found
-_source_if_readable "$HOME/.fzf.zsh"
-_source_if_readable "$HOME/.iterm2_shell_integration.zsh"
+_source_if_readable ~/.fzf.zsh
+_source_if_readable ~/.iterm2_shell_integration.zsh
 _source_if_readable "${ZDOTDIR-$HOME}/.zshrc.local"
 
 unset _OS_ARCH
