@@ -102,7 +102,8 @@ shopt -s dotglob
 
 for _fd in * bin/* .config/* .config/gh/*; do
 	case "$_fd" in
-	.git | .gitignore | .config | bin | Library | LICENSE | README.md | bootstrap.sh)
+	.git | .github | .gitignore | .config | \
+		bin | Library | LICENSE | README.md | bootstrap.sh)
 		continue
 		;;
 	.config/htop | .config/gh | .config/karabiner)
