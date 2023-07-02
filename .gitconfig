@@ -14,7 +14,6 @@
 	defaultBranch = main
 [core]
 	quotepath = false
-	worktree = --list
 [gpg]
 	format = ssh
 [gpg "ssh"]
