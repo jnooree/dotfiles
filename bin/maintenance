@@ -84,9 +84,12 @@ function _maint() {
 	)
 }
 
-_now="$(date +'%y%m%d - %H:%M')"
-if ! _log="$(_maint 2>&1)"; then
-	mail -s "Maintenance error at $(hostname -s)" 'jnooree@gmail.com' <<<"$_log"
-fi
+{
+	_now="$(date +'%y%m%d - %H:%M')"
+	if ! _log="$(_maint 2>&1)"; then
+		mail -s "Maintenance error at $(hostname -s)" 'jnooree@gmail.com' <<<"$_log"
+	fi
 
-printf '\nMAINTAINANCE LOG AT: %s\n%s\n' "$_now" "$_log" >>"$HOME/.maint.log"
+	printf '\nMAINTAINANCE LOG AT: %s\n%s\n' "$_now" "$_log" >>"$HOME/.maint.log"
+	exit 0
+}
