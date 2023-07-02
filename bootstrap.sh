@@ -62,7 +62,7 @@ if [[ ! -d ~/anaconda3 ]]; then
 	_auto_install_conda ~/anaconda3
 fi
 
-brew install coreutils fd ripgrep fzf
+brew install coreutils fd ripgrep fzf zsh
 export PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
 
 script_dir="$(dirname "$(realpath "$0")")"
