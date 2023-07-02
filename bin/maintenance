@@ -3,7 +3,7 @@
 
 function _maint() {
 	(
-		local _retval=0
+		local _retval=0 brewfile
 
 		renice 1 $$
 		cd "$HOME"
@@ -21,8 +21,14 @@ function _maint() {
 			export PATH="$_brew_prefix/bin:${PATH+:$PATH}"
 			eval "$(brew shellenv)"
 
-			brew update && brew upgrade &&
-				brew bundle dump --global --force --no-lock || _retval="$?"
+			brew update && brew upgrade && brew cleanup &&
+				brew bundle install --global --no-lock &&
+				brew bundle dump --global --force || _retval="$?"
+
+			# Fixup
+			brewfile="$(realpath .Brewfile)"
+			gsed -i -E '/^vscode /d' "$brewfile"
+			gsed -i -E '0,/^brew "python@.*/s//brew "python"/' "$brewfile"
 		fi
 
 		# Update python packages with anaconda
