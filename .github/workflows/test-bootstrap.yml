@@ -12,7 +12,9 @@ defaults:
   run:
     shell: bash
 
-concurrency: ${{github.ref}}-${{github.workflow}}
+concurrency:
+  group: ${{github.ref}}-${{github.workflow}}
+  cancel-in-progress: true
 
 jobs:
   test:
