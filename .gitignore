@@ -1,4 +1,5 @@
 .zcomp*
+.zshrc.local
 .zfunc/completion/_git
 .config/iterm2.mac/AppSupport
 
