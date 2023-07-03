@@ -78,6 +78,7 @@ function _maint() {
 				_retval="$?"
 				break
 			fi
+			sleep 1
 		done
 
 		exit "$_retval"
