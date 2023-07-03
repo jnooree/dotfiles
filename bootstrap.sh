@@ -187,7 +187,11 @@ else
 fi
 
 # Local gitignore repo
-git clone https://github.com/github/gitignore ~/opt/gitignore
+if [[ ! -d ~/opt/gitignore ]]; then
+	git clone https://github.com/github/gitignore ~/opt/gitignore
+else
+	git -C ~/opt/gitignore pull
+fi
 
 # Zim
 curl -fsSL --create-dirs -o ~/.zim/zimfw.zsh \
