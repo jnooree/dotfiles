@@ -11,17 +11,19 @@ function _auto_install_brew() {
 	if command -v brew &>/dev/null; then
 		brew_prefix="$(brew --prefix)"
 	else
-		NONINTERACTIVE=1 bash -c "$(
-			curl -fsSL \
-				https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
-		)"
-
 		if [[ $_os_arch = *Linux* ]]; then
 			brew_prefix=/home/linuxbrew/.linuxbrew
 		elif [[ $_os_arch = *x86_64* ]]; then
 			brew_prefix=/usr/local
 		else
 			brew_prefix=/opt/homebrew
+		fi
+
+		if ! [[ -x $brew_prefix/bin/brew ]]; then
+			NONINTERACTIVE=1 bash -c "$(
+				curl -fsSL \
+					https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+			)"
 		fi
 	fi
 
@@ -31,7 +33,11 @@ function _auto_install_brew() {
 }
 
 function _auto_install_conda() {
-	local os_conda arch conda_prefix script_dest
+	local conda_prefix="$1" os_conda arch script_dest
+
+	if [[ -d $conda_prefix ]]; then
+		return 0
+	fi
 
 	case "$_os_arch" in
 	*Linux*) os_conda="Linux" ;;
@@ -48,7 +54,6 @@ function _auto_install_conda() {
 		exit 1
 	fi
 
-	conda_prefix="$1"
 	script_dest="$(mktemp -d)/conda-install.sh"
 
 	curl -fsSL "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-${os_conda}-${arch}.sh" -o "$script_dest"
@@ -57,13 +62,16 @@ function _auto_install_conda() {
 }
 
 # Install package managers
-_auto_install_brew
-if [[ ! -d ~/anaconda3 ]]; then
-	_auto_install_conda ~/anaconda3
+if [[ -z ${SKIP_HOMEBREW-} ]]; then
+	_auto_install_brew
+
+	brew install coreutils fd ripgrep fzf zsh
+	export PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
 fi
 
-brew install coreutils fd ripgrep fzf zsh
-export PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
+if [[ -z ${SKIP_CONDA-} ]]; then
+	_auto_install_conda ~/anaconda3
+fi
 
 script_dir="$(dirname "$(realpath "$0")")"
 cd "$script_dir"
@@ -139,14 +147,16 @@ shopt -u dotglob
 # Create directories
 mkdir -p ~/opt ~/.config/zsh ~/.vim/{backup,swap,undo}
 
-# Link zsh configs
-for _file in .zshenv .zshrc .zimrc; do
-	ln -sfT "../../$_file" "$HOME/.config/zsh/$_file"
-done
-
 if [[ -z ${CODESPACES-} ]]; then
-	# Homebrew
-	ln -sfT "$HOMEBREW_PREFIX/share/zsh/functions/_git" ~/.zfunc/completion/_git
+	# Link git autocompletion
+	if [[ -n ${HOMEBREW_PREFIX-} ]]; then
+		_zsh_git="$HOMEBREW_PREFIX/share/zsh/functions/_git"
+	elif [[ $_os_arch = *Linux* ]]; then
+		_zsh_git=/usr/share/zsh/functions/Completion/Unix/_git
+	else
+		_zsh_git="/usr/share/zsh/$(/bin/zsh -c 'echo $ZSH_VERSION')/functions/_git"
+	fi
+	ln -sfT "$_zsh_git" ~/.zfunc/completion/_git
 
 	if [[ $_os_arch = *Linux* ]]; then
 		# cron
