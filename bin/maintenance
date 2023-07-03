@@ -21,14 +21,15 @@ function _maint() {
 			export PATH="$_brew_prefix/bin:${PATH+:$PATH}"
 			eval "$(brew shellenv)"
 
-			brew update && brew upgrade && brew cleanup &&
-				brew bundle install --global --no-lock &&
-				brew bundle dump --global --force || _retval="$?"
-
-			# Fixup
-			brewfile="$(realpath .Brewfile)"
-			gsed -i -E '/^vscode /d' "$brewfile"
-			gsed -i -E '0,/^brew "python@.*/s//brew "python"/' "$brewfile"
+			brew update && brew upgrade || _retval="$?"
+			brew cleanup
+			brew bundle install --global --no-lock &&
+				brew bundle dump --global --force && {
+				# Fixup
+				brewfile="$(realpath .Brewfile)"
+				gsed -i -E '/^vscode /d' "$brewfile"
+				gsed -i -E '0,/^brew "python@.*/s//brew "python"/' "$brewfile"
+			} || _retval="$?"
 		fi
 
 		# Update python packages with anaconda
