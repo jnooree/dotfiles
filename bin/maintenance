@@ -1,97 +1,152 @@
 #!/bin/bash
-# shellcheck disable=SC1091,SC2164
+# shellcheck disable=SC1091,SC2155,SC2164
 
-function _maint() {
+function _brew_update() {
+	local retval=0 brew_prefix
+
+	# Upgrade homebrew
+	if [[ $(uname -s) = *Linux* ]]; then
+		brew_prefix=/home/linuxbrew/.linuxbrew
+	elif [[ $(uname -m) = *arm64* ]]; then
+		brew_prefix=/opt/homebrew
+	else
+		brew_prefix=/usr/local
+	fi
+
+	if ! [[ -d $brew_prefix && -w $brew_prefix ]]; then
+		echo "skipping brew update" >&2
+		return 0
+	fi
+
+	export PATH="$brew_prefix/bin:${PATH+:$PATH}"
+	eval "$(brew shellenv)"
+
+	brew update && brew upgrade || retval="$?"
+	brew cleanup
+	brew bundle install --global --no-lock &&
+		brew bundle dump --global --force && {
+		# Fixup
+		brewfile="$(realpath .Brewfile)"
+		gsed -i -E '/^vscode /d' "$brewfile"
+		gsed -i -E '0,/^brew "python@.*/s//brew "python"/' "$brewfile"
+	} || retval="$?"
+
+	return "$retval"
+}
+
+function _conda_update() {
+	if [[ ! -x ~/anaconda3/condabin/mamba ]]; then
+		echo "skipping conda update" >&2
+		return 0
+	fi
+
 	(
-		local _retval=0 brewfile
-
-		renice 1 $$
-		cd ~
-
-		if [[ $(uname -s) = *Linux* ]]; then
-			# Backup crontab settings
-			crontab -l >".config/cron/mytab"
-		elif [[ $(uname -s) = *Darwin* ]]; then
-			# Upgrade homebrew
-			if [[ $(uname -m) = *arm64* ]]; then
-				_brew_prefix=/opt/homebrew
-			else
-				_brew_prefix=/usr/local
-			fi
-			export PATH="$_brew_prefix/bin:${PATH+:$PATH}"
-			eval "$(brew shellenv)"
-
-			brew update && brew upgrade || _retval="$?"
-			brew cleanup
-			brew bundle install --global --no-lock &&
-				brew bundle dump --global --force && {
-				# Fixup
-				brewfile="$(realpath .Brewfile)"
-				gsed -i -E '/^vscode /d' "$brewfile"
-				gsed -i -E '0,/^brew "python@.*/s//brew "python"/' "$brewfile"
-			} || _retval="$?"
-		fi
-
-		# Update python packages with anaconda
-		~/anaconda3/condabin/mamba update -n base mamba || _retval="$?"
-		~/anaconda3/condabin/mamba update -n base --all || _retval="$?"
-		~/anaconda3/condabin/mamba update -n default --all || _retval="$?"
-
-		# Update custom plugins
-		local -a _folders
-		_folders=(
-			'opt/gitignore'
-		)
-
-		local _folder
-		for _folder in "${_folders[@]}"; do
-			if [[ -d "$_folder" ]]; then
-				(
-					cd "$_folder"
-					git stash push --include-untracked
-					git pull
-					git stash pop
-				)
-			fi
-		done
-
-		# vcsh push all updates
-		local repo curr_head auto_commit_msg
-		auto_commit_msg="$(date +'%y%m%d - %H:%M') @ $(hostname -s)"
-
-		for repo in $(vcsh list); do
-			curr_head="$(vcsh "$repo" rev-parse --abbrev-ref HEAD)"
-
-			vcsh "$repo" pull origin "$curr_head"
-			vcsh "$repo" add -u
-			vcsh "$repo" commit -m "$auto_commit_msg"
-			vcsh "$repo" push
-		done
-
-		# Push changes of dotfiles
-		cd ~/.dotfiles
-		git add --all
-		git commit -m "$auto_commit_msg"
-
-		while ! git push; do
-			git fetch --all
-			if ! git rebase origin/main; then
-				_retval="$?"
-				break
-			fi
-			sleep 1
-		done
-
-		exit "$_retval"
+		set -e
+		~/anaconda3/condabin/mamba update -n base mamba
+		~/anaconda3/condabin/mamba update -n base --all
+		~/anaconda3/condabin/mamba update -n default --all
 	)
 }
 
-{
-	_now="$(date +'%y%m%d - %H:%M')"
-	if ! _log="$(_maint 2>&1)"; then
-		mail -s "Maintenance error at $(hostname -s)" 'jnooree@gmail.com' <<<"$_log"
+function _plugins_update() {
+	local -a folders retval=0
+	folders=(
+		'opt/gitignore'
+	)
+
+	local folder
+	for folder in "${folders[@]}"; do
+		if [[ -d $folder && -w $folder ]]; then
+			git -C "$folder" pull || retval="$?"
+		fi
+	done
+
+	return "$retval"
+}
+
+function _vcsh_update() {
+	local auto_commit_msg="$1" retval=0
+
+	if ! command -v vcsh &>/dev/null; then
+		echo "skipping vcsh update" >&2
+		return 0
 	fi
 
+	local repo
+	for repo in $(vcsh list); do
+		(
+			set -e
+
+			vcsh "$repo" pull
+			vcsh "$repo" add -u
+			vcsh "$repo" commit -m "$auto_commit_msg"
+			vcsh "$repo" push
+		) || retval="$?"
+	done
+
+	return "$retval"
+}
+
+function _dotfiles_sync() {
+	local auto_commit_msg="$1"
+
+	cd ~/.dotfiles
+
+	git add --all
+	git commit -m "$auto_commit_msg"
+
+	while ! git push; do
+		git fetch --all
+		if ! git rebase origin/main; then
+			return "$?"
+		fi
+		sleep 1
+	done
+
+	return 0
+}
+
+function _maint() {
+	local retval=0
+
+	if ! cd ~; then
+		echo "failed to cd to home" >&2
+		return 1
+	fi
+
+	if [[ $(uname -s) = *Linux* ]]; then
+		# Backup crontab settings
+		crontab -l >.config/cron/mytab
+	fi
+
+	_brew_update || retval="$?"
+	_conda_update || retval="$?"
+	_plugins_update || retval="$?"
+
+	local auto_commit_msg="$(date +'%y%m%d - %H:%M') @ $(hostname -s)"
+
+	_vcsh_update "$auto_commit_msg" || retval="$?"
+	_dotfiles_sync "$auto_commit_msg" || retval="$?"
+
+	return "$retval"
+}
+
+function _autorun() {
+	renice 1 $$
+
+	_now="$(date +'%y%m%d - %H:%M')"
+	if ! _log="$(_maint 2>&1)" && command -v mail &>/dev/null; then
+		mail -s "Maintenance error at $(hostname -s)" 'jnooree@gmail.com' <<<"$_log"
+	fi
 	printf '\nMAINTAINANCE LOG AT: %s\n%s\n' "$_now" "$_log" >>~/.maint.log
-	exit 0
+}
+
+{
+	if [[ -z ${MANUAL-} ]]; then
+		_autorun
+		exit 0
+	else
+		_maint
+		exit "$?"
+	fi
 }
