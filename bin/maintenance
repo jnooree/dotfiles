@@ -6,7 +6,7 @@ function _maint() {
 		local _retval=0 brewfile
 
 		renice 1 $$
-		cd "$HOME"
+		cd ~
 
 		if [[ $(uname -s) = *Linux* ]]; then
 			# Backup crontab settings
@@ -32,9 +32,9 @@ function _maint() {
 		fi
 
 		# Update python packages with anaconda
-		"$HOME/anaconda3/condabin/mamba" update -n base mamba || _retval="$?"
-		"$HOME/anaconda3/condabin/mamba" update -n base --all || _retval="$?"
-		"$HOME/anaconda3/condabin/mamba" update -n default --all || _retval="$?"
+		~/anaconda3/condabin/mamba update -n base mamba || _retval="$?"
+		~/anaconda3/condabin/mamba update -n base --all || _retval="$?"
+		~/anaconda3/condabin/mamba update -n default --all || _retval="$?"
 
 		# Update custom plugins
 		local -a _folders
@@ -91,6 +91,6 @@ function _maint() {
 		mail -s "Maintenance error at $(hostname -s)" 'jnooree@gmail.com' <<<"$_log"
 	fi
 
-	printf '\nMAINTAINANCE LOG AT: %s\n%s\n' "$_now" "$_log" >>"$HOME/.maint.log"
+	printf '\nMAINTAINANCE LOG AT: %s\n%s\n' "$_now" "$_log" >>~/.maint.log
 	exit 0
 }
