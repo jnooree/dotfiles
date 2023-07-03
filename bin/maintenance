@@ -13,7 +13,7 @@ function _brew_update() {
 		brew_prefix=/usr/local
 	fi
 
-	if ! [[ -d $brew_prefix && -w $brew_prefix ]]; then
+	if ! [[ -d $brew_prefix && -w $brew_prefix/Cellar ]]; then
 		echo "skipping brew update" >&2
 		return 0
 	fi
