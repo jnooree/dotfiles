@@ -9,10 +9,10 @@ esac
 # shellcheck disable=SC2154
 if [[ $_OS_ARCH = *Linux* ]]; then
 	ulimit -s 1048576
-else
+elif [[ -n ${HOMEBREW_PREFIX-} ]]; then
 	_brew_opt="$HOMEBREW_PREFIX/opt"
 
-	export PATH="$HOME/bin:$HOME/.local/bin:$_brew_opt/gnu-sed/libexec/gnubin:\
+	PATH="$_brew_opt/gnu-sed/libexec/gnubin:\
 $_brew_opt/gnu-tar/libexec/gnubin:$_brew_opt/grep/libexec/gnubin:\
 $_brew_opt/findutils/libexec/gnubin:$_brew_opt/coreutils/libexec/gnubin:\
 $_brew_opt/curl/bin:$_brew_opt/ruby/bin:$_brew_opt/ssh-copy-id/bin:\
@@ -23,6 +23,8 @@ $HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin${PATH+:$PATH}"
 
 	unset _brew_opt
 fi
+
+export PATH="$HOME/bin:$HOME/.local/bin${PATH+:$PATH}"
 
 function _source_if_readable() {
 	if [[ -r $1 ]]; then
@@ -60,8 +62,11 @@ if [[ $(hostname -s) = galaxy3 ]]; then
 	_source_if_readable ~/.rvm/scripts/rvm
 fi
 
-FPATH="$HOME/.zfunc/completion:$HOMEBREW_PREFIX/share/zsh/site-functions${FPATH+:$FPATH}"
-export NODE_PATH="$HOMEBREW_PREFIX/lib/node_modules${NODE_PATH+:$NODE_PATH}"
+if [[ -n ${HOMEBREW_PREFIX-} ]]; then
+	FPATH="$HOMEBREW_PREFIX/share/zsh/site-functions${FPATH+:$FPATH}"
+	export NODE_PATH="$HOMEBREW_PREFIX/lib/node_modules${NODE_PATH+:$NODE_PATH}"
+fi
+FPATH="$HOME/.zfunc/completion${FPATH+:$FPATH}"
 
 export LS_COLORS="rs=0:di=1;36:ln=35:mh=00:pi=33:so=32:bd=34;46:cd=34;43:\
 or=40;31;01:mi=00:su=30;41:sg=30;46:ca=00:tw=30;42:ow=30;43:st=30;44:ex=31:\
@@ -70,7 +75,7 @@ or=40;31;01:mi=00:su=30;41:sg=30;46:ca=00:tw=30;42:ow=30;43:st=30;44:ex=31:\
 
 # compdump file path
 zstyle ':zim:completion' dumpfile \
-	"${ZDOTDIR-$HOME}/.zcompdump-${SHORT_HOST}-${ZSH_VERSION}"
+	"${ZDOTDIR-$HOME}/.zcompdump-$SHORT_HOST-$ZSH_VERSION"
 
 DEFAULT_USER=jnooree
 
@@ -78,12 +83,12 @@ DEFAULT_USER=jnooree
 ZIM_HOME="$HOME/.zim"
 
 # Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
-if [[ ! "${ZIM_HOME}/init.zsh" -nt "${ZDOTDIR-$HOME}/.zimrc" ]]; then
-	source "${ZIM_HOME}/zimfw.zsh" init -q
+if [[ ! $ZIM_HOME/init.zsh -nt ${ZDOTDIR-$HOME}/.zimrc ]]; then
+	source "$ZIM_HOME/zimfw.zsh" init -q
 fi
 
 # Initialize modules.
-source "${ZIM_HOME}/init.zsh"
+source "$ZIM_HOME/init.zsh"
 
 if [[ $_OS_ARCH = *Darwin* ]]; then
 	# NFD...
@@ -95,7 +100,7 @@ if [[ $_OS_ARCH = *Darwin* ]]; then
 		if [[ "$expanded_curr_dir" != */* ]]; then
 			curr_dir='%/'
 			expanded_curr_dir="${(%)curr_dir}"
-		elif [[ ${#expanded_curr_dir} -gt $(( $COLUMNS - ${MIN_COLUMNS:-30} )) ]]; then
+		elif [[ ${#expanded_curr_dir} -gt $(( COLUMNS - ${MIN_COLUMNS:-30} )) ]]; then
 			curr_dir='.../%2d'
 			expanded_curr_dir="${(%)curr_dir}"
 		fi
@@ -106,11 +111,11 @@ fi
 
 # Related to pre{cmd,exec}
 function jnr_precmd() {
-	builtin print -n $'\033]0;'"${USER}@${SHORT_HOST}: ${(%)$(prompt_current_dir)}"$'\a'
+	builtin print -n $'\033]0;'"$USER@$SHORT_HOST: ${(%)$(prompt_current_dir)}"$'\a'
 }
 
 function jnr_preexec() {
-	builtin print -n $'\033]0;'"${USER}@${SHORT_HOST}: $1"$'\a'
+	builtin print -n $'\033]0;'"$USER@$SHORT_HOST: $1"$'\a'
 }
 
 autoload -U add-zsh-hook
@@ -121,9 +126,9 @@ add-zsh-hook preexec jnr_preexec
 export LANG="en_US.UTF-8"
 
 # Preferred editor for local and remote sessions
-if [[ "${TERM_PROGRAM-}" = vscode ]]; then
+if [[ ${TERM_PROGRAM-} = vscode ]]; then
 	export EDITOR="$(which code) --wait"
-elif [[ -n "$SSH_CONNECTION" ]]; then
+elif [[ -n ${SSH_CONNECTION-} ]]; then
 	export EDITOR='rsub -n -w'
 else
 	export HOMEBREW_EDITOR='subl -n'
@@ -139,7 +144,7 @@ else
 	alias sdsubl="sudo '/Applications/Sublime Text.app/Contents/MacOS/sublime_text'"
 fi
 
-if [[ -z $SSH_CONNECTION ]]; then
+if [[ -z ${SSH_CONNECTION-} ]]; then
 	unfunction rcode
 	alias rcode=code
 fi
@@ -153,7 +158,7 @@ unset _OS_ARCH
 unfunction _source_if_readable
 
 if command -v neofetch &>/dev/null &&
-	[[ -z $SSH_CONNECTION && $(who | wc -l) -eq 2 ]]; then
+	[[ -z ${SSH_CONNECTION-} && $(who | wc -l) -eq 2 ]]; then
 	echo
 	neofetch
 fi
