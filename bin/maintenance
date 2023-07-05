@@ -95,7 +95,11 @@ function _dotfiles_sync() {
 	git add --all
 	git commit -m "$auto_commit_msg"
 
-	while ! git push; do
+	for _ in {1..5}; do
+		if git push; then
+			return 0
+		fi
+
 		git fetch --all
 		if ! git rebase origin/main; then
 			return "$?"
@@ -103,11 +107,13 @@ function _dotfiles_sync() {
 		sleep 1
 	done
 
-	return 0
+	return 1
 }
 
 function _maint() {
 	local retval=0
+
+	renice 1 $$
 
 	if ! cd ~; then
 		echo "failed to cd to home" >&2
@@ -132,8 +138,6 @@ function _maint() {
 }
 
 function _autorun() {
-	renice 1 $$
-
 	_now="$(date +'%y%m%d - %H:%M')"
 	if ! _log="$(_maint 2>&1)" && command -v mail &>/dev/null; then
 		mail -s "Maintenance error at $(hostname -s)" 'jnooree@gmail.com' <<<"$_log"
