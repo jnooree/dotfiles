@@ -4,22 +4,10 @@
 function _brew_update() {
 	local retval=0 brew_prefix
 
-	# Upgrade homebrew
-	if [[ $(uname -s) = *Linux* ]]; then
-		brew_prefix=/home/linuxbrew/.linuxbrew
-	elif [[ $(uname -m) = *arm64* ]]; then
-		brew_prefix=/opt/homebrew
-	else
-		brew_prefix=/usr/local
-	fi
-
-	if ! [[ -d $brew_prefix && -w $brew_prefix/Cellar ]]; then
+	if ! [[ -d $HOMEBREW_PREFIX/ && -w $HOMEBREW_PREFIX/Cellar ]]; then
 		echo "skipping brew update" >&2
 		return 0
 	fi
-
-	export PATH="$brew_prefix/bin:${PATH+:$PATH}"
-	eval "$(brew shellenv)"
 
 	brew update && brew upgrade || retval="$?"
 	brew cleanup
@@ -118,6 +106,18 @@ function _maint() {
 	if ! cd ~; then
 		echo "failed to cd to home" >&2
 		return 1
+	fi
+
+	if [[ $(uname -s) = *Linux* ]]; then
+		brew_prefix=/home/linuxbrew/.linuxbrew
+	elif [[ $(uname -m) = *arm64* ]]; then
+		brew_prefix=/opt/homebrew
+	else
+		brew_prefix=/usr/local
+	fi
+
+	if [[ -x $brew_prefix/bin/brew ]]; then
+		eval "$("$brew_prefix/bin/brew" shellenv)"
 	fi
 
 	if [[ $(uname -s) = *Linux* ]]; then
