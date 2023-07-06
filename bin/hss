@@ -23,7 +23,7 @@ def ssh(*command, stdin: str = None, stdout=None, stderr=None):
 async def rsync(local_path, remote_path: str, stdout=None, stderr=None):
     args = ["rsync", "-amL", "--info=progress2",
             str(local_path),
-            f"{_HOST}:{shlex.quote(normalize(remote_path, 'NFD'))}"]
+            f"{_HOST}:{shlex.quote(normalize('NFD', remote_path))}"]
     async with _sem:
         return sp.run(args, check=True, stdout=stdout, stderr=stderr)
 
