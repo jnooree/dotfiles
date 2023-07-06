@@ -1758,7 +1758,7 @@ Log.SaveContents</string>
 			<key>Send Session Ended Alert</key>
 			<false/>
 			<key>Set Local Environment Vars</key>
-			<true/>
+			<false/>
 			<key>Shortcut</key>
 			<string>A</string>
 			<key>Show Mark Indicators</key>
