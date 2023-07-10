@@ -1,3 +1,15 @@
+function wqst() {
+	OPTIND=1
+	local n_flag=1
+	while getopts 'n:' flag; do
+		case "$flag" in
+		n) n_flag="$OPTARG" ;;
+		*) return ;;
+		esac
+	done
+	watch -n "$n_flag" qstat
+}
+
 function gpa() {
 	OPTIND=1
 	local cur_head="$(git rev-parse --abbrev-ref HEAD)"
