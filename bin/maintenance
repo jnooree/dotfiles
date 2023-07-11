@@ -142,7 +142,7 @@ function _autorun() {
 	if ! _log="$(_maint 2>&1)" && command -v mail &>/dev/null; then
 		mail -s "Maintenance error at $(hostname -s)" 'jnooree@gmail.com' <<<"$_log"
 	fi
-	printf '\nMAINTAINANCE LOG AT: %s\n%s\n' "$_now" "$_log" >>~/.maint.log
+	printf '\nMAINTENANCE LOG AT: %s\n%s\n' "$_now" "$_log" >>~/.maint.log
 }
 
 {
