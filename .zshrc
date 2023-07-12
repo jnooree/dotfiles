@@ -151,7 +151,11 @@ fi
 
 _source_if_readable /etc/zsh_command_not_found
 _source_if_readable ~/.fzf.zsh
+
+export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=1
 _source_if_readable ~/.iterm2_shell_integration.zsh
+unset ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX
+
 _source_if_readable "${ZDOTDIR-$HOME}/.zshrc.local"
 
 unset _OS_ARCH
