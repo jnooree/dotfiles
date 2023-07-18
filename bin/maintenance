@@ -129,7 +129,7 @@ function _maint() {
 	_conda_update || retval="$?"
 	_plugins_update || retval="$?"
 
-	local auto_commit_msg="$(date +'%y%m%d - %H:%M') @ $(hostname -s)"
+	local auto_commit_msg="[AUTOCOMMIT] $(date +'%y%m%d - %H:%M') @ $(hostname -s)"
 
 	_vcsh_update "$auto_commit_msg" || retval="$?"
 	_dotfiles_sync "$auto_commit_msg" || retval="$?"
