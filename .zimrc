@@ -4,7 +4,7 @@ zmodule jnooree/rcode
 zmodule zsh-users/zsh-completions --fpath src
 zmodule jnooree/conda-zsh-completion
 zmodule completion
-zmodule zsh-users/zsh-syntax-highlighting
+zmodule zdharma-continuum/fast-syntax-highlighting -s fast-syntax-highlighting.plugin.zsh
 zmodule zsh-users/zsh-autosuggestions
 zmodule jnooree/zim-cfg -n jnooree
 zmodule jnooree/jnooree-zsh-theme -s jnooree.zsh-theme
