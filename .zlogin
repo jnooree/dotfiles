@@ -1,4 +1,4 @@
-if [[ -n {SLURM_JOB_ID-} ]]; then
+if [[ -n ${SLURM_JOB_ID-} ]]; then
 	case $- in
 		*i* )
 			tput setaf 1
