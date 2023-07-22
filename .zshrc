@@ -58,6 +58,8 @@ if [[ -x ~/.jenv/bin/jenv ]]; then
 	eval "$(jenv init -)"
 fi
 
+_source_if_readable "$HOME/.cargo/env"
+
 if [[ $(hostname -s) = galaxy3 ]]; then
 	_source_if_readable ~/.rvm/scripts/rvm
 fi
