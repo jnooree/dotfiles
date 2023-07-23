@@ -1,4 +1,5 @@
 .zcomp*
+.zsh_history*
 .zshrc.local
 .zsh_sessions/
 .zfunc/completion/_git
