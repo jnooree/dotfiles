@@ -12,11 +12,11 @@ if [[ $_OS_ARCH = *Linux* ]]; then
 elif [[ -n ${HOMEBREW_PREFIX-} ]]; then
 	_brew_opt="$HOMEBREW_PREFIX/opt"
 
-	PATH="$_brew_opt/gnu-sed/libexec/gnubin:\
-$_brew_opt/gnu-tar/libexec/gnubin:$_brew_opt/grep/libexec/gnubin:\
-$_brew_opt/findutils/libexec/gnubin:$_brew_opt/coreutils/libexec/gnubin:\
-$_brew_opt/curl/bin:$_brew_opt/ruby/bin:$_brew_opt/ssh-copy-id/bin:\
-$_brew_opt/gnu-units/libexec/gnubin:$_brew_opt/binutils/bin:\
+	PATH="$_brew_opt/gnu-sed/libexec/gnubin:$_brew_opt/gnu-tar/libexec/gnubin:\
+$_brew_opt/grep/libexec/gnubin:$_brew_opt/findutils/libexec/gnubin:\
+$_brew_opt/coreutils/libexec/gnubin:$_brew_opt/curl/bin:$_brew_opt/ruby/bin:\
+$_brew_opt/ssh-copy-id/bin:$_brew_opt/gnu-units/libexec/gnubin:\
+$_brew_opt/icu4c/bin:$_brew_opt/binutils/bin:\
 $HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin${PATH+:$PATH}"
 
 	FPATH="$_brew_opt/curl/share/zsh/site-functions${FPATH+:$FPATH}"
@@ -125,7 +125,7 @@ if [[ $_OS_ARCH = *Darwin* ]]; then
 			expanded_curr_dir="${(%)curr_dir}"
 		fi
 
-		print -n "$expanded_curr_dir" | nfc
+		print -n "$expanded_curr_dir" | uconv -x Any-NFC
 	}
 fi
 
