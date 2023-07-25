@@ -92,6 +92,24 @@ fi
 # Initialize modules.
 source "$ZIM_HOME/init.zsh"
 
+_comp_options+=(globdots)
+zstyle ':completion:*' format '%d'
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*:options' auto-description '%d'
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':completion:*:corrections' format '%d (errors: %e)'
+zstyle ':completion:*:messages' format '%d'
+zstyle ':completion:*:warnings' format 'no matches found'
+zstyle ':completion:*:git-checkout:*' sort false
+
+zstyle ':fzf-tab:*' fzf-flags \
+	--color=16,hl:2,hl+:10,info:3,prompt:2,spinner:5,pointer:5,marker:6 \
+	--height='40%' --reverse --border --inline-info
+zstyle ':fzf-tab:*' default-color $'\x1b[39m'
+if command -v exa &>/dev/null; then
+	zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+fi
+
 if [[ $_OS_ARCH = *Darwin* ]]; then
 	# NFD...
 	function prompt_current_dir() {
