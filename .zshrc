@@ -104,7 +104,7 @@ zstyle ':completion:*:git-checkout:*' sort false
 
 zstyle ':fzf-tab:*' switch-group \; :
 zstyle ':fzf-tab:*' fzf-flags \
-	--color=16,hl:2,hl+:10,info:3,prompt:2,spinner:5,pointer:5,marker:6 \
+	--color=hl:2,hl+:10,info:3,prompt:2,spinner:5,pointer:5,marker:6 \
 	--height='40%' --reverse --border --inline-info
 zstyle ':fzf-tab:*' default-color $'\x1b[39m'
 if command -v exa &>/dev/null; then
