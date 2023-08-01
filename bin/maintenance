@@ -32,7 +32,7 @@ function _conda_update() {
 		set -e
 		~/anaconda3/condabin/mamba update -n base mamba
 		~/anaconda3/condabin/mamba update -n base --all
-		~/anaconda3/condabin/mamba update -n default --all
+		~/anaconda3/condabin/mamba update -n default --all || true
 	)
 }
 
