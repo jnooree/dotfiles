@@ -1,6 +1,6 @@
-#!/usr/bin/env bash -eu
+#!/usr/bin/env bash
 
-set -o pipefail
+set -euo pipefail
 
 if [[ -d .gitignore ]]; then
 	echo "Error: .gitignore directory exists" >&2
