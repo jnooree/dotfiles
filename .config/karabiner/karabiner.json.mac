@@ -603,7 +603,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "code --new-window"
+                    "shell_command": "/Users/jnooree/bin/code --new-window"
                   }
                 ],
                 "type": "basic"
