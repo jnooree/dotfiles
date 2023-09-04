@@ -65,7 +65,7 @@ function _auto_install_conda() {
 if [[ -z ${SKIP_HOMEBREW-} ]]; then
 	_auto_install_brew
 
-	brew install coreutils fd ripgrep fzf zsh
+	brew install coreutils fd ripgrep fzf zsh icu4c
 	export PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
 fi
 
