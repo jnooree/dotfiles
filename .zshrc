@@ -92,6 +92,8 @@ fi
 # Initialize modules.
 source "$ZIM_HOME/init.zsh"
 
+WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+
 _comp_options+=(globdots)
 zstyle ':completion:*' format '%d'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
