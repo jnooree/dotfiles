@@ -92,26 +92,7 @@ fi
 # Initialize modules.
 source "$ZIM_HOME/init.zsh"
 
-WORDCHARS='*?.[]~=&;!#$%^(){}<>'
-
-function my-kill-word() {
-	local WORDCHARS='*?.[]~=&;!#$%^(){}<>'
-	zle kill-word
-}
-
-function my-backward-kill-word() {
-	local WORDCHARS='*?.[]~=&;!#$%^(){}<>'
-	zle backward-kill-word
-}
-
-zle -N my-kill-word
-zle -N my-backward-kill-word
-
-bindkey "^[D" my-kill-word
-bindkey "^[d" my-kill-word
-bindkey "^W" my-backward-kill-word
-bindkey "^[^H" my-backward-kill-word
-bindkey "^[^?" my-backward-kill-word
+WORDCHARS='*?[]~=&;!#%^(){}<>'
 
 _comp_options+=(globdots)
 # zstyle ':completion:*' format '%d'
