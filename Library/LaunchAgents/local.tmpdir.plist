@@ -3,7 +3,7 @@
 <plist version="1.0">
    <dict>
       <key>Label</key>
-      <string>local.ramdisk</string>
+      <string>local.tmpdir</string>
       <key>ProgramArguments</key>
       <array>
          <string>/Users/jnooree/bin/osx_ramdisk</string>
