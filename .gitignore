@@ -3,6 +3,8 @@
 .zshrc.local
 .zsh_sessions/
 .zfunc/completion/_git
+.zfunc/completion/_vcsh*
+.zfunc/completion/git-completion.bash
 .config/iterm2.mac/AppSupport
 
 # From Python.gitignore
