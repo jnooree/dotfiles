@@ -1,0 +1,44 @@
+#!/bin/bash
+
+set -euo pipefail
+
+help=false
+
+function pvtar-usage() {
+	echo >&2 'Usage: pvtar -f archive -I program [-- TAR_OPTIONS...] FILES...'
+}
+
+while getopts ':hf:I:' flag &>/dev/null; do
+	case "$flag" in
+		h) help=true ;;
+		f) archive="$OPTARG" ;;
+		I) prog="$OPTARG" ;;
+		*) echo >&2 "Error: unsupported option -$OPTARG; \
+add -- to pass options to tar, e.g., \
+'pvtar -I gzip -f archive.tar.gz -- -$OPTARG a.txt b.txt'"
+			exit 1 ;;
+	esac
+done
+
+shift $((OPTIND-1))
+
+if [[ $help = true ]]; then
+	pvtar-usage
+	exit 0
+fi
+
+files=()
+for arg in "$@"; do
+	if [[ $arg != -* ]]; then
+		files+=("$arg")
+	fi
+done
+
+if [[ -z ${archive-} || -z ${prog-} || ${#files[@]} -eq 0 ]]; then
+	pvtar-usage
+	exit 1
+fi
+
+tar -c -f - --exclude='*~' "$@" |
+	pv -fs "$(du -csB1 "${files[@]}" | tail -n1 | cut -d$'\t' -f1)" |
+	$prog >"$archive"
