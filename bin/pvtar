@@ -5,7 +5,7 @@ set -euo pipefail
 help=false
 
 function pvtar-usage() {
-	echo >&2 'Usage: pvtar -f archive -I program [-- TAR_OPTIONS...] FILES...'
+	echo >&2 'Usage: pvtar -f archive [-I program] [-- TAR_OPTIONS...] FILES...'
 }
 
 while getopts ':hf:I:' flag &>/dev/null; do
@@ -34,9 +34,19 @@ for arg in "$@"; do
 	fi
 done
 
-if [[ -z ${archive-} || -z ${prog-} || ${#files[@]} -eq 0 ]]; then
+if [[ -z ${archive-} || ${#files[@]} -eq 0 ]]; then
 	pvtar-usage
 	exit 1
+fi
+
+if [[ -z ${prog-} ]]; then
+	if [[ $archive != *.bz2 && $archive != *.tbz2 ]]; then
+		echo >&2 "\
+Error: default compressor is lbzip2, but archive file does not have .bz2 extension
+Set -I option to use a different compressor"
+		exit 1
+	fi
+	prog='lbzip2 -n8'
 fi
 
 tar -c -f - --exclude='*~' "$@" |
