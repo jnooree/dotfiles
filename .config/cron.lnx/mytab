@@ -22,4 +22,3 @@
 # 
 # m h  dom mon dow   command
 @daily $HOME/bin/maintenance
-0 */2 * * * /opt/slurm/current/bin/scontrol resume job=$(/opt/slurm/current/bin/squeue -hu tp1928 -t S -p normal.q -o '\%i' | head -50 | paste -s -d,)
