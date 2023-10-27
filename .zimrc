@@ -8,8 +8,8 @@ zmodule ohmyzsh/ohmyzsh -r lib -s correction.zsh -s clipboard.zsh
 zmodule ohmyzsh/ohmyzsh -r plugins/git
 zmodule ohmyzsh/ohmyzsh -r plugins/copyfile
 zmodule ohmyzsh/ohmyzsh -r plugins/copypath
+zmodule jnooree/zim-cfg -n jnooree -u git
+zmodule jnooree/magic-enter
 zmodule zsh-users/zsh-syntax-highlighting
 zmodule zsh-users/zsh-autosuggestions
-zmodule jnooree/zim-cfg -n jnooree -u git
 zmodule jnooree/jnooree-zsh-theme -s jnooree.zsh-theme -u git
-zmodule jnooree/magic-enter

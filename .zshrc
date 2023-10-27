@@ -100,6 +100,14 @@ _comp_options+=(globdots)
 
 unset ENABLE_CORRECTION DEFAULT_USER
 
+# Highlight settings
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets regexp root)
+ZSH_HIGHLIGHT_STYLES[comment]='bold,9'
+ZSH_HIGHLIGHT_REGEXP[\bsudo\b]='bold,underline'
+
+# Autocomplete settings
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
 if [[ $_OS_ARCH = *Darwin* ]]; then
 	# NFD...
 	function prompt_current_dir() {
