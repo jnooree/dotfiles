@@ -7,4 +7,8 @@ zmodule completion
 zmodule zsh-users/zsh-syntax-highlighting
 zmodule zsh-users/zsh-autosuggestions
 zmodule jnooree/zim-cfg -n jnooree
+zmodule ohmyzsh/ohmyzsh -r lib -u degit -s correction.zsh -s clipboard.zsh
+zmodule ohmyzsh/ohmyzsh -r plugins/git
+zmodule ohmyzsh/ohmyzsh -r plugins/copyfile
+zmodule ohmyzsh/ohmyzsh -r plugins/copypath
 zmodule jnooree/jnooree-zsh-theme -s jnooree.zsh-theme

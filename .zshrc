@@ -78,31 +78,22 @@ or=40;31;01:mi=00:su=30;41:sg=30;46:ca=00:tw=30;42:ow=30;43:st=30;44:ex=31:\
 # compdump file path
 zstyle ':zim:completion' dumpfile \
 	"${ZDOTDIR-$HOME}/.zcompdump-$SHORT_HOST-$ZSH_VERSION"
+zstyle ':zim:glob' case-sensitivity sensitive
+
+# For oh-my-zsh
+ENABLE_CORRECTION=true
 
 DEFAULT_USER=jnooree
 
-# Path to zim home
+# zim loading
 ZIM_HOME="$HOME/.zim"
-
-# Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
 if [[ ! $ZIM_HOME/init.zsh -nt ${ZDOTDIR-$HOME}/.zimrc ]]; then
 	source "$ZIM_HOME/zimfw.zsh" init -q
 fi
-
-# Initialize modules.
 source "$ZIM_HOME/init.zsh"
-
-WORDCHARS='*?[]~=&;!#%^(){}<>'
-
 _comp_options+=(globdots)
-# zstyle ':completion:*' format '%d'
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-# zstyle ':completion:*:options' auto-description '%d'
-# zstyle ':completion:*:descriptions' format '[%d]'
-# zstyle ':completion:*:corrections' format '%d (errors: %e)'
-# zstyle ':completion:*:messages' format '%d'
-# zstyle ':completion:*:warnings' format 'no matches found'
-# zstyle ':completion:*:git-checkout:*' sort false
+
+unset ENABLE_CORRECTION DEFAULT_USER
 
 if [[ $_OS_ARCH = *Darwin* ]]; then
 	# NFD...
