@@ -107,6 +107,7 @@ ZSH_HIGHLIGHT_REGEXP[\bsudo\b]='bold,underline'
 
 # Autocomplete settings
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(buffer-empty)
 
 if [[ $_OS_ARCH = *Darwin* ]]; then
 	# NFD...
