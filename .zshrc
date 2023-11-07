@@ -27,9 +27,7 @@ fi
 export PATH="$HOME/bin:$HOME/.local/bin${PATH+:$PATH}"
 
 function _source_if_readable() {
-	if [[ -r $1 ]]; then
-		. "$1" || true
-	fi
+	if [[ -r $1 ]] builtin source "$1" || true
 }
 
 # environment managers: conda, jenv, rvm
@@ -115,7 +113,7 @@ if [[ $_OS_ARCH = *Darwin* ]]; then
 		local expanded_curr_dir="${(%)curr_dir}"
 
 		# Show full path of named directories if they are the current directory.
-		if [[ "$expanded_curr_dir" != */* ]]; then
+		if [[ $expanded_curr_dir != */* ]]; then
 			curr_dir='%/'
 			expanded_curr_dir="${(%)curr_dir}"
 		elif [[ ${#expanded_curr_dir} -gt $(( COLUMNS - ${MIN_COLUMNS:-30} )) ]]; then
@@ -123,17 +121,19 @@ if [[ $_OS_ARCH = *Darwin* ]]; then
 			expanded_curr_dir="${(%)curr_dir}"
 		fi
 
-		print -n "$expanded_curr_dir" | uconv -x Any-NFC
+		print -n \
+			"${${${${expanded_curr_dir//\\/\\\\\\\\}//\%/%%}//\$/\\\\\$}//\`/\\\\\`}" |
+				uconv -x Any-NFC
 	}
 fi
 
 # Related to pre{cmd,exec}
 function jnr_precmd() {
-	builtin print -n $'\033]0;'"$USER@$SHORT_HOST: ${(%)$(prompt_current_dir)}"$'\a'
+	builtin print -n $'\e]0;'"$USER@$SHORT_HOST: ${(%)$(prompt_current_dir)}"$'\a'
 }
 
 function jnr_preexec() {
-	builtin print -n $'\033]0;'"$USER@$SHORT_HOST: $1"$'\a'
+	builtin print -n $'\e]0;'"$USER@$SHORT_HOST: $1"$'\a'
 }
 
 autoload -U add-zsh-hook
