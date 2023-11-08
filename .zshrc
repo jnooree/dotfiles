@@ -117,19 +117,18 @@ if [[ $_OS_ARCH = *Darwin* ]]; then
 			curr_dir='%/'
 			expanded_curr_dir="${(%)curr_dir}"
 		elif [[ ${#expanded_curr_dir} -gt $(( COLUMNS - ${MIN_COLUMNS:-30} )) ]]; then
-			curr_dir='.../%2d'
+			curr_dir='.../%2/'
 			expanded_curr_dir="${(%)curr_dir}"
 		fi
 
-		print -n \
-			"${${${${expanded_curr_dir//\\/\\\\\\\\}//\%/%%}//\$/\\\\\$}//\`/\\\\\`}" |
-				uconv -x Any-NFC
+		print -n "${${(q)expanded_curr_dir}//\%/%%}" | uconv -x Any-NFC
 	}
 fi
 
 # Related to pre{cmd,exec}
 function jnr_precmd() {
-	builtin print -n $'\e]0;'"$USER@$SHORT_HOST: ${(%)$(prompt_current_dir)}"$'\a'
+	builtin print -n \
+		$'\e]0;'"$USER@$SHORT_HOST: ${(q%)$(prompt_current_dir)}"$'\a'
 }
 
 function jnr_preexec() {
