@@ -121,18 +121,22 @@ if [[ $_OS_ARCH = *Darwin* ]]; then
 			expanded_curr_dir="${(%)curr_dir}"
 		fi
 
-		print -n "${${(q)expanded_curr_dir}//\%/%%}" | uconv -x Any-NFC
+		psvar[1]="$(builtin print -rn -- "$expanded_curr_dir" | uconv -x Any-NFC)"
 	}
+
+	# Re-run for macos
+	prompt_current_dir
 fi
 
 # Related to pre{cmd,exec}
 function jnr_precmd() {
-	builtin print -n \
-		$'\e]0;'"$USER@$SHORT_HOST: ${(q%)$(prompt_current_dir)}"$'\a'
+	builtin print -Pn '\e]0;%n@%m: %1v\a'
 }
 
 function jnr_preexec() {
-	builtin print -n $'\e]0;'"$USER@$SHORT_HOST: $1"$'\a'
+	builtin print -Pn '\e]0;%n@%m: '
+	builtin print -rn -- "$1"
+	builtin print -n '\a'
 }
 
 autoload -U add-zsh-hook
