@@ -12,19 +12,29 @@ if [[ $_OS_ARCH = *Linux* ]]; then
 elif [[ -n ${HOMEBREW_PREFIX-} ]]; then
 	_brew_opt="$HOMEBREW_PREFIX/opt"
 
-	PATH="$_brew_opt/gnu-sed/libexec/gnubin:$_brew_opt/gnu-tar/libexec/gnubin:\
-$_brew_opt/grep/libexec/gnubin:$_brew_opt/findutils/libexec/gnubin:\
-$_brew_opt/coreutils/libexec/gnubin:$_brew_opt/curl/bin:$_brew_opt/ruby/bin:\
-$_brew_opt/ssh-copy-id/bin:$_brew_opt/gnu-units/libexec/gnubin:\
-$_brew_opt/icu4c/bin:$_brew_opt/binutils/bin:\
-$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin${PATH+:$PATH}"
+	path=(
+		"$_brew_opt/gnu-sed/libexec/gnubin"
+		"$_brew_opt/gnu-tar/libexec/gnubin"
+		"$_brew_opt/grep/libexec/gnubin"
+		"$_brew_opt/findutils/libexec/gnubin"
+		"$_brew_opt/coreutils/libexec/gnubin"
+		"$_brew_opt/curl/bin"
+		"$_brew_opt/ruby/bin"
+		"$_brew_opt/ssh-copy-id/bin"
+		"$_brew_opt/gnu-units/libexec/gnubin"
+		"$_brew_opt/icu4c/bin"
+		"$_brew_opt/binutils/bin"
+		"$HOMEBREW_PREFIX/bin"
+		"$HOMEBREW_PREFIX/sbin"
+		"$path[@]"
+	)
 
-	FPATH="$_brew_opt/curl/share/zsh/site-functions${FPATH+:$FPATH}"
+	fpath=("$_brew_opt/curl/share/zsh/site-functions" "$fpath[@]")
 
 	unset _brew_opt
 fi
 
-export PATH="$HOME/bin:$HOME/.local/bin${PATH+:$PATH}"
+path=("$HOME/bin" "$HOME/.local/bin" "$path[@]")
 
 function _source_if_readable() {
 	if [[ -r $1 ]] builtin source "$1" || true
@@ -52,7 +62,7 @@ fi
 # <<< conda initialize <<<
 
 if [[ -x ~/.jenv/bin/jenv ]]; then
-	export PATH="$HOME/.jenv/bin:$PATH"
+	path=("$HOME/.jenv/bin" "$path[@]")
 	eval "$(jenv init -)"
 fi
 
@@ -63,10 +73,10 @@ if [[ $(hostname -s) = galaxy3 ]]; then
 fi
 
 if [[ -n ${HOMEBREW_PREFIX-} ]]; then
-	FPATH="$HOMEBREW_PREFIX/share/zsh/site-functions${FPATH+:$FPATH}"
-	export NODE_PATH="$HOMEBREW_PREFIX/lib/node_modules${NODE_PATH+:$NODE_PATH}"
+	fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" "$fpath[@]")
+	export NODE_PATH="$HOMEBREW_PREFIX/lib/node_modules${NODE_PATH:+:$NODE_PATH}"
 fi
-FPATH="$HOME/.zfunc/completion${FPATH+:$FPATH}"
+fpath=("$HOME/.zfunc/completion" "$fpath[@]")
 
 export LS_COLORS="rs=0:di=1;36:ln=35:mh=00:pi=33:so=32:bd=34;46:cd=34;43:\
 or=40;31;01:mi=00:su=30;41:sg=30;46:ca=00:tw=30;42:ow=30;43:st=30;44:ex=31:\
@@ -191,4 +201,4 @@ if command -v neofetch &>/dev/null &&
 fi
 
 # Path deduplication
-declare -aU path
+declare -aU path fpath

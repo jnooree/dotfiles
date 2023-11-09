@@ -26,11 +26,11 @@ unset _stripped_path
 if [[ -x $_brew_prefix/bin/brew ]]; then
 	eval "$("$_brew_prefix/bin/brew" shellenv)"
 	# shellcheck disable=SC2123
-	PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin${PATH+:$PATH}"
+	path=("$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin" "$path[@]")
 fi
 unset _brew_prefix
 
-export PATH="$HOME/bin:$HOME/.local/bin${PATH+:$PATH}"
+path=("$HOME/bin" "$HOME/.local/bin" "$path[@]")
 
 # User env variables
 if [[ -n $SSH_CONNECTION ]]; then
