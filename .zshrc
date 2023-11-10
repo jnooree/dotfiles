@@ -73,6 +73,7 @@ if [[ $(hostname -s) = galaxy3 ]]; then
 fi
 
 if [[ -n ${HOMEBREW_PREFIX-} ]]; then
+	manpath=("$HOMEBREW_PREFIX/share/man" "$manpath[@]")
 	fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" "$fpath[@]")
 	export NODE_PATH="$HOMEBREW_PREFIX/lib/node_modules${NODE_PATH:+:$NODE_PATH}"
 fi
@@ -201,4 +202,4 @@ if command -v neofetch &>/dev/null &&
 fi
 
 # Path deduplication
-declare -aU path fpath
+declare -aU path fpath manpath
