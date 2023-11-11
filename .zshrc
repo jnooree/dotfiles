@@ -154,9 +154,6 @@ autoload -U add-zsh-hook
 add-zsh-hook precmd jnr_precmd
 add-zsh-hook preexec jnr_preexec
 
-# You may need to manually set your language environment
-export LANG="en_US.UTF-8"
-
 # Preferred editor for local and remote sessions
 if [[ ${TERM_PROGRAM-} = vscode ]]; then
 	export EDITOR="$(which code) --wait"
