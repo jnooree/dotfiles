@@ -16,7 +16,7 @@
 	quotepath = false
 [commit]
 	gpgsign = true
-	template = ~/.gitmessage
+	template = ~/.dotfiles/.gitmessage
 [tag]
 	gpgsign = true
 [submodule]
