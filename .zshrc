@@ -157,6 +157,8 @@ add-zsh-hook preexec jnr_preexec
 # Preferred editor for local and remote sessions
 if [[ ${TERM_PROGRAM-} = vscode ]]; then
 	export EDITOR="$(which code) --wait"
+elif [[ ${LC_TERMINAL-} = terminus ]]; then
+	export EDITOR=vim
 elif [[ -n ${SSH_CONNECTION-} ]]; then
 	export EDITOR='rsub -n -w'
 else
