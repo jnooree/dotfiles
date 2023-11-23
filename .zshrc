@@ -168,8 +168,6 @@ fi
 export SUDO_EDITOR="$EDITOR"
 
 if [[ $_OS_ARCH = *Linux* ]]; then
-	export SYSTEMD_URLIFY=no
-
 	alias visudo="sudo visudo"
 	alias ufw-full-reload="sudo bash -c 'iptables -F; iptables -X; ip6tables -F; ip6tables -X; ufw disable; ufw enable'"
 	alias sinf='sinfo -N -o "%8N  %9P  %.2t  %.13C  %.8O  %.6m  %.8e  %$(( $COLUMNS - 68 ))E"'

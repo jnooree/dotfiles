@@ -61,6 +61,15 @@ if [[ $_OS_ARCH = *Darwin* ]]; then
 	alias chimera='open -n /Applications/Chimera.app --args'
 fi
 
+# Add options for pagers; set here for ssh sessions
+if [[ -t 1 ]]; then
+	export LESS='-RM~gi'
+	if [[ -d /run/systemd/system ]]; then
+		export SYSTEMD_LESS="${LESS}s"
+		export SYSTEMD_URLIFY=no
+	fi
+fi
+
 if [[ -r ~/.zshenv.local ]]; then
 	. ~/.zshenv.local
 fi
