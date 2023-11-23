@@ -75,7 +75,7 @@ fi
 if [[ -n ${HOMEBREW_PREFIX-} ]]; then
 	manpath=("$HOMEBREW_PREFIX/share/man" "$manpath[@]")
 	fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" "$fpath[@]")
-	export NODE_PATH="$HOMEBREW_PREFIX/lib/node_modules${NODE_PATH:+:$NODE_PATH}"
+	export NODE_PATH="$HOMEBREW_PREFIX/lib/node_modules:$NODE_PATH"
 fi
 fpath=("$HOME/.zfunc/completion" "$fpath[@]")
 
