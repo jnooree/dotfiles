@@ -209,7 +209,7 @@ function _cleanup_path_str() {
 
 	local -a pa=("${(@Ps.:.)1}")
 	_cleanup_path_arr pa
-	: "${(P)1::="${(@j.:.)pa:#}"}"
+	: "${(P)1::="${(@j.:.)pa}"}"
 }
 
 for _arr in path fpath manpath module_path; do
