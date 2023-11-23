@@ -205,9 +205,7 @@ function _cleanup_path_arr() {
 }
 
 function _cleanup_path_str() {
-	if [[ -z ${(P)1} ]]; then
-		return
-	fi
+	if [[ -z ${(P)1} ]] return
 
 	local -a pa=("${(@Ps.:.)1}")
 	_cleanup_path_arr pa
