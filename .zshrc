@@ -207,11 +207,11 @@ function _cleanup_path_str() {
 	: "${(P)1::="${(@j.:.)pa}"}"
 }
 
-for _arr in path fpath manpath module_path; do
+for _arr in path fpath module_path; do
 	_cleanup_path_arr "$_arr"
 done
-for _str in CPATH GEM_PATH INFOPATH LD_LIBRARY_PATH LIBRARY_PATH \
-		NLSPATH NODE_PATH PKG_CONFIG_PATH PYTHONPATH XDG_DATA_DIRS; do
+for _str in CPATH GEM_PATH LD_LIBRARY_PATH LIBRARY_PATH NLSPATH NODE_PATH \
+		PKG_CONFIG_PATH PYTHONPATH XDG_DATA_DIRS; do
 	_cleanup_path_str "$_str"
 done
 
