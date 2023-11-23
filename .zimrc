@@ -12,4 +12,4 @@ zmodule jnooree/zim-cfg -n jnooree -u git
 zmodule jnooree/magic-enter -u git
 zmodule zsh-users/zsh-syntax-highlighting
 zmodule zsh-users/zsh-autosuggestions
-zmodule jnooree/jnooree-zsh-theme -s jnooree.zsh-theme -u git
+zmodule jnooree/jnooree-zsh-theme -s jnooree.zsh-theme -f functions -u git
