@@ -5,7 +5,7 @@ setopt autonamedirs
 
 export LANG="en_US.UTF-8"
 
-if [[ -z "$SAFEPATH" ]]; then
+if [[ -z $SAFEPATH ]]; then
 	SAFEPATH="$PATH"
 fi
 
