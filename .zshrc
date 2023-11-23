@@ -198,5 +198,29 @@ if command -v neofetch &>/dev/null &&
 	neofetch
 fi
 
-# Path deduplication
-declare -aU path fpath manpath
+function _cleanup_path_arr() {
+	typeset -aUg "$1"
+
+	: "${(PA)1::="${(@P)1:#}"}"
+}
+
+function _cleanup_path_str() {
+	if [[ -z ${(P)1} ]]; then
+		return
+	fi
+
+	local -a pa=("${(@Ps.:.)1}")
+	_cleanup_path_arr pa
+	: "${(P)1::="${(@j.:.)pa:#}"}"
+}
+
+for _arr in path fpath manpath; do
+	_cleanup_path_arr "$_arr"
+done
+for _str in CPATH GEM_PATH INFOPATH LD_LIBRARY_PATH LIBRARY_PATH \
+						NLSPATH NODE_PATH PKG_CONFIG_PATH PYTHONPATH XDG_DATA_DIRS; do
+	_cleanup_path_str "$_str"
+done
+
+unset _arr _str
+unfunction _cleanup_path_arr _cleanup_path_str
