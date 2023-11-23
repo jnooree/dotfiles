@@ -127,7 +127,8 @@ if [[ $_OS_ARCH = *Darwin* ]]; then
 		if [[ $expanded_curr_dir != */* ]]; then
 			curr_dir='%/'
 			expanded_curr_dir="${(%)curr_dir}"
-		elif [[ ${#expanded_curr_dir} -gt $(( COLUMNS - ${MIN_COLUMNS:-30} )) ]]; then
+		fi
+		if [[ ${#expanded_curr_dir} -gt $(( COLUMNS - ${MIN_COLUMNS:-30} )) ]]; then
 			curr_dir='.../%2/'
 			expanded_curr_dir="${(%)curr_dir}"
 		fi
