@@ -1,5 +1,10 @@
 # shellcheck disable=SC1090,SC2034,SC2155
 
+# Very likely inside interactive session
+if [[ ! -o interactive && $PATH = *"$HOME"* ]]; then
+	return
+fi
+
 # For convenience
 setopt autonamedirs
 
