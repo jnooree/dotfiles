@@ -110,7 +110,7 @@ shopt -s dotglob
 
 for _fd in * bin/* .config/* .config/gh/*; do
 	case "$_fd" in
-	.git | .github | .gitignore | .gitmessage | .config | \
+	.git | .github | .gitignore | .gitmessage | .config | .zfunc \
 		bin | Library | LICENSE | README.md | bootstrap.sh)
 		continue
 		;;
@@ -156,7 +156,7 @@ if [[ -z ${CODESPACES-} ]]; then
 	else
 		_zsh_git="/usr/share/zsh/$(/bin/zsh -c 'echo $ZSH_VERSION')/functions/_git"
 	fi
-	ln -sfT "$_zsh_git" ~/.zfunc/completion/_git
+	ln -sfT "$_zsh_git" .zfunc/completion/_git
 
 	if [[ $_os_arch = *Linux* ]]; then
 		# cron

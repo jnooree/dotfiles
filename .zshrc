@@ -77,7 +77,7 @@ if [[ -n ${HOMEBREW_PREFIX-} ]]; then
 	fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" "$fpath[@]")
 	export NODE_PATH="$HOMEBREW_PREFIX/lib/node_modules:$NODE_PATH"
 fi
-fpath=("$HOME/.zfunc/completion" "$fpath[@]")
+fpath=("$HOME/.dotfiles/.zfunc/completion" "$fpath[@]")
 
 export LS_COLORS="rs=0:di=1;36:ln=35:mh=00:pi=33:so=32:bd=34;46:cd=34;43:\
 or=40;31;01:mi=00:su=30;41:sg=30;46:ca=00:tw=30;42:ow=30;43:st=30;44:ex=31:\

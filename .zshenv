@@ -53,7 +53,7 @@ if command -v groff &>/dev/null; then
 fi
 
 # For custom functions
-for _file in ~/.zfunc/*.zsh; do
+for _file in ~/.dotfiles/.zfunc/*.zsh; do
 	. "$_file"
 done
 unset _file
