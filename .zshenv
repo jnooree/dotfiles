@@ -81,3 +81,9 @@ fi
 
 # For more zsh completions
 skip_global_compinit=1
+
+# Setup path etc. for ssh single line commands
+if [[ -n ${SSH_CONNECTION-} && ! -o login ]]; then
+	if [[ -r /etc/zprofile ]]     . /etc/zprofile
+	if [[ -r /etc/zsh/zprofile ]] . /etc/zsh/zprofile
+fi
