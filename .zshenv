@@ -60,6 +60,7 @@ unset _file
 
 export ZDOTDIR="$HOME/.config/zsh"
 export SHORT_HOST="$(hostname -s)"
+export PYTHONNOUSERSITE=1
 
 if [[ $_OS_ARCH = *Darwin* ]]; then
 	export ramdisk="/Volumes/RAMDisk"
