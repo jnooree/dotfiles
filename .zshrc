@@ -188,6 +188,17 @@ export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=1
 _source_if_readable ~/.iterm2_shell_integration.zsh
 unset ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX
 
+if command -v direnv &>/dev/null; then
+	function _direnv_hook() {
+		trap -- '' SIGINT;
+		eval "$(direnv export zsh)";
+		trap - SIGINT;
+	}
+
+	add-zsh-hook precmd _direnv_hook
+	add-zsh-hook preexec _direnv_hook
+fi
+
 _source_if_readable "${ZDOTDIR-$HOME}/.zshrc.local"
 
 unset _OS_ARCH

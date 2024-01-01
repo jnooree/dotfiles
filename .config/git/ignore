@@ -1,6 +1,7 @@
 *.code-workspace
 perf.data*
 .cache/
+.envrc
 
 # From Vim.gitignore
 # Swap
