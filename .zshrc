@@ -87,6 +87,8 @@ or=40;31;01:mi=00:su=30;41:sg=30;46:ca=00:tw=30;42:ow=30;43:st=30;44:ex=31:\
 # compdump file path
 zstyle ':zim:completion' dumpfile \
 	"${ZDOTDIR-$HOME}/.zcompdump-$SHORT_HOST-$ZSH_VERSION"
+zstyle ':completion::complete:*' cache-path \
+	"${XDG_CACHE_HOME-$HOME/.cache}/zsh/zcompcache-$SHORT_HOST"
 zstyle ':zim:zmodule' use degit
 
 # For oh-my-zsh
