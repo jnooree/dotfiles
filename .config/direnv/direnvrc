@@ -1,1 +1,26 @@
 source ~/anaconda3/etc/profile.d/conda.sh || true
+
+function _join_array() {
+	local IFS=':'
+	echo "$*"
+}
+
+function update-prompt() {
+	local var modifier
+	local -a modifiers
+
+	for var in VIRTUAL_ENV_PROMPT CONDA_PROMPT_MODIFIER; do
+		modifier="${!var-}"
+		if [[ -n $modifier ]]; then
+			modifiers+=("$(tr -d '() \n' <<<"$modifier")")
+		fi
+	done
+
+	if [[ ${#modifiers[@]} -gt 0 ]]; then
+		export DIRENV_MODIFIER="($(_join_array "${modifiers[@]}")) "
+	fi
+
+	__dump_at_exit
+}
+
+trap -- update-prompt EXIT
