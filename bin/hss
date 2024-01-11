@@ -3,10 +3,10 @@
 import os
 import sys
 import shlex
-import subprocess as sp
 import asyncio as aio
+from asyncio import subprocess as sp
 from pathlib import Path
-from argparse import ArgumentParser
+from argparse import ArgumentParser, REMAINDER
 from unicodedata import normalize
 
 _HOST = os.getenv("LC_HOSTNAME", "MBP")
@@ -14,26 +14,10 @@ _TMPDIR = "/Volumes/RAMDisk"
 _sem = aio.Semaphore(3)
 
 
-def ssh(*command, stdin: str = None, stdout=None, stderr=None):
-    return sp.run(["ssh", "-T", _HOST, *map(shlex.quote, command)],
-                  check=True, input=stdin.encode("utf-8") if stdin else None,
-                  stdout=stdout, stderr=stderr)
-
-
-async def rsync(local_path, remote_path: str, stdout=None, stderr=None):
-    args = ["rsync", "-amL", "--info=progress2",
-            str(local_path),
-            f"{_HOST}:{shlex.quote(normalize('NFD', remote_path))}"]
-    async with _sem:
-        return sp.run(args, check=True, stdout=stdout, stderr=stderr)
-
-
 def get_parser():
     parser = ArgumentParser(
         description="Exec the given command in remote host")
 
-    parser.add_argument("command")
-    parser.add_argument("-c", "--args", nargs="*", default=[])
     parser.add_argument("-v",
                         "--verbose",
                         action="count",
@@ -57,56 +41,94 @@ def get_parser():
                         metavar="TEMP_DIR",
                         dest="dir",
                         action="store")
-    parser.add_argument("file", metavar="file(s) or directory(s)", nargs="*")
+
+    parser.add_argument(
+        "args",
+        help="command and file(s), will be parsed again",
+        nargs=REMAINDER,
+        metavar="command-and-files",
+    )
 
     return parser
 
 
-def hash_file(file):
-    return sp.check_output(["md5sum", str(file)], text=True).split()[0]
+def split_args(args: list[str]):
+    cmd, *args = args
+    try:
+        until = args.index("--")
+    except ValueError:
+        return cmd, [], args
+    return cmd, args[:until], args[until + 1:]
+
+
+async def hash_file(file):
+    ret, stdout, _ = await run("md5sum", str(file), stdout=sp.PIPE)
+    if ret:
+        raise RuntimeError
+    return stdout.decode("utf-8").split()[0]
+
+
+async def run(*command, stdin: str = None, stdout=None, stderr=None):
+    proc = await sp.create_subprocess_exec(
+        *command,
+        stdin=sp.PIPE if stdin else None,
+        stdout=stdout,
+        stderr=stderr,
+    )
+    stdout, stderr = await proc.communicate(
+        stdin.encode("utf-8") if stdin else None)
+    return proc.returncode, stdout, stderr
+
+
+async def ssh(*command, **kwargs):
+    return await run("ssh", "-T", _HOST, *map(shlex.quote, command), **kwargs)
+
+
+async def rsync(local_path, remote_path, **kwargs):
+    async with _sem:
+        args = ["rsync", "-amL", "--info=progress2",
+                local_path,
+                f"{_HOST}:{shlex.quote(normalize('NFD', remote_path))}"]
+        return await run(*args, **kwargs)
 
 
 async def main():
     args = get_parser().parse_args()
-    command: str = args.command
-    remote_args: list[str] = args.args
-    files_list = list(map(Path, args.file))
+    command, remote_args, files = split_args(args.args)
+    files = list(map(Path, files))
 
     stdin = None
     stdout = None if args.verbose > 0 else sp.DEVNULL
     stderr = None if args.verbose > 1 else sp.DEVNULL
 
-    tasks = []
-
-    if files_list:
-        async def send_file(file):
+    if files:
+        async def send_file(file: Path):
             file_ext = "".join(file.suffixes)
             file_stem = file.name.removesuffix(file_ext)
             if not recursive and ext:
                 file_ext = ext if ext.startswith(".") else f".{ext}"
-            suffix = "" if args.preserve else f"_{hash_file(file)[:8]}"
+
+            md5 = await hash_file(file)
+            suffix = "" if args.preserve else f"_{md5[:8]}"
 
             remote_path = str(tmp_dir / suffix.join((file_stem, file_ext)))
-            _ = await rsync(file, remote_path, stdout=stdout, stderr=stderr)
+            await rsync(file, remote_path, stdout=stdout, stderr=stderr)
             return remote_path
 
         tmp_dir = Path(args.dir if args.dir else _TMPDIR)
         if command != "open":
             tmp_dir = tmp_dir / command
 
-        _ = ssh("mkdir", "-p", str(tmp_dir), stdout=stdout, stderr=stderr)
+        await ssh("mkdir", "-p", str(tmp_dir), stdout=stdout, stderr=stderr)
 
         recursive = args.recursive
         ext = args.extension
-        for file in files_list:
-            tasks.append(aio.create_task(send_file(file)))
-
-        remote_args.extend(await aio.gather(*tasks))
+        remote_args.extend(await aio.gather(*map(send_file, files)))
 
     if not sys.stdin.isatty():
         stdin = sys.stdin.read()
 
-    _ = ssh(command, *remote_args, stdin=stdin, stdout=stdout, stderr=stderr)
+    await ssh(command, *remote_args, stdin=stdin, stdout=stdout, stderr=stderr)
 
 
 if __name__ == '__main__':
