@@ -36,3 +36,6 @@
 	show = diff-highlight | less
 [interactive]
 	diffFilter = diff-highlight
+[rerere]
+	enabled = true
+	autoupdate = true
