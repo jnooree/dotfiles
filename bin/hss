@@ -11,8 +11,6 @@ from unicodedata import normalize
 
 _HOST = os.getenv("LC_HOSTNAME", "MBP")
 _TMPDIR = "/Volumes/RAMDisk"
-_sem = aio.Semaphore(3)
-
 
 def get_parser():
     parser = ArgumentParser(
@@ -84,8 +82,8 @@ async def ssh(*command, **kwargs):
     return await run("ssh", "-T", _HOST, *map(shlex.quote, command), **kwargs)
 
 
-async def rsync(local_path, remote_path, **kwargs):
-    async with _sem:
+async def rsync(sem, local_path, remote_path, **kwargs):
+    async with sem:
         args = ["rsync", "-amL", "--info=progress2",
                 local_path,
                 f"{_HOST}:{shlex.quote(normalize('NFD', remote_path))}"]
@@ -102,6 +100,8 @@ async def main():
     stderr = None if args.verbose > 1 else sp.DEVNULL
 
     if files:
+        sem = aio.Semaphore(3)
+
         async def send_file(file: Path):
             file_ext = "".join(file.suffixes)
             file_stem = file.name.removesuffix(file_ext)
@@ -112,7 +112,7 @@ async def main():
             suffix = "" if args.preserve else f"_{md5[:8]}"
 
             remote_path = str(tmp_dir / suffix.join((file_stem, file_ext)))
-            await rsync(file, remote_path, stdout=stdout, stderr=stderr)
+            await rsync(sem, file, remote_path, stdout=stdout, stderr=stderr)
             return remote_path
 
         tmp_dir = Path(args.dir if args.dir else _TMPDIR)
