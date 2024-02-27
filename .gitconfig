@@ -39,3 +39,5 @@
 [rerere]
 	enabled = true
 	autoupdate = true
+[maintenance]
+	repo = /scratch/jnooree/nurikit/current
