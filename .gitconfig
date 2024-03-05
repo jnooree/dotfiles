@@ -41,3 +41,5 @@
 	autoupdate = true
 [maintenance]
 	repo = /scratch/jnooree/nurikit/current
+[stash]
+	showIncludeUntracked = true
