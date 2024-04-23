@@ -186,10 +186,7 @@ fi
 
 _source_if_readable /etc/zsh_command_not_found
 _source_if_readable ~/.fzf.zsh
-
-export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=1
 _source_if_readable ~/.iterm2_shell_integration.zsh
-unset ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX
 
 if command -v direnv &>/dev/null; then
 	function _direnv_hook() {
@@ -200,6 +197,10 @@ if command -v direnv &>/dev/null; then
 
 	add-zsh-hook precmd _direnv_hook
 	add-zsh-hook preexec _direnv_hook
+fi
+
+if command -v zoxide &>/dev/null; then
+	eval "$(zoxide init zsh --hook pwd)"
 fi
 
 _source_if_readable "${ZDOTDIR-$HOME}/.zshrc.local"
