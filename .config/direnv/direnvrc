@@ -14,6 +14,7 @@ function update-prompt() {
 		if [[ -n $modifier ]]; then
 			modifiers+=("$(tr -d '() \n' <<<"$modifier")")
 		fi
+		unset "$var"
 	done
 
 	if [[ ${#modifiers[@]} -gt 0 ]]; then
