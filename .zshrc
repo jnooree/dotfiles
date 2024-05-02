@@ -200,7 +200,17 @@ if command -v direnv &>/dev/null; then
 fi
 
 if command -v zoxide &>/dev/null; then
-	eval "$(zoxide init zsh --hook pwd)"
+	eval "$(zoxide init zsh --hook pwd --no-cmd)"
+
+	function z() {
+		setopt localoptions no_autonamedirs
+		__zoxide_z "$@"
+	}
+
+	function zi() {
+		setopt localoptions no_autonamedirs
+		__zoxide_zi "$@"
+	}
 fi
 
 _source_if_readable "${ZDOTDIR-$HOME}/.zshrc.local"

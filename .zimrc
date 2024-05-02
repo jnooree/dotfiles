@@ -3,6 +3,7 @@ zmodule utility
 zmodule jnooree/rcode -u git
 zmodule zsh-users/zsh-completions -f src
 zmodule jnooree/conda-zsh-completion -u git -f .
+zmodule jnooree/zoxide-zsh-completion -u git
 zmodule completion
 zmodule ohmyzsh/ohmyzsh -r lib -s correction.zsh -s clipboard.zsh
 zmodule ohmyzsh/ohmyzsh -r plugins/git
