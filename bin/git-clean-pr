@@ -1,0 +1,32 @@
+#!/bin/bash -eu
+
+set -o pipefail
+
+if [[ "$*" == *"--help"* ]]; then
+	echo 'usage: git clean-pr [<branch>]'
+	exit 0
+fi
+
+main="$(git symbolic-ref --short refs/remotes/origin/HEAD | sed 's@^origin/@@')"
+if [[ $# -lt 1 ]]; then
+	branch="$(git symbolic-ref --short HEAD)"
+else
+	branch="$1"
+fi
+
+if [[ "$branch" == "$main" ]]; then
+	echo >&2 "Refusing to clean default branch $main"
+	exit 1
+fi
+
+if ! main_tree="$(git worktree list | grep -F "[$main]" | cut -f 1 -d' ')"; then
+	git checkout "$main"
+	git pull --prune
+elif branch_tree="$(git worktree list | grep -F "[$branch]" | cut -f 1 -d' ')"; then
+	pushd "$main_tree"
+	git pull --prune
+	git worktree remove -f "$branch_tree"
+fi
+
+git push -d origin "$branch"
+git branch -d "$branch"
