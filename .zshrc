@@ -186,7 +186,8 @@ fi
 
 _source_if_readable /etc/zsh_command_not_found
 _source_if_readable ~/.fzf.zsh
-_source_if_readable ~/.iterm2_shell_integration.zsh
+ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=1 \
+	_source_if_readable ~/.iterm2_shell_integration.zsh
 
 if command -v it2copy &>/dev/null; then
 	detect-clipboard
