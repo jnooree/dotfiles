@@ -1,6 +1,5 @@
 tap "homebrew/bundle"
 tap "homebrew/cask"
-tap "homebrew/core"
 brew "aria2"
 brew "bash"
 brew "bat"
