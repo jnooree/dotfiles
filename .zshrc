@@ -69,10 +69,6 @@ fi
 
 _source_if_readable "$HOME/.cargo/env"
 
-if [[ $(hostname -s) = galaxy3 ]]; then
-	_source_if_readable ~/.rvm/scripts/rvm
-fi
-
 if [[ -n ${HOMEBREW_PREFIX-} ]]; then
 	manpath=("$HOMEBREW_PREFIX/share/man" "$manpath[@]")
 	fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" "$fpath[@]")
@@ -112,36 +108,17 @@ _comp_options+=(globdots)
 unset ENABLE_CORRECTION DEFAULT_USER
 
 # Highlight settings
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets regexp root)
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets root)
 ZSH_HIGHLIGHT_STYLES[comment]='bold,9'
-ZSH_HIGHLIGHT_REGEXP[\bsudo\b]='bold,underline'
+
+if [[ -o rematchpcre ]]; then
+	ZSH_HIGHLIGHT_HIGHLIGHTERS+=(regexp)
+	ZSH_HIGHLIGHT_REGEXP[\bsudo\b]='bold,underline'
+fi
 
 # Autocomplete settings
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(buffer-empty)
-
-if [[ $_OS_ARCH = *Darwin* ]]; then
-	# NFD...
-	function prompt_current_dir() {
-		local curr_dir='%~'
-		local expanded_curr_dir="${(%)curr_dir}"
-
-		# Show full path of named directories if they are the current directory.
-		if [[ $expanded_curr_dir != */* ]]; then
-			curr_dir='%/'
-			expanded_curr_dir="${(%)curr_dir}"
-		fi
-		if [[ ${#expanded_curr_dir} -gt $(( COLUMNS - ${MIN_COLUMNS:-30} )) ]]; then
-			curr_dir='.../%2/'
-			expanded_curr_dir="${(%)curr_dir}"
-		fi
-
-		psvar[1]="$(builtin print -rn -- "$expanded_curr_dir" | uconv -x Any-NFC)"
-	}
-
-	# Re-run for macos
-	prompt_current_dir
-fi
 
 # Related to pre{cmd,exec}
 function jnr_precmd() {
