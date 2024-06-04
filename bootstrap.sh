@@ -114,7 +114,7 @@ for _fd in * bin/* .config/* .config/gh/*; do
 		bin | Library | LICENSE | README.md | bootstrap.sh)
 		continue
 		;;
-	.config/htop | .config/gh | .config/karabiner)
+	.config/htop | .config/gh)
 		continue
 		;;
 	esac
@@ -127,10 +127,6 @@ for _fd in .config/htop/*; do
 done
 
 if [[ $_os_arch = *Darwin* ]]; then
-	for _fd in .config/karabiner/*; do
-		to_home "$_fd"
-	done
-
 	while IFS= read -r -d '' _fd; do
 		to_home "$_fd"
 	done < <(find Library -type f -print0)
