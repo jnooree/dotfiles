@@ -45,3 +45,5 @@
 	showIncludeUntracked = true
 [rebase]
 	autoSquash = true
+[advice]
+	skippedCherryPicks = false
