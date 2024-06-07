@@ -10,6 +10,7 @@
 	ff = only
 [merge]
 	ff = false
+	autoStash = true
 [init]
 	defaultBranch = main
 [core]
@@ -45,5 +46,7 @@
 	showIncludeUntracked = true
 [rebase]
 	autoSquash = true
+	autoStash = true
+	rebaseMerges = true
 [advice]
 	skippedCherryPicks = false
