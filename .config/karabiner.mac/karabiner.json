@@ -24,40 +24,6 @@
                 "conditions": [
                   {
                     "bundle_identifiers": ["^com.vmware.fusion"],
-                    "type": "frontmost_application_unless"
-                  },
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      }
-                    ],
-                    "type": "device_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "right_command",
-                  "modifiers": {
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "right_command",
-                    "lazy": true
-                  }
-                ],
-                "to_if_alone": [
-                  {
-                    "key_code": "keypad_enter"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^com.vmware.fusion"],
                     "type": "frontmost_application_if"
                   },
                   {
