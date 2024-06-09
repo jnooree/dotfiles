@@ -18,7 +18,6 @@ elif [[ -n ${HOMEBREW_PREFIX-} ]]; then
 		"$_brew_opt/grep/libexec/gnubin"
 		"$_brew_opt/findutils/libexec/gnubin"
 		"$_brew_opt/coreutils/libexec/gnubin"
-		"$_brew_opt/curl/bin"
 		"$_brew_opt/ruby/bin"
 		"$_brew_opt/ssh-copy-id/bin"
 		"$_brew_opt/gnu-units/libexec/gnubin"
