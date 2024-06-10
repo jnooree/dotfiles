@@ -42,6 +42,7 @@
 	autoupdate = true
 [maintenance]
 	repo = /scratch/jnooree/nurikit/current
+	repo = /home/jnooree/repo/seoklab/GalaxyMol
 [stash]
 	showIncludeUntracked = true
 [rebase]
@@ -50,3 +51,5 @@
 	rebaseMerges = true
 [advice]
 	skippedCherryPicks = false
+[fetch]
+	prune = true
