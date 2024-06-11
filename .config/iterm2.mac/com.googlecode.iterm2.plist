@@ -17,7 +17,7 @@
 	<key>AutoCommandHistory</key>
 	<false/>
 	<key>AutoHideTmuxClientSession</key>
-	<false/>
+	<true/>
 	<key>BadgeFont</key>
 	<string>Apple SD Gothic Neo</string>
 	<key>BracketedPasteMode</key>
@@ -2667,6 +2667,8 @@
 				<key>Red Component</key>
 				<real>0.0</real>
 			</dict>
+			<key>Load Shell Integration Automatically</key>
+			<false/>
 			<key>Match Background Color</key>
 			<dict>
 				<key>Alpha Component</key>
@@ -3064,7 +3066,7 @@
 	<key>OpenNoWindowsAtStartup</key>
 	<false/>
 	<key>OpenTmuxWindowsIn</key>
-	<integer>2</integer>
+	<integer>0</integer>
 	<key>OpenUntitledFile</key>
 	<true/>
 	<key>PMPrintingExpandedStateForPrint2</key>
