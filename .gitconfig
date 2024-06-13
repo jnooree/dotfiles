@@ -7,7 +7,7 @@
 	followTags = true
 	autoSetupRemote = true
 [pull]
-	ff = only
+	rebase = interactive
 [merge]
 	ff = false
 	autoStash = true
