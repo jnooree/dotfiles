@@ -53,3 +53,5 @@
 	skippedCherryPicks = false
 [fetch]
 	prune = true
+[branch]
+	autoSetupMerge = false
