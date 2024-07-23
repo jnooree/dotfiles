@@ -173,9 +173,10 @@ else
 fi
 
 # Zim
-curl -fsSL --create-dirs -o ~/.zim/zimfw.zsh \
+export ZIM_HOME="$HOME/.zim"
+curl -fsSL --create-dirs -o "$ZIM_HOME/zimfw.zsh" \
 	https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
-zsh ~/.zim/zimfw.zsh init -q
+zsh "$ZIM_HOME/zimfw.zsh" init -q
 
 # iTerm2
 if [[ ! -r ~/.iterm2_shell_integration.zsh ]]; then
