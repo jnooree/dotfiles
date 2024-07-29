@@ -51,6 +51,7 @@
 	rebaseMerges = true
 [advice]
 	skippedCherryPicks = false
+	forceDeleteBranch = false
 [fetch]
 	prune = true
 [branch]
