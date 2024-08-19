@@ -3082,7 +3082,7 @@
 	<key>PasteSpecialSubstitution</key>
 	<string> </string>
 	<key>PasteSpecialUseRegexSubstitution</key>
-	<false/>
+	<true/>
 	<key>PasteTabToStringTabStopSize</key>
 	<integer>4</integer>
 	<key>PerPaneBackgroundImage</key>
