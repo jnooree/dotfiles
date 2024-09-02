@@ -1539,6 +1539,9 @@
                     "identifiers": [
                       {
                         "vendor_id": 1452
+                      },
+                      {
+                        "vendor_id": 13364
                       }
                     ],
                     "type": "device_unless"
@@ -1564,6 +1567,9 @@
                     "identifiers": [
                       {
                         "vendor_id": 1452
+                      },
+                      {
+                        "vendor_id": 13364
                       }
                     ],
                     "type": "device_unless"
@@ -1589,6 +1595,9 @@
                     "identifiers": [
                       {
                         "vendor_id": 1452
+                      },
+                      {
+                        "vendor_id": 13364
                       }
                     ],
                     "type": "device_unless"
@@ -1614,6 +1623,9 @@
                     "identifiers": [
                       {
                         "vendor_id": 1452
+                      },
+                      {
+                        "vendor_id": 13364
                       }
                     ],
                     "type": "device_unless"
@@ -1639,6 +1651,9 @@
                     "identifiers": [
                       {
                         "vendor_id": 1452
+                      },
+                      {
+                        "vendor_id": 13364
                       }
                     ],
                     "type": "device_unless"
@@ -1664,6 +1679,9 @@
                     "identifiers": [
                       {
                         "vendor_id": 1452
+                      },
+                      {
+                        "vendor_id": 13364
                       }
                     ],
                     "type": "device_unless"
@@ -1689,6 +1707,9 @@
                     "identifiers": [
                       {
                         "vendor_id": 1452
+                      },
+                      {
+                        "vendor_id": 13364
                       }
                     ],
                     "type": "device_unless"
@@ -1714,6 +1735,9 @@
                     "identifiers": [
                       {
                         "vendor_id": 1452
+                      },
+                      {
+                        "vendor_id": 13364
                       }
                     ],
                     "type": "device_unless"
@@ -1739,6 +1763,9 @@
                     "identifiers": [
                       {
                         "vendor_id": 1452
+                      },
+                      {
+                        "vendor_id": 13364
                       }
                     ],
                     "type": "device_unless"
@@ -1764,6 +1791,9 @@
                     "identifiers": [
                       {
                         "vendor_id": 1452
+                      },
+                      {
+                        "vendor_id": 13364
                       }
                     ],
                     "type": "device_unless"
@@ -1789,6 +1819,9 @@
                     "identifiers": [
                       {
                         "vendor_id": 1452
+                      },
+                      {
+                        "vendor_id": 13364
                       }
                     ],
                     "type": "device_unless"
@@ -1814,6 +1847,9 @@
                     "identifiers": [
                       {
                         "vendor_id": 1452
+                      },
+                      {
+                        "vendor_id": 13364
                       }
                     ],
                     "type": "device_unless"
@@ -1839,6 +1875,9 @@
                     "identifiers": [
                       {
                         "vendor_id": 1452
+                      },
+                      {
+                        "vendor_id": 13364
                       }
                     ],
                     "type": "device_unless"
@@ -1860,6 +1899,9 @@
                     "identifiers": [
                       {
                         "vendor_id": 1452
+                      },
+                      {
+                        "vendor_id": 13364
                       }
                     ],
                     "type": "device_unless"
@@ -1881,6 +1923,9 @@
                     "identifiers": [
                       {
                         "vendor_id": 1452
+                      },
+                      {
+                        "vendor_id": 13364
                       }
                     ],
                     "type": "device_unless"
@@ -1905,6 +1950,9 @@
                     "identifiers": [
                       {
                         "vendor_id": 1452
+                      },
+                      {
+                        "vendor_id": 13364
                       }
                     ],
                     "type": "device_unless"
@@ -1929,6 +1977,9 @@
                     "identifiers": [
                       {
                         "vendor_id": 1452
+                      },
+                      {
+                        "vendor_id": 13364
                       }
                     ],
                     "type": "device_unless"
@@ -1953,6 +2004,9 @@
                     "identifiers": [
                       {
                         "vendor_id": 1452
+                      },
+                      {
+                        "vendor_id": 13364
                       }
                     ],
                     "type": "device_unless"
@@ -1977,6 +2031,9 @@
                     "identifiers": [
                       {
                         "vendor_id": 1452
+                      },
+                      {
+                        "vendor_id": 13364
                       }
                     ],
                     "type": "device_unless"
@@ -2001,6 +2058,9 @@
                     "identifiers": [
                       {
                         "vendor_id": 1452
+                      },
+                      {
+                        "vendor_id": 13364
                       }
                     ],
                     "type": "device_unless"
