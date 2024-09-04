@@ -1,12 +1,12 @@
 # shellcheck disable=SC1090,SC2034,SC2155
 
 # Very likely inside interactive session
-if [[ ! -o interactive && $PATH = *"$HOME"* ]]; then
+if [[ ! -o interactive && -n ${ZDOTDIR-} ]]; then
 	return
 fi
 
-# For convenience
 setopt autonamedirs
+skip_global_compinit=1
 
 if [[ -z $SAFEPATH ]]; then
 	SAFEPATH="$PATH"
@@ -31,11 +31,11 @@ unset _stripped_path
 if [[ -x $_brew_prefix/bin/brew ]]; then
 	eval "$("$_brew_prefix/bin/brew" shellenv)"
 	# shellcheck disable=SC2123
-	path=("$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin" "$path[@]")
+	path=("$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin" $path)
 fi
 unset _brew_prefix
 
-path=("$HOME/bin" "$HOME/.local/bin" "$path[@]")
+path=("$HOME/bin" "$HOME/.local/bin" $path)
 
 # User env variables
 if [[ -n $SSH_CONNECTION ]]; then
@@ -76,13 +76,4 @@ fi
 
 if [[ -r ~/.zshenv.local ]]; then
 	. ~/.zshenv.local
-fi
-
-# For more zsh completions
-skip_global_compinit=1
-
-# Setup path etc. for ssh single line commands
-if [[ -n ${SSH_CONNECTION-} && ! -o login ]]; then
-	if [[ -r /etc/zprofile ]]     . /etc/zprofile
-	if [[ -r /etc/zsh/zprofile ]] . /etc/zsh/zprofile
 fi
