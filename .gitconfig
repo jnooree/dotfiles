@@ -41,7 +41,7 @@
 	enabled = true
 	autoupdate = true
 [maintenance]
-	repo = /scratch/jnooree/nurikit/current
+	repo = /home/jnooree/nurikit/current
 	repo = /home/jnooree/repo/seoklab/GalaxyMol
 [stash]
 	showIncludeUntracked = true
