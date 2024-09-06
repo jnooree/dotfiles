@@ -5,6 +5,9 @@ set -o pipefail
 
 _os_arch="$(uname -sm)"
 
+script_dir="$(dirname "$(realpath "$0")")"
+cd "$script_dir"
+
 function _auto_install_brew() {
 	local brew_prefix
 
@@ -56,7 +59,7 @@ function _auto_install_conda() {
 
 	script_dest="$(mktemp -d)/conda-install.sh"
 
-	curl -fsSL "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-${os_conda}-${arch}.sh" -o "$script_dest"
+	curl -fsSL "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-${os_conda}-${arch}.sh" -o "$script_dest"
 	bash "$script_dest" -bup "$conda_prefix"
 	rm -rf "$(dirname "$script_dest")"
 }
@@ -73,72 +76,7 @@ if [[ -z ${SKIP_CONDA-} ]]; then
 	_auto_install_conda ~/anaconda3
 fi
 
-script_dir="$(dirname "$(realpath "$0")")"
-cd "$script_dir"
-
-function to_home() {
-	local source="$script_dir/$1" dest="$HOME/$1" dest_dir
-
-	case "$dest" in
-	*.mac)
-		if [[ $_os_arch = *Darwin* ]]; then
-			dest="${dest%.mac}"
-		else
-			return 0
-		fi
-		;;
-	*.lnx)
-		if [[ $_os_arch = *Linux* ]]; then
-			dest="${dest%.lnx}"
-		else
-			return 0
-		fi
-		;;
-	esac
-
-	dest_dir="$(dirname "$dest")"
-	mkdir -p "$dest_dir"
-
-	if [[ "${2-}" = copy ]]; then
-		cp -fT "$source" "$dest"
-	else
-		ln -sfT "$(realpath --relative-to "$dest_dir" "$source")" "$dest"
-	fi
-}
-
-shopt -s dotglob
-
-for _fd in * bin/* .config/* .config/gh/*; do
-	case "$_fd" in
-	.git | .github | .gitignore | .gitmessage | .config | .zfunc | \
-		bin | Library | LICENSE | README.md | bootstrap.sh)
-		continue
-		;;
-	.config/htop | .config/gh)
-		continue
-		;;
-	esac
-
-	to_home "$_fd"
-done
-
-for _fd in .config/htop/*; do
-	to_home "$_fd" copy
-done
-
-if [[ $_os_arch = *Darwin* ]]; then
-	while IFS= read -r -d '' _fd; do
-		to_home "$_fd"
-	done < <(find Library -type f -print0)
-
-	for _fd in Library/LaunchAgents/*; do
-		launchctl bootstrap "gui/$UID" "$HOME/$_fd"
-	done
-fi
-
-unset _fd
-
-shopt -u dotglob
+./link.sh
 
 # Create directories
 mkdir -p ~/opt ~/.config/zsh ~/.vim/{backup,swap,undo}
