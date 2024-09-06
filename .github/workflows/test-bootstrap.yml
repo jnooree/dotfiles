@@ -26,4 +26,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
+      - run: ln -s $PWD ~/.dotfiles
+
       - run: ./bootstrap.sh
