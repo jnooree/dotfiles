@@ -26,15 +26,15 @@ elif [[ -n ${HOMEBREW_PREFIX-} ]]; then
 		"$_brew_opt/node@20/bin"
 		"$HOMEBREW_PREFIX/bin"
 		"$HOMEBREW_PREFIX/sbin"
-		"$path[@]"
+		$path
 	)
 
-	fpath=("$_brew_opt/curl/share/zsh/site-functions" "$fpath[@]")
+	fpath=("$_brew_opt/curl/share/zsh/site-functions" $fpath)
 
 	unset _brew_opt
 fi
 
-path=("$HOME/bin" "$HOME/.local/bin" "$path[@]")
+path=("$HOME/bin" "$HOME/.local/bin" $path)
 
 function _source_if_readable() {
 	if [[ -r $1 ]] builtin source "$1" || true
@@ -62,18 +62,18 @@ fi
 # <<< conda initialize <<<
 
 if [[ -x ~/.jenv/bin/jenv ]]; then
-	path=("$HOME/.jenv/bin" "$path[@]")
+	path=("$HOME/.jenv/bin" $path)
 	eval "$(jenv init -)"
 fi
 
 _source_if_readable "$HOME/.cargo/env"
 
 if [[ -n ${HOMEBREW_PREFIX-} ]]; then
-	manpath=("$HOMEBREW_PREFIX/share/man" "$manpath[@]")
-	fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" "$fpath[@]")
+	manpath=("$HOMEBREW_PREFIX/share/man" $manpath)
+	fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" $fpath)
 	export NODE_PATH="$HOMEBREW_PREFIX/lib/node_modules:$NODE_PATH"
 fi
-fpath=("$HOME/.dotfiles/.zfunc/completion" "$fpath[@]")
+fpath=("$HOME/.dotfiles/.zfunc/completion" $fpath)
 
 export LS_COLORS="rs=0:di=1;36:ln=35:mh=00:pi=33:so=32:bd=34;46:cd=34;43:\
 or=40;31;01:mi=00:su=30;41:sg=30;46:ca=00:tw=30;42:ow=30;43:st=30;44:ex=31:\
