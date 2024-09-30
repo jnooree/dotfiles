@@ -135,15 +135,20 @@ add-zsh-hook precmd jnr_precmd
 add-zsh-hook preexec jnr_preexec
 
 # Preferred editor for local and remote sessions
+export EDITOR=vim
 if [[ ${TERM_PROGRAM-} = vscode ]]; then
 	export EDITOR="$(which code) --wait"
-elif [[ ${LC_TERMINAL-} = terminus ]]; then
-	export EDITOR=vim
-elif [[ -n ${SSH_CONNECTION-} ]]; then
+elif [[ -z ${SSH_CONNECTION-} ]]; then
+	unfunction rcode
+	alias rcode=code
+	if command -v subl &>/dev/null; then
+		export HOMEBREW_EDITOR='subl -n'
+		export EDITOR='subl -n -w'
+	fi
+elif command -v rsub &>/dev/null && [[ ${LC_TERMINAL-} != terminus ]]; then
+	alias -g subl=rsub
 	export EDITOR='rsub -n -w'
-else
-	export HOMEBREW_EDITOR='subl -n'
-	export EDITOR='subl -n -w'
+	export RMATE_PORT="${LC_RSUB_PORT:-58023}"
 fi
 export SUDO_EDITOR="$EDITOR"
 
@@ -153,11 +158,6 @@ if [[ $_OS_ARCH = *Linux* ]]; then
 	alias sinf='sinfo -N -o "%8N  %9P  %.2t  %.13C  %.8O  %.6m  %.8e  %$(( $COLUMNS - 68 ))E"'
 else
 	alias sdsubl="sudo '/Applications/Sublime Text.app/Contents/MacOS/sublime_text'"
-fi
-
-if [[ -z ${SSH_CONNECTION-} ]]; then
-	unfunction rcode
-	alias rcode=code
 fi
 
 _source_if_readable /etc/zsh_command_not_found

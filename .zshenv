@@ -38,11 +38,6 @@ unset _brew_prefix
 path=("$HOME/bin" "$HOME/.local/bin" $path)
 
 # User env variables
-if [[ -n $SSH_CONNECTION ]] && command -v rsub &>/dev/null; then
-	alias -g subl=rsub
-	export RMATE_PORT="${LC_RSUB_PORT:-58023}"
-fi
-
 export PAGER="less"
 export MANPAGER="less"
 # Fix for colored man pages when groff is installed
