@@ -10,8 +10,12 @@
 	<true/>
 	<key>AllowClipboardAccess</key>
 	<true/>
+	<key>AlphaForDeselectedCommandShade</key>
+	<real>0.05000000074505806</real>
 	<key>AlternateMouseScroll</key>
 	<true/>
+	<key>AlwaysOpenWindowAtStartup</key>
+	<false/>
 	<key>AlwaysWarnBeforePastingOverSize</key>
 	<integer>1000</integer>
 	<key>AutoCommandHistory</key>
@@ -2837,7 +2841,7 @@
 			<key>Set Local Environment Vars</key>
 			<integer>2</integer>
 			<key>Shortcut</key>
-			<string>A</string>
+			<string></string>
 			<key>Show Mark Indicators</key>
 			<false/>
 			<key>Show Offscreen Command line</key>
@@ -3062,7 +3066,7 @@
 	<key>OpenBookmark</key>
 	<false/>
 	<key>OpenNewWindowAtStartup</key>
-	<true/>
+	<false/>
 	<key>OpenNoWindowsAtStartup</key>
 	<false/>
 	<key>OpenTmuxWindowsIn</key>
@@ -3137,7 +3141,7 @@
 	<key>SeparateStatusBarsPerPane</key>
 	<false/>
 	<key>SetCookie</key>
-	<true/>
+	<false/>
 	<key>ShowFullScreenTabBar</key>
 	<false/>
 	<key>ShowNewOutputIndicator</key>
