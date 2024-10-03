@@ -8,6 +8,8 @@
 	<integer>2</integer>
 	<key>AdjustWindowForFontSizeChange</key>
 	<true/>
+	<key>Alert On Marks in Offscreen Sessions</key>
+	<false/>
 	<key>AllowClipboardAccess</key>
 	<true/>
 	<key>AlphaForDeselectedCommandShade</key>
@@ -32,6 +34,8 @@
 	<integer>0</integer>
 	<key>Command</key>
 	<string></string>
+	<key>CommandSelection</key>
+	<false/>
 	<key>ConvertDosNewlines</key>
 	<false/>
 	<key>CopySelection</key>
@@ -1150,6 +1154,20 @@
 			<integer>2</integer>
 			<key>Text</key>
 			<string>_</string>
+			<key>Version</key>
+			<integer>2</integer>
+		</dict>
+		<key>0x61-0x140000-0x0</key>
+		<dict>
+			<key>Action</key>
+			<integer>25</integer>
+			<key>Apply Mode</key>
+			<integer>0</integer>
+			<key>Escaping</key>
+			<integer>2</integer>
+			<key>Text</key>
+			<string>Select Current Command
+Select Current Command</string>
 			<key>Version</key>
 			<integer>2</integer>
 		</dict>
