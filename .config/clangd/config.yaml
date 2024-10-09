@@ -1,0 +1,8 @@
+If:
+  PathMatch: ^/(usr|opt|applic|(data/galaxy4|home)/linuxbrew)/.*
+CompileFlags:
+  Add:
+    - -ferror-limit=0
+Diagnostics:
+  Suppress: "*"
+  UnusedIncludes: None
