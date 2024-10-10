@@ -1,5 +1,5 @@
 If:
-  PathMatch: ^/(usr|opt|applic|(data/galaxy4|home)/linuxbrew)/.*
+  PathMatch: ^/(usr|opt|applic|(data/galaxy./user|home)/linuxbrew)/.*
 CompileFlags:
   Add:
     - -ferror-limit=0
