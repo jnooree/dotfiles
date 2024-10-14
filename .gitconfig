@@ -30,7 +30,6 @@
 [log]
 	date = format-local:%F %I:%M %p
 [diff]
-	external = difft
 	wordRegex = [a-zA-Z0-9_-]+
 [pager]
 	log = diff-highlight | less
