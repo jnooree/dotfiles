@@ -115,9 +115,3 @@ export ZIM_HOME="$HOME/.zim"
 curl -fsSL --create-dirs -o "$ZIM_HOME/zimfw.zsh" \
 	https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
 zsh "$ZIM_HOME/zimfw.zsh" init -q
-
-# iTerm2
-if [[ ! -r ~/.iterm2_shell_integration.zsh ]]; then
-	curl -L https://iterm2.com/shell_integration/install_shell_integration_and_utilities.sh |
-		SHELL=zsh bash
-fi

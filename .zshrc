@@ -101,7 +101,7 @@ fi
 if [[ ! $ZIM_HOME/init.zsh -nt ${ZDOTDIR-$HOME}/.zimrc ]]; then
 	source "$ZIM_HOME/zimfw.zsh" init -q
 fi
-source "$ZIM_HOME/init.zsh"
+ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=1 source "$ZIM_HOME/init.zsh"
 _comp_options+=(globdots)
 
 unset ENABLE_CORRECTION DEFAULT_USER
@@ -162,8 +162,6 @@ fi
 
 _source_if_readable /etc/zsh_command_not_found
 _source_if_readable ~/.fzf.zsh
-ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=1 \
-	_source_if_readable ~/.iterm2_shell_integration.zsh
 
 if command -v it2copy &>/dev/null; then
 	detect-clipboard

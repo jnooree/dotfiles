@@ -15,3 +15,4 @@ zmodule zsh-users/zsh-syntax-highlighting
 zmodule zsh-users/zsh-autosuggestions
 zmodule jnooree/jnooree-zsh-theme -s jnooree.zsh-theme -f functions -u git
 zmodule junegunn/fzf-git.sh -s fzf-git.sh
+zmodule gnachman/iTerm2-shell-integration --no-submodules -s shell_integration/zsh -c 'path=($path {}/utilities)'
