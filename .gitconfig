@@ -32,6 +32,7 @@
 [diff]
 	wordRegex = [a-zA-Z0-9_-]+
 [pager]
+	diff = diff-highlight | less
 	log = diff-highlight | less
 	show = diff-highlight | less
 [interactive]
