@@ -1,2432 +1,1756 @@
 {
-  "global": {
-    "ask_for_confirmation_before_quitting": true,
-    "check_for_updates_on_startup": true,
-    "show_in_menu_bar": true,
-    "show_profile_name_in_menu_bar": false,
-    "unsafe_ui": false
-  },
-  "profiles": [
-    {
-      "complex_modifications": {
-        "parameters": {
-          "basic.simultaneous_threshold_milliseconds": 50,
-          "basic.to_delayed_action_delay_milliseconds": 500,
-          "basic.to_if_alone_timeout_milliseconds": 1000,
-          "basic.to_if_held_down_threshold_milliseconds": 500,
-          "mouse_motion_to_scroll.speed": 100
-        },
-        "rules": [
-          {
-            "description": "Sync with windows",
-            "manipulators": [
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^com.vmware.fusion"],
-                    "type": "frontmost_application_if"
-                  },
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      }
-                    ],
-                    "type": "device_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "right_command",
-                  "modifiers": {
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "f16"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^com.microsoft.rdc.macos"],
-                    "type": "frontmost_application_unless"
-                  },
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      }
-                    ],
-                    "type": "device_unless"
-                  }
-                ],
-                "from": {
-                  "key_code": "right_option",
-                  "modifiers": {
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "keypad_enter"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^com.microsoft.rdc.macos"],
-                    "type": "frontmost_application_if"
-                  },
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      }
-                    ],
-                    "type": "device_unless"
-                  }
-                ],
-                "from": {
-                  "apple_vendor_top_case_key_code": "keyboard_fn",
-                  "modifiers": {
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "right_option"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      }
-                    ],
-                    "type": "device_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "return_or_enter",
-                  "modifiers": {
-                    "mandatory": ["fn"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "insert"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "from": {
-                  "key_code": "print_screen",
-                  "modifiers": {
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "4",
-                    "modifiers": ["command", "shift"]
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "from": {
-                  "key_code": "print_screen",
-                  "modifiers": {
-                    "mandatory": ["control"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "3",
-                    "modifiers": ["command", "shift"]
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Allow original screenshot shortcuts",
-            "manipulators": [
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      }
-                    ],
-                    "type": "device_unless"
-                  }
-                ],
-                "from": {
-                  "key_code": "3",
-                  "modifiers": {
-                    "mandatory": ["command", "shift"],
-                    "optional": ["caps_lock", "control"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "f13",
-                    "modifiers": ["option"]
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      }
-                    ],
-                    "type": "device_unless"
-                  }
-                ],
-                "from": {
-                  "key_code": "4",
-                  "modifiers": {
-                    "mandatory": ["command", "shift"],
-                    "optional": ["caps_lock", "control"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "f13"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      }
-                    ],
-                    "type": "device_unless"
-                  }
-                ],
-                "from": {
-                  "key_code": "5",
-                  "modifiers": {
-                    "mandatory": ["command", "shift"],
-                    "optional": ["caps_lock", "control"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "f13",
-                    "modifiers": ["command"]
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Launch apps by option+numbers",
-            "manipulators": [
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      }
-                    ],
-                    "type": "device_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "escape",
-                  "modifiers": {
-                    "mandatory": ["fn", "left_shift"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open '/System/Applications/Utilities/Activity Monitor.app'"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      }
-                    ],
-                    "type": "device_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "comma",
-                  "modifiers": {
-                    "mandatory": ["fn"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open '/System/Applications/System Settings.app'"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      }
-                    ],
-                    "type": "device_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "comma",
-                  "modifiers": {
-                    "mandatory": ["fn", "left_control"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open '/System/Applications/App Store.app'"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      }
-                    ],
-                    "type": "device_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "comma",
-                  "modifiers": {
-                    "mandatory": ["fn", "left_shift"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "subl -n ~/.config/karabiner/karabiner.json"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      }
-                    ],
-                    "type": "device_unless"
-                  }
-                ],
-                "from": {
-                  "key_code": "escape",
-                  "modifiers": {
-                    "mandatory": ["left_control", "left_shift"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open '/System/Applications/Utilities/Activity Monitor.app'"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      }
-                    ],
-                    "type": "device_unless"
-                  }
-                ],
-                "from": {
-                  "key_code": "scroll_lock",
-                  "modifiers": {
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open '/System/Applications/System Settings.app'"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      }
-                    ],
-                    "type": "device_unless"
-                  }
-                ],
-                "from": {
-                  "key_code": "pause",
-                  "modifiers": {
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open '/System/Applications/App Store.app'"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      }
-                    ],
-                    "type": "device_unless"
-                  }
-                ],
-                "from": {
-                  "key_code": "scroll_lock",
-                  "modifiers": {
-                    "mandatory": ["control"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "subl -n ~/.config/karabiner/karabiner.json"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "from": {
-                  "key_code": "grave_accent_and_tilde",
-                  "modifiers": {
-                    "mandatory": ["option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e 'tell app \"iTerm2\" to create window with default profile activate' || open '/Applications/iTerm.app'"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "from": {
-                  "key_code": "1",
-                  "modifiers": {
-                    "mandatory": ["option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e 'tell app \"Safari\" to make new document activate'"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "from": {
-                  "key_code": "1",
-                  "modifiers": {
-                    "mandatory": ["left_control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e 'if app \"Google Chrome\" is running then\n\ttell app \"Google Chrome\" to make new window\nend if\ntell app \"Google Chrome\" to activate'"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "from": {
-                  "key_code": "2",
-                  "modifiers": {
-                    "mandatory": ["option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open '/Applications/Between.app'"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "from": {
-                  "key_code": "3",
-                  "modifiers": {
-                    "mandatory": ["option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open '/Applications/KakaoTalk.app'"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "from": {
-                  "key_code": "3",
-                  "modifiers": {
-                    "mandatory": ["left_shift", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open '/System/Applications/Messages.app'"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "from": {
-                  "key_code": "3",
-                  "modifiers": {
-                    "mandatory": ["left_control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open '/System/Applications/Reminders.app'"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "from": {
-                  "key_code": "3",
-                  "modifiers": {
-                    "mandatory": ["left_control", "left_shift"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open '/System/Applications/Calendar.app'"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "from": {
-                  "key_code": "4",
-                  "modifiers": {
-                    "mandatory": ["option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "/Users/jnooree/bin/code --new-window"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "from": {
-                  "key_code": "4",
-                  "modifiers": {
-                    "mandatory": ["left_shift", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "subl --launch-or-new-window"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      }
-                    ],
-                    "type": "device_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "hyphen",
-                  "modifiers": {
-                    "mandatory": ["fn"],
-                    "optional": ["caps_lock", "option", "shift"]
-                  }
-                },
-                "to": [
-                  {
-                    "consumer_key_code": "display_brightness_decrement"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      }
-                    ],
-                    "type": "device_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "equal_sign",
-                  "modifiers": {
-                    "mandatory": ["fn"],
-                    "optional": ["caps_lock", "option", "shift"]
-                  }
-                },
-                "to": [
-                  {
-                    "consumer_key_code": "display_brightness_increment"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Remap to reduce accidents",
-            "manipulators": [
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": [
-                      "^com.apple.Safari",
-                      "^com.apple.Preview"
-                    ],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "q",
-                  "modifiers": {
-                    "mandatory": ["command"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "q"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": [
-                      "^com.apple.Safari",
-                      "^com.apple.Preview"
-                    ],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "q",
-                  "modifiers": {
-                    "mandatory": ["command", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "q",
-                    "modifiers": ["command"]
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Remap keys in hwp",
-            "manipulators": [
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^com.hancom.office"],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "delete_or_backspace",
-                  "modifiers": {
-                    "mandatory": ["option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "delete_or_backspace",
-                    "modifiers": ["control"]
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^com.hancom.office"],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "e",
-                  "modifiers": {
-                    "mandatory": ["command"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "n",
-                    "modifiers": ["control"]
-                  },
-                  {
-                    "key_code": "m",
-                    "modifiers": ["control"]
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^com.hancom.office"],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "v",
-                  "modifiers": {
-                    "mandatory": ["command", "shift"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "k",
-                    "modifiers": ["shift", "option", "control"]
-                  },
-                  {
-                    "key_code": "v",
-                    "modifiers": ["command"]
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^com.hancom.office"],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "n",
-                  "modifiers": {
-                    "mandatory": ["left_control", "shift"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "t",
-                    "modifiers": ["command"]
-                  },
-                  {
-                    "key_code": "n",
-                    "modifiers": ["control", "shift"]
-                  },
-                  {
-                    "key_code": "return_or_enter"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^com.hancom.office"],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "a",
-                  "modifiers": {
-                    "mandatory": ["left_control", "shift"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "t",
-                    "modifiers": ["command"]
-                  },
-                  {
-                    "key_code": "a",
-                    "modifiers": ["control", "shift"]
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^com.hancom.office"],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "equal_sign",
-                  "modifiers": {
-                    "mandatory": ["command", "shift"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "p",
-                    "modifiers": ["command", "control"]
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^com.hancom.office"],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "hyphen",
-                  "modifiers": {
-                    "mandatory": ["command", "shift"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "s",
-                    "modifiers": ["command", "control"]
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^com.hancom.office", "^com.adobe."],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "f1",
-                  "modifiers": {
-                    "optional": ["any"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "f1"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^com.hancom.office", "^com.adobe."],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "f2",
-                  "modifiers": {
-                    "optional": ["any"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "f2"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^com.hancom.office", "^com.adobe."],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "f3",
-                  "modifiers": {
-                    "optional": ["any"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "f3"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^com.hancom.office", "^com.adobe."],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "f4",
-                  "modifiers": {
-                    "optional": ["any"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "f4"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^com.hancom.office", "^com.adobe."],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "f5",
-                  "modifiers": {
-                    "optional": ["any"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "f5"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^com.hancom.office", "^com.adobe."],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "f6",
-                  "modifiers": {
-                    "optional": ["any"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "f6"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^com.hancom.office", "^com.adobe."],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "f7",
-                  "modifiers": {
-                    "optional": ["any"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "f7"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^com.hancom.office", "^com.adobe."],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "f8",
-                  "modifiers": {
-                    "optional": ["any"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "f8"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^com.hancom.office", "^com.adobe."],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "f9",
-                  "modifiers": {
-                    "optional": ["any"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "f9"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^com.hancom.office", "^com.adobe."],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "f10",
-                  "modifiers": {
-                    "optional": ["any"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "f10"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^com.hancom.office", "^com.adobe."],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "f11",
-                  "modifiers": {
-                    "optional": ["any"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "f11"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^com.hancom.office", "^com.adobe."],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "f12",
-                  "modifiers": {
-                    "optional": ["any"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "f12"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Format-less Copy & Paste",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "k",
-                  "modifiers": {
-                    "mandatory": ["command", "option", "shift"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "/Users/jnooree/bin/pbplain"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^com.hancom.office"],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "v",
-                  "modifiers": {
-                    "mandatory": ["command", "shift"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "k",
-                    "modifiers": ["option", "control", "shift"]
-                  },
-                  {
-                    "key_code": "v",
-                    "modifiers": ["command"]
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^com.apple.Preview"],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "c",
-                  "modifiers": {
-                    "mandatory": ["command", "shift"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "c",
-                    "modifiers": ["command"]
-                  },
-                  {
-                    "key_code": "k",
-                    "modifiers": ["option", "control", "shift"]
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "⌘Z to Undo",
-            "manipulators": [
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": [
-                      "^com\\.apple\\.Terminal$",
-                      "^co\\.zeit\\.hyperterm$",
-                      "^co\\.zeit\\.hyper$",
-                      "^io\\.alacritty$",
-                      "^net\\.kovidgoyal\\.kitty$"
-                    ],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "z",
-                  "modifiers": {
-                    "mandatory": ["command"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "hyphen",
-                    "modifiers": ["left_control"]
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "⌘⇧Z to Redo [Zsh only]",
-            "manipulators": [
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": [
-                      "^com\\.apple\\.Terminal$",
-                      "^co\\.zeit\\.hyperterm$",
-                      "^co\\.zeit\\.hyper$",
-                      "^io\\.alacritty$",
-                      "^net\\.kovidgoyal\\.kitty$"
-                    ],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "z",
-                  "modifiers": {
-                    "mandatory": ["command", "shift"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "escape"
-                  },
-                  {
-                    "key_code": "hyphen",
-                    "modifiers": ["left_shift"]
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "⌘ + ← | Move cursor to line begin",
-            "manipulators": [
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": [
-                      "^com\\.apple\\.Terminal$",
-                      "^co\\.zeit\\.hyperterm$",
-                      "^co\\.zeit\\.hyper$",
-                      "^io\\.alacritty$",
-                      "^net\\.kovidgoyal\\.kitty$"
-                    ],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "left_arrow",
-                  "modifiers": {
-                    "mandatory": ["command"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "a",
-                    "modifiers": ["left_control"]
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "⌘ + → | Move cursor to line end",
-            "manipulators": [
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": [
-                      "^com\\.apple\\.Terminal$",
-                      "^co\\.zeit\\.hyperterm$",
-                      "^co\\.zeit\\.hyper$",
-                      "^io\\.alacritty$",
-                      "^net\\.kovidgoyal\\.kitty$"
-                    ],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "right_arrow",
-                  "modifiers": {
-                    "mandatory": ["command"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "e",
-                    "modifiers": ["left_control"]
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "⌥ + ← | Move cursor one word behind",
-            "manipulators": [
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": [
-                      "^com\\.apple\\.Terminal$",
-                      "^co\\.zeit\\.hyperterm$",
-                      "^co\\.zeit\\.hyper$",
-                      "^io\\.alacritty$",
-                      "^net\\.kovidgoyal\\.kitty$"
-                    ],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "left_arrow",
-                  "modifiers": {
-                    "mandatory": ["option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "escape"
-                  },
-                  {
-                    "key_code": "b"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "⌥ + → | Move cursor one word ahead",
-            "manipulators": [
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": [
-                      "^com\\.apple\\.Terminal$",
-                      "^co\\.zeit\\.hyperterm$",
-                      "^co\\.zeit\\.hyper$",
-                      "^io\\.alacritty$",
-                      "^net\\.kovidgoyal\\.kitty$"
-                    ],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "right_arrow",
-                  "modifiers": {
-                    "mandatory": ["option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "escape"
-                  },
-                  {
-                    "key_code": "f"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "⌥ + ⌫ | Delete one word",
-            "manipulators": [
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": [
-                      "^com\\.apple\\.Terminal$",
-                      "^co\\.zeit\\.hyperterm$",
-                      "^co\\.zeit\\.hyper$",
-                      "^io\\.alacritty$",
-                      "^net\\.kovidgoyal\\.kitty$"
-                    ],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "delete_or_backspace",
-                  "modifiers": {
-                    "mandatory": ["option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "w",
-                    "modifiers": ["left_control"]
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "⌥ + fn + ⌫ | Delete one word ahead [laptop w/out ⌦ key]",
-            "manipulators": [
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": [
-                      "^com\\.apple\\.Terminal$",
-                      "^co\\.zeit\\.hyperterm$",
-                      "^co\\.zeit\\.hyper$",
-                      "^io\\.alacritty$",
-                      "^net\\.kovidgoyal\\.kitty$"
-                    ],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "delete_or_backspace",
-                  "modifiers": {
-                    "mandatory": ["option", "fn"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "escape"
-                  },
-                  {
-                    "key_code": "d"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "⌘ + ⌫ | Delete to line begin",
-            "manipulators": [
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": [
-                      "^com\\.apple\\.Terminal$",
-                      "^co\\.zeit\\.hyperterm$",
-                      "^co\\.zeit\\.hyper$",
-                      "^io\\.alacritty$",
-                      "^net\\.kovidgoyal\\.kitty$"
-                    ],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "delete_or_backspace",
-                  "modifiers": {
-                    "mandatory": ["command"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "u",
-                    "modifiers": ["left_control"]
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "⌘ + fn + ⌫ | Delete to line end [laptop w/out ⌦ key]",
-            "manipulators": [
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": [
-                      "^com\\.apple\\.Terminal$",
-                      "^co\\.zeit\\.hyperterm$",
-                      "^co\\.zeit\\.hyper$",
-                      "^io\\.alacritty$",
-                      "^net\\.kovidgoyal\\.kitty$"
-                    ],
-                    "type": "frontmost_application_if"
-                  }
-                ],
-                "from": {
-                  "key_code": "delete_or_backspace",
-                  "modifiers": {
-                    "mandatory": ["command", "fn"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "k",
-                    "modifiers": ["left_control"]
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Function keys",
-            "manipulators": [
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      },
-                      {
-                        "vendor_id": 13364
-                      }
-                    ],
-                    "type": "device_unless"
-                  }
-                ],
-                "from": {
-                  "key_code": "f1",
-                  "modifiers": {
-                    "mandatory": ["shift"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "f1"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      },
-                      {
-                        "vendor_id": 13364
-                      }
-                    ],
-                    "type": "device_unless"
-                  }
-                ],
-                "from": {
-                  "key_code": "f2",
-                  "modifiers": {
-                    "mandatory": ["shift"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "f2"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      },
-                      {
-                        "vendor_id": 13364
-                      }
-                    ],
-                    "type": "device_unless"
-                  }
-                ],
-                "from": {
-                  "key_code": "f3",
-                  "modifiers": {
-                    "mandatory": ["shift"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "f3"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      },
-                      {
-                        "vendor_id": 13364
-                      }
-                    ],
-                    "type": "device_unless"
-                  }
-                ],
-                "from": {
-                  "key_code": "f4",
-                  "modifiers": {
-                    "mandatory": ["shift"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "f4"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      },
-                      {
-                        "vendor_id": 13364
-                      }
-                    ],
-                    "type": "device_unless"
-                  }
-                ],
-                "from": {
-                  "key_code": "f5",
-                  "modifiers": {
-                    "mandatory": ["shift"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "f5"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      },
-                      {
-                        "vendor_id": 13364
-                      }
-                    ],
-                    "type": "device_unless"
-                  }
-                ],
-                "from": {
-                  "key_code": "f6",
-                  "modifiers": {
-                    "mandatory": ["shift"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "f6"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      },
-                      {
-                        "vendor_id": 13364
-                      }
-                    ],
-                    "type": "device_unless"
-                  }
-                ],
-                "from": {
-                  "key_code": "f7",
-                  "modifiers": {
-                    "mandatory": ["shift"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "f7"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      },
-                      {
-                        "vendor_id": 13364
-                      }
-                    ],
-                    "type": "device_unless"
-                  }
-                ],
-                "from": {
-                  "key_code": "f8",
-                  "modifiers": {
-                    "mandatory": ["shift"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "f8"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      },
-                      {
-                        "vendor_id": 13364
-                      }
-                    ],
-                    "type": "device_unless"
-                  }
-                ],
-                "from": {
-                  "key_code": "f9",
-                  "modifiers": {
-                    "mandatory": ["shift"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "f9"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      },
-                      {
-                        "vendor_id": 13364
-                      }
-                    ],
-                    "type": "device_unless"
-                  }
-                ],
-                "from": {
-                  "key_code": "f10",
-                  "modifiers": {
-                    "mandatory": ["shift"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "f10"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      },
-                      {
-                        "vendor_id": 13364
-                      }
-                    ],
-                    "type": "device_unless"
-                  }
-                ],
-                "from": {
-                  "key_code": "f11",
-                  "modifiers": {
-                    "mandatory": ["shift"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "f11"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      },
-                      {
-                        "vendor_id": 13364
-                      }
-                    ],
-                    "type": "device_unless"
-                  }
-                ],
-                "from": {
-                  "key_code": "f12",
-                  "modifiers": {
-                    "mandatory": ["shift"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "f12"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      },
-                      {
-                        "vendor_id": 13364
-                      }
-                    ],
-                    "type": "device_unless"
-                  }
-                ],
-                "from": {
-                  "key_code": "f1"
-                },
-                "to": [
-                  {
-                    "consumer_key_code": "display_brightness_decrement"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      },
-                      {
-                        "vendor_id": 13364
-                      }
-                    ],
-                    "type": "device_unless"
-                  }
-                ],
-                "from": {
-                  "key_code": "f2"
-                },
-                "to": [
-                  {
-                    "consumer_key_code": "display_brightness_increment"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      },
-                      {
-                        "vendor_id": 13364
-                      }
-                    ],
-                    "type": "device_unless"
-                  }
-                ],
-                "from": {
-                  "key_code": "f7",
-                  "modifiers": {
-                    "optional": ["any"]
-                  }
-                },
-                "to": [
-                  {
-                    "consumer_key_code": "rewind"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      },
-                      {
-                        "vendor_id": 13364
-                      }
-                    ],
-                    "type": "device_unless"
-                  }
-                ],
-                "from": {
-                  "key_code": "f8",
-                  "modifiers": {
-                    "optional": ["any"]
-                  }
-                },
-                "to": [
-                  {
-                    "consumer_key_code": "play_or_pause"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      },
-                      {
-                        "vendor_id": 13364
-                      }
-                    ],
-                    "type": "device_unless"
-                  }
-                ],
-                "from": {
-                  "key_code": "f9",
-                  "modifiers": {
-                    "optional": ["any"]
-                  }
-                },
-                "to": [
-                  {
-                    "consumer_key_code": "fast_forward"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      },
-                      {
-                        "vendor_id": 13364
-                      }
-                    ],
-                    "type": "device_unless"
-                  }
-                ],
-                "from": {
-                  "key_code": "f10",
-                  "modifiers": {
-                    "optional": ["any"]
-                  }
-                },
-                "to": [
-                  {
-                    "consumer_key_code": "mute"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      },
-                      {
-                        "vendor_id": 13364
-                      }
-                    ],
-                    "type": "device_unless"
-                  }
-                ],
-                "from": {
-                  "key_code": "f11",
-                  "modifiers": {
-                    "optional": ["any"]
-                  }
-                },
-                "to": [
-                  {
-                    "consumer_key_code": "volume_decrement"
-                  }
-                ],
-                "type": "basic"
-              },
-              {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "vendor_id": 1452
-                      },
-                      {
-                        "vendor_id": 13364
-                      }
-                    ],
-                    "type": "device_unless"
-                  }
-                ],
-                "from": {
-                  "key_code": "f12",
-                  "modifiers": {
-                    "optional": ["any"]
-                  }
-                },
-                "to": [
-                  {
-                    "consumer_key_code": "volume_increment"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          }
-        ]
-      },
-      "devices": [
+    "profiles": [
         {
-          "disable_built_in_keyboard_if_exists": false,
-          "fn_function_keys": [],
-          "game_pad_swap_sticks": false,
-          "identifiers": {
-            "is_game_pad": false,
-            "is_keyboard": true,
-            "is_pointing_device": false,
-            "product_id": 832,
-            "vendor_id": 1452
-          },
-          "ignore": false,
-          "manipulate_caps_lock_led": true,
-          "mouse_flip_horizontal_wheel": false,
-          "mouse_flip_vertical_wheel": false,
-          "mouse_flip_x": false,
-          "mouse_flip_y": false,
-          "mouse_swap_wheels": false,
-          "mouse_swap_xy": false,
-          "simple_modifications": [],
-          "treat_as_built_in_keyboard": false
-        },
-        {
-          "disable_built_in_keyboard_if_exists": false,
-          "fn_function_keys": [],
-          "game_pad_swap_sticks": false,
-          "identifiers": {
-            "is_game_pad": false,
-            "is_keyboard": true,
-            "is_pointing_device": false,
-            "product_id": 16641,
-            "vendor_id": 1578
-          },
-          "ignore": false,
-          "manipulate_caps_lock_led": false,
-          "mouse_flip_horizontal_wheel": false,
-          "mouse_flip_vertical_wheel": false,
-          "mouse_flip_x": false,
-          "mouse_flip_y": false,
-          "mouse_swap_wheels": false,
-          "mouse_swap_xy": false,
-          "simple_modifications": [],
-          "treat_as_built_in_keyboard": false
-        },
-        {
-          "disable_built_in_keyboard_if_exists": false,
-          "fn_function_keys": [],
-          "game_pad_swap_sticks": false,
-          "identifiers": {
-            "is_game_pad": false,
-            "is_keyboard": true,
-            "is_pointing_device": false,
-            "product_id": 50475,
-            "vendor_id": 1133
-          },
-          "ignore": false,
-          "manipulate_caps_lock_led": false,
-          "mouse_flip_horizontal_wheel": false,
-          "mouse_flip_vertical_wheel": false,
-          "mouse_flip_x": false,
-          "mouse_flip_y": false,
-          "mouse_swap_wheels": false,
-          "mouse_swap_xy": false,
-          "simple_modifications": [],
-          "treat_as_built_in_keyboard": false
-        },
-        {
-          "disable_built_in_keyboard_if_exists": false,
-          "fn_function_keys": [],
-          "game_pad_swap_sticks": false,
-          "identifiers": {
-            "is_game_pad": false,
-            "is_keyboard": true,
-            "is_pointing_device": false,
-            "product_id": 34304,
-            "vendor_id": 1452
-          },
-          "ignore": false,
-          "manipulate_caps_lock_led": true,
-          "mouse_flip_horizontal_wheel": false,
-          "mouse_flip_vertical_wheel": false,
-          "mouse_flip_x": false,
-          "mouse_flip_y": false,
-          "mouse_swap_wheels": false,
-          "mouse_swap_xy": false,
-          "simple_modifications": [],
-          "treat_as_built_in_keyboard": false
-        },
-        {
-          "disable_built_in_keyboard_if_exists": false,
-          "fn_function_keys": [
-            {
-              "from": {
-                "key_code": "f4"
-              },
-              "to": [
+            "complex_modifications": {
+                "rules": [
+                    {
+                        "description": "Sync with windows",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.vmware.fusion"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    },
+                                    {
+                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "type": "device_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "right_command",
+                                    "modifiers": { "optional": ["caps_lock"] }
+                                },
+                                "to": [{ "key_code": "f16" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.microsoft.rdc.macos"
+                                        ],
+                                        "type": "frontmost_application_unless"
+                                    },
+                                    {
+                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "right_option",
+                                    "modifiers": { "optional": ["caps_lock"] }
+                                },
+                                "to": [{ "key_code": "keypad_enter" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.microsoft.rdc.macos"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    },
+                                    {
+                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "apple_vendor_top_case_key_code": "keyboard_fn",
+                                    "modifiers": { "optional": ["caps_lock"] }
+                                },
+                                "to": [{ "key_code": "right_option" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "type": "device_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "return_or_enter",
+                                    "modifiers": {
+                                        "mandatory": ["fn"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "key_code": "insert" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "print_screen",
+                                    "modifiers": { "optional": ["caps_lock"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "4",
+                                        "modifiers": ["command", "shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "print_screen",
+                                    "modifiers": {
+                                        "mandatory": ["control"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "3",
+                                        "modifiers": ["command", "shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Allow original screenshot shortcuts",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "3",
+                                    "modifiers": {
+                                        "mandatory": ["command", "shift"],
+                                        "optional": ["caps_lock", "control"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "f13",
+                                        "modifiers": ["option"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "4",
+                                    "modifiers": {
+                                        "mandatory": ["command", "shift"],
+                                        "optional": ["caps_lock", "control"]
+                                    }
+                                },
+                                "to": [{ "key_code": "f13" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "5",
+                                    "modifiers": {
+                                        "mandatory": ["command", "shift"],
+                                        "optional": ["caps_lock", "control"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "f13",
+                                        "modifiers": ["command"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Launch apps by option+numbers",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "type": "device_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "escape",
+                                    "modifiers": {
+                                        "mandatory": ["fn", "left_shift"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "shell_command": "open '/System/Applications/Utilities/Activity Monitor.app'" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "type": "device_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "comma",
+                                    "modifiers": {
+                                        "mandatory": ["fn"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "shell_command": "open '/System/Applications/System Settings.app'" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "type": "device_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "comma",
+                                    "modifiers": {
+                                        "mandatory": ["fn", "left_control"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "shell_command": "open '/System/Applications/App Store.app'" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "type": "device_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "comma",
+                                    "modifiers": {
+                                        "mandatory": ["fn", "left_shift"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "shell_command": "subl -n ~/.config/karabiner/karabiner.json" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "escape",
+                                    "modifiers": {
+                                        "mandatory": ["left_control", "left_shift"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "shell_command": "open '/System/Applications/Utilities/Activity Monitor.app'" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "scroll_lock",
+                                    "modifiers": { "optional": ["caps_lock"] }
+                                },
+                                "to": [{ "shell_command": "open '/System/Applications/System Settings.app'" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "pause",
+                                    "modifiers": { "optional": ["caps_lock"] }
+                                },
+                                "to": [{ "shell_command": "open '/System/Applications/App Store.app'" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "scroll_lock",
+                                    "modifiers": {
+                                        "mandatory": ["control"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "shell_command": "subl -n ~/.config/karabiner/karabiner.json" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "grave_accent_and_tilde",
+                                    "modifiers": {
+                                        "mandatory": ["option"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "shell_command": "osascript -e 'tell app \"iTerm2\" to create window with default profile activate' || open '/Applications/iTerm.app'" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "1",
+                                    "modifiers": {
+                                        "mandatory": ["option"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "shell_command": "osascript -e 'tell app \"Safari\" to make new document activate'" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "1",
+                                    "modifiers": {
+                                        "mandatory": ["left_control", "option"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "shell_command": "osascript -e 'if app \"Google Chrome\" is running then\n\ttell app \"Google Chrome\" to make new window\nend if\ntell app \"Google Chrome\" to activate'" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "2",
+                                    "modifiers": {
+                                        "mandatory": ["option"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "shell_command": "open '/Applications/Between.app'" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "3",
+                                    "modifiers": {
+                                        "mandatory": ["option"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "shell_command": "open '/Applications/KakaoTalk.app'" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "3",
+                                    "modifiers": {
+                                        "mandatory": ["left_shift", "option"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "shell_command": "open '/System/Applications/Messages.app'" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "3",
+                                    "modifiers": {
+                                        "mandatory": ["left_control", "option"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "shell_command": "open '/System/Applications/Reminders.app'" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "3",
+                                    "modifiers": {
+                                        "mandatory": ["left_control", "left_shift"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "shell_command": "open '/System/Applications/Calendar.app'" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "4",
+                                    "modifiers": {
+                                        "mandatory": ["option"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "shell_command": "/Users/jnooree/bin/code --new-window" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "4",
+                                    "modifiers": {
+                                        "mandatory": ["left_shift", "option"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "shell_command": "subl --launch-or-new-window" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "type": "device_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "hyphen",
+                                    "modifiers": {
+                                        "mandatory": ["fn"],
+                                        "optional": ["caps_lock", "option", "shift"]
+                                    }
+                                },
+                                "to": [{ "consumer_key_code": "display_brightness_decrement" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "type": "device_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "equal_sign",
+                                    "modifiers": {
+                                        "mandatory": ["fn"],
+                                        "optional": ["caps_lock", "option", "shift"]
+                                    }
+                                },
+                                "to": [{ "consumer_key_code": "display_brightness_increment" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Remap to reduce accidents",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.apple.Safari",
+                                            "^com.apple.Preview"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "q",
+                                    "modifiers": {
+                                        "mandatory": ["command"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "key_code": "q" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.apple.Safari",
+                                            "^com.apple.Preview"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "q",
+                                    "modifiers": {
+                                        "mandatory": ["command", "option"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "q",
+                                        "modifiers": ["command"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Remap keys in hwp",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.hancom.office"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "delete_or_backspace",
+                                    "modifiers": {
+                                        "mandatory": ["option"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "delete_or_backspace",
+                                        "modifiers": ["control"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.hancom.office"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "e",
+                                    "modifiers": {
+                                        "mandatory": ["command"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "n",
+                                        "modifiers": ["control"]
+                                    },
+                                    {
+                                        "key_code": "m",
+                                        "modifiers": ["control"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.hancom.office"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "v",
+                                    "modifiers": {
+                                        "mandatory": ["command", "shift"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "k",
+                                        "modifiers": ["shift", "option", "control"]
+                                    },
+                                    {
+                                        "key_code": "v",
+                                        "modifiers": ["command"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.hancom.office"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "n",
+                                    "modifiers": {
+                                        "mandatory": ["left_control", "shift"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "t",
+                                        "modifiers": ["command"]
+                                    },
+                                    {
+                                        "key_code": "n",
+                                        "modifiers": ["control", "shift"]
+                                    },
+                                    { "key_code": "return_or_enter" }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.hancom.office"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "a",
+                                    "modifiers": {
+                                        "mandatory": ["left_control", "shift"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "t",
+                                        "modifiers": ["command"]
+                                    },
+                                    {
+                                        "key_code": "a",
+                                        "modifiers": ["control", "shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.hancom.office"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "equal_sign",
+                                    "modifiers": {
+                                        "mandatory": ["command", "shift"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "p",
+                                        "modifiers": ["command", "control"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.hancom.office"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "hyphen",
+                                    "modifiers": {
+                                        "mandatory": ["command", "shift"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "s",
+                                        "modifiers": ["command", "control"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.hancom.office",
+                                            "^com.adobe."
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f1",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "f1" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.hancom.office",
+                                            "^com.adobe."
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f2",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "f2" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.hancom.office",
+                                            "^com.adobe."
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f3",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "f3" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.hancom.office",
+                                            "^com.adobe."
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f4",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "f4" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.hancom.office",
+                                            "^com.adobe."
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f5",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "f5" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.hancom.office",
+                                            "^com.adobe."
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f6",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "f6" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.hancom.office",
+                                            "^com.adobe."
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f7",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "f7" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.hancom.office",
+                                            "^com.adobe."
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f8",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "f8" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.hancom.office",
+                                            "^com.adobe."
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f9",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "f9" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.hancom.office",
+                                            "^com.adobe."
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f10",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "f10" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.hancom.office",
+                                            "^com.adobe."
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f11",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "f11" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.hancom.office",
+                                            "^com.adobe."
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f12",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "f12" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Format-less Copy & Paste",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "k",
+                                    "modifiers": {
+                                        "mandatory": ["command", "option", "shift"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "shell_command": "/Users/jnooree/bin/pbplain" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.hancom.office"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "v",
+                                    "modifiers": {
+                                        "mandatory": ["command", "shift"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "k",
+                                        "modifiers": ["option", "control", "shift"]
+                                    },
+                                    {
+                                        "key_code": "v",
+                                        "modifiers": ["command"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.apple.Preview"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "c",
+                                    "modifiers": {
+                                        "mandatory": ["command", "shift"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "c",
+                                        "modifiers": ["command"]
+                                    },
+                                    {
+                                        "key_code": "k",
+                                        "modifiers": ["option", "control", "shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "⌘Z to Undo",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com\\.apple\\.Terminal$",
+                                            "^co\\.zeit\\.hyperterm$",
+                                            "^co\\.zeit\\.hyper$",
+                                            "^io\\.alacritty$",
+                                            "^net\\.kovidgoyal\\.kitty$"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "z",
+                                    "modifiers": {
+                                        "mandatory": ["command"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "hyphen",
+                                        "modifiers": ["left_control"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "⌘⇧Z to Redo [Zsh only]",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com\\.apple\\.Terminal$",
+                                            "^co\\.zeit\\.hyperterm$",
+                                            "^co\\.zeit\\.hyper$",
+                                            "^io\\.alacritty$",
+                                            "^net\\.kovidgoyal\\.kitty$"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "z",
+                                    "modifiers": {
+                                        "mandatory": ["command", "shift"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [
+                                    { "key_code": "escape" },
+                                    {
+                                        "key_code": "hyphen",
+                                        "modifiers": ["left_shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "⌘ + ← | Move cursor to line begin",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com\\.apple\\.Terminal$",
+                                            "^co\\.zeit\\.hyperterm$",
+                                            "^co\\.zeit\\.hyper$",
+                                            "^io\\.alacritty$",
+                                            "^net\\.kovidgoyal\\.kitty$"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "left_arrow",
+                                    "modifiers": {
+                                        "mandatory": ["command"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "a",
+                                        "modifiers": ["left_control"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "⌘ + → | Move cursor to line end",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com\\.apple\\.Terminal$",
+                                            "^co\\.zeit\\.hyperterm$",
+                                            "^co\\.zeit\\.hyper$",
+                                            "^io\\.alacritty$",
+                                            "^net\\.kovidgoyal\\.kitty$"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "right_arrow",
+                                    "modifiers": {
+                                        "mandatory": ["command"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "e",
+                                        "modifiers": ["left_control"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "⌥ + ← | Move cursor one word behind",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com\\.apple\\.Terminal$",
+                                            "^co\\.zeit\\.hyperterm$",
+                                            "^co\\.zeit\\.hyper$",
+                                            "^io\\.alacritty$",
+                                            "^net\\.kovidgoyal\\.kitty$"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "left_arrow",
+                                    "modifiers": {
+                                        "mandatory": ["option"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [
+                                    { "key_code": "escape" },
+                                    { "key_code": "b" }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "⌥ + → | Move cursor one word ahead",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com\\.apple\\.Terminal$",
+                                            "^co\\.zeit\\.hyperterm$",
+                                            "^co\\.zeit\\.hyper$",
+                                            "^io\\.alacritty$",
+                                            "^net\\.kovidgoyal\\.kitty$"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "right_arrow",
+                                    "modifiers": {
+                                        "mandatory": ["option"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [
+                                    { "key_code": "escape" },
+                                    { "key_code": "f" }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "⌥ + ⌫ | Delete one word",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com\\.apple\\.Terminal$",
+                                            "^co\\.zeit\\.hyperterm$",
+                                            "^co\\.zeit\\.hyper$",
+                                            "^io\\.alacritty$",
+                                            "^net\\.kovidgoyal\\.kitty$"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "delete_or_backspace",
+                                    "modifiers": {
+                                        "mandatory": ["option"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "w",
+                                        "modifiers": ["left_control"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "⌥ + fn + ⌫ | Delete one word ahead [laptop w/out ⌦ key]",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com\\.apple\\.Terminal$",
+                                            "^co\\.zeit\\.hyperterm$",
+                                            "^co\\.zeit\\.hyper$",
+                                            "^io\\.alacritty$",
+                                            "^net\\.kovidgoyal\\.kitty$"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "delete_or_backspace",
+                                    "modifiers": {
+                                        "mandatory": ["option", "fn"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [
+                                    { "key_code": "escape" },
+                                    { "key_code": "d" }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "⌘ + ⌫ | Delete to line begin",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com\\.apple\\.Terminal$",
+                                            "^co\\.zeit\\.hyperterm$",
+                                            "^co\\.zeit\\.hyper$",
+                                            "^io\\.alacritty$",
+                                            "^net\\.kovidgoyal\\.kitty$"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "delete_or_backspace",
+                                    "modifiers": {
+                                        "mandatory": ["command"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "u",
+                                        "modifiers": ["left_control"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "⌘ + fn + ⌫ | Delete to line end [laptop w/out ⌦ key]",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com\\.apple\\.Terminal$",
+                                            "^co\\.zeit\\.hyperterm$",
+                                            "^co\\.zeit\\.hyper$",
+                                            "^io\\.alacritty$",
+                                            "^net\\.kovidgoyal\\.kitty$"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "delete_or_backspace",
+                                    "modifiers": {
+                                        "mandatory": ["command", "fn"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "k",
+                                        "modifiers": ["left_control"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Function keys",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "vendor_id": 13364 }
+                                        ],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f1",
+                                    "modifiers": {
+                                        "mandatory": ["shift"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "key_code": "f1" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "vendor_id": 13364 }
+                                        ],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f2",
+                                    "modifiers": {
+                                        "mandatory": ["shift"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "key_code": "f2" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "vendor_id": 13364 }
+                                        ],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f3",
+                                    "modifiers": {
+                                        "mandatory": ["shift"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "key_code": "f3" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "vendor_id": 13364 }
+                                        ],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f4",
+                                    "modifiers": {
+                                        "mandatory": ["shift"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "key_code": "f4" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "vendor_id": 13364 }
+                                        ],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f5",
+                                    "modifiers": {
+                                        "mandatory": ["shift"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "key_code": "f5" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "vendor_id": 13364 }
+                                        ],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f6",
+                                    "modifiers": {
+                                        "mandatory": ["shift"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "key_code": "f6" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "vendor_id": 13364 }
+                                        ],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f7",
+                                    "modifiers": {
+                                        "mandatory": ["shift"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "key_code": "f7" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "vendor_id": 13364 }
+                                        ],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f8",
+                                    "modifiers": {
+                                        "mandatory": ["shift"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "key_code": "f8" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "vendor_id": 13364 }
+                                        ],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f9",
+                                    "modifiers": {
+                                        "mandatory": ["shift"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "key_code": "f9" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "vendor_id": 13364 }
+                                        ],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f10",
+                                    "modifiers": {
+                                        "mandatory": ["shift"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "key_code": "f10" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "vendor_id": 13364 }
+                                        ],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f11",
+                                    "modifiers": {
+                                        "mandatory": ["shift"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "key_code": "f11" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "vendor_id": 13364 }
+                                        ],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f12",
+                                    "modifiers": {
+                                        "mandatory": ["shift"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "key_code": "f12" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "vendor_id": 13364 }
+                                        ],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": { "key_code": "f1" },
+                                "to": [{ "consumer_key_code": "display_brightness_decrement" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "vendor_id": 13364 }
+                                        ],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": { "key_code": "f2" },
+                                "to": [{ "consumer_key_code": "display_brightness_increment" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "vendor_id": 13364 }
+                                        ],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f7",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "consumer_key_code": "rewind" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "vendor_id": 13364 }
+                                        ],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f8",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "consumer_key_code": "play_or_pause" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "vendor_id": 13364 }
+                                        ],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f9",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "consumer_key_code": "fast_forward" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "vendor_id": 13364 }
+                                        ],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f10",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "consumer_key_code": "mute" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "vendor_id": 13364 }
+                                        ],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f11",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "consumer_key_code": "volume_decrement" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "vendor_id": 13364 }
+                                        ],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "f12",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "consumer_key_code": "volume_increment" }],
+                                "type": "basic"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "devices": [
                 {
-                  "key_code": "f17"
-                }
-              ]
-            }
-          ],
-          "game_pad_swap_sticks": false,
-          "identifiers": {
-            "is_game_pad": false,
-            "is_keyboard": true,
-            "is_pointing_device": false,
-            "product_id": 1296,
-            "vendor_id": 1204
-          },
-          "ignore": false,
-          "manipulate_caps_lock_led": true,
-          "mouse_flip_horizontal_wheel": false,
-          "mouse_flip_vertical_wheel": false,
-          "mouse_flip_x": false,
-          "mouse_flip_y": false,
-          "mouse_swap_wheels": false,
-          "mouse_swap_xy": false,
-          "simple_modifications": [
-            {
-              "from": {
-                "key_code": "application"
-              },
-              "to": [
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 16641,
+                        "vendor_id": 1578
+                    },
+                    "manipulate_caps_lock_led": false
+                },
                 {
-                  "key_code": "right_command"
-                }
-              ]
-            }
-          ],
-          "treat_as_built_in_keyboard": false
-        },
-        {
-          "disable_built_in_keyboard_if_exists": false,
-          "fn_function_keys": [],
-          "game_pad_swap_sticks": false,
-          "identifiers": {
-            "is_game_pad": false,
-            "is_keyboard": true,
-            "is_pointing_device": true,
-            "product_id": 417,
-            "vendor_id": 13364
-          },
-          "ignore": true,
-          "manipulate_caps_lock_led": true,
-          "mouse_flip_horizontal_wheel": false,
-          "mouse_flip_vertical_wheel": false,
-          "mouse_flip_x": false,
-          "mouse_flip_y": false,
-          "mouse_swap_wheels": false,
-          "mouse_swap_xy": false,
-          "simple_modifications": [],
-          "treat_as_built_in_keyboard": false
-        },
-        {
-          "disable_built_in_keyboard_if_exists": false,
-          "fn_function_keys": [],
-          "game_pad_swap_sticks": false,
-          "identifiers": {
-            "is_game_pad": false,
-            "is_keyboard": true,
-            "is_pointing_device": false,
-            "product_id": 417,
-            "vendor_id": 13364
-          },
-          "ignore": false,
-          "manipulate_caps_lock_led": true,
-          "mouse_flip_horizontal_wheel": false,
-          "mouse_flip_vertical_wheel": false,
-          "mouse_flip_x": false,
-          "mouse_flip_y": false,
-          "mouse_swap_wheels": false,
-          "mouse_swap_xy": false,
-          "simple_modifications": [
-            {
-              "from": {
-                "key_code": "keypad_enter"
-              },
-              "to": [
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 50475,
+                        "vendor_id": 1133
+                    },
+                    "manipulate_caps_lock_led": false
+                },
                 {
-                  "apple_vendor_top_case_key_code": "keyboard_fn"
+                    "fn_function_keys": [
+                        {
+                            "from": { "key_code": "f4" },
+                            "to": [{ "key_code": "f17" }]
+                        }
+                    ],
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 1296,
+                        "vendor_id": 1204
+                    },
+                    "simple_modifications": [
+                        {
+                            "from": { "key_code": "application" },
+                            "to": [{ "key_code": "right_command" }]
+                        }
+                    ]
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 417,
+                        "vendor_id": 13364
+                    },
+                    "simple_modifications": [
+                        {
+                            "from": { "key_code": "keypad_enter" },
+                            "to": [{ "apple_vendor_top_case_key_code": "keyboard_fn" }]
+                        }
+                    ]
                 }
-              ]
+            ],
+            "fn_function_keys": [
+                {
+                    "from": { "key_code": "f3" },
+                    "to": [{ "key_code": "mission_control" }]
+                },
+                {
+                    "from": { "key_code": "f4" },
+                    "to": [{ "apple_vendor_keyboard_key_code": "launchpad" }]
+                },
+                {
+                    "from": { "key_code": "f5" },
+                    "to": [{ "key_code": "illumination_decrement" }]
+                },
+                {
+                    "from": { "key_code": "f6" },
+                    "to": [{ "key_code": "illumination_increment" }]
+                }
+            ],
+            "name": "Default profile",
+            "selected": true,
+            "virtual_hid_keyboard": {
+                "country_code": 0,
+                "keyboard_type_v2": "ansi"
             }
-          ],
-          "treat_as_built_in_keyboard": false
-        },
-        {
-          "disable_built_in_keyboard_if_exists": false,
-          "fn_function_keys": [],
-          "game_pad_swap_sticks": false,
-          "identifiers": {
-            "is_game_pad": false,
-            "is_keyboard": false,
-            "is_pointing_device": true,
-            "product_id": 613,
-            "vendor_id": 1452
-          },
-          "ignore": true,
-          "manipulate_caps_lock_led": false,
-          "mouse_flip_horizontal_wheel": false,
-          "mouse_flip_vertical_wheel": false,
-          "mouse_flip_x": false,
-          "mouse_flip_y": false,
-          "mouse_swap_wheels": false,
-          "mouse_swap_xy": false,
-          "simple_modifications": [],
-          "treat_as_built_in_keyboard": false
         }
-      ],
-      "fn_function_keys": [
-        {
-          "from": {
-            "key_code": "f1"
-          },
-          "to": [
-            {
-              "consumer_key_code": "display_brightness_decrement"
-            }
-          ]
-        },
-        {
-          "from": {
-            "key_code": "f2"
-          },
-          "to": [
-            {
-              "consumer_key_code": "display_brightness_increment"
-            }
-          ]
-        },
-        {
-          "from": {
-            "key_code": "f3"
-          },
-          "to": [
-            {
-              "key_code": "mission_control"
-            }
-          ]
-        },
-        {
-          "from": {
-            "key_code": "f4"
-          },
-          "to": [
-            {
-              "apple_vendor_keyboard_key_code": "launchpad"
-            }
-          ]
-        },
-        {
-          "from": {
-            "key_code": "f5"
-          },
-          "to": [
-            {
-              "key_code": "illumination_decrement"
-            }
-          ]
-        },
-        {
-          "from": {
-            "key_code": "f6"
-          },
-          "to": [
-            {
-              "key_code": "illumination_increment"
-            }
-          ]
-        },
-        {
-          "from": {
-            "key_code": "f7"
-          },
-          "to": [
-            {
-              "consumer_key_code": "rewind"
-            }
-          ]
-        },
-        {
-          "from": {
-            "key_code": "f8"
-          },
-          "to": [
-            {
-              "consumer_key_code": "play_or_pause"
-            }
-          ]
-        },
-        {
-          "from": {
-            "key_code": "f9"
-          },
-          "to": [
-            {
-              "consumer_key_code": "fast_forward"
-            }
-          ]
-        },
-        {
-          "from": {
-            "key_code": "f10"
-          },
-          "to": [
-            {
-              "consumer_key_code": "mute"
-            }
-          ]
-        },
-        {
-          "from": {
-            "key_code": "f11"
-          },
-          "to": [
-            {
-              "consumer_key_code": "volume_decrement"
-            }
-          ]
-        },
-        {
-          "from": {
-            "key_code": "f12"
-          },
-          "to": [
-            {
-              "consumer_key_code": "volume_increment"
-            }
-          ]
-        }
-      ],
-      "name": "Default profile",
-      "parameters": {
-        "delay_milliseconds_before_open_device": 1000
-      },
-      "selected": true,
-      "simple_modifications": [],
-      "virtual_hid_keyboard": {
-        "country_code": 0,
-        "indicate_sticky_modifier_keys_state": true,
-        "mouse_key_xy_scale": 100
-      }
-    }
-  ]
+    ]
 }
