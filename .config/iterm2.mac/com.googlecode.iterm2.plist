@@ -3188,6 +3188,8 @@ Select Current Command</string>
 	<integer>4</integer>
 	<key>TabTransform</key>
 	<integer>0</integer>
+	<key>TmuxSyncClipboard</key>
+	<true/>
 	<key>TmuxUsesDedicatedProfile</key>
 	<false/>
 	<key>TmuxWindowsShouldCloseAfterDetach</key>
