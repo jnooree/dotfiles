@@ -7,6 +7,7 @@ import sys
 from argparse import REMAINDER, ArgumentParser
 from asyncio import subprocess as sp
 from pathlib import Path
+from typing import List, Optional
 from unicodedata import normalize
 
 _HOST = os.getenv("LC_HOSTNAME", "MBP")
@@ -15,7 +16,7 @@ _TMPDIR = "/Volumes/RAMDisk"
 
 async def run(
     *command,
-    stdin: str | None = None,
+    stdin: Optional[str] = None,
     stdout=None,
     stderr=None,
     check: bool = True,
@@ -63,8 +64,8 @@ async def rsync(sem, local_path, remote_path, **kwargs):
 async def async_main(
     args,
     command: str,
-    remote_args: list[str],
-    files: list[Path],
+    remote_args: List[str],
+    files: List[Path],
     stdout,
     stderr,
 ):
@@ -73,7 +74,9 @@ async def async_main(
 
         async def send_file(file: Path):
             file_ext = "".join(file.suffixes)
-            file_stem = file.name.removesuffix(file_ext)
+            file_stem = file.name
+            if file_stem.endswith(file_ext):
+                file_stem = file_stem[: -len(file_ext)]
             if not recursive and ext:
                 file_ext = ext if ext.startswith(".") else f".{ext}"
 
@@ -129,7 +132,7 @@ def get_parser():
     return parser
 
 
-def split_args(args: list[str]):
+def split_args(args: List[str]):
     cmd, *args = args
     try:
         until = args.index("--")
