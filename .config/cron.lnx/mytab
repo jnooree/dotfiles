@@ -21,4 +21,5 @@
 # For more information see the manual pages of crontab(5) and cron(8)
 # 
 # m h  dom mon dow   command
+PATH=/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
 @daily $HOME/bin/maintenance
