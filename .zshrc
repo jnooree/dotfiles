@@ -201,6 +201,10 @@ jnooree="$(realpath "$HOME")"
 
 _source_if_readable "${ZDOTDIR-$HOME}/.zshrc.local"
 
+if [[ -z ${RCODE_REMOTE-} && -n ${LC_RCODE_REMOTE-} ]]; then
+  RCODE_REMOTE="$LC_RCODE_REMOTE"
+fi
+
 unset _OS_ARCH
 unfunction _source_if_readable
 
