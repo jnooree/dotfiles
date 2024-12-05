@@ -5,6 +5,10 @@ set -o pipefail
 
 _os_arch="$(uname -sm)"
 
+if [[ $_os_arch == *Darwin* ]]; then
+	./init-macos.sh
+fi
+
 script_dir="$(dirname "$(realpath "$0")")"
 cd "$script_dir"
 
