@@ -1,4 +1,2 @@
 auto_activate_base: false
-channels:
-  - conda-forge
 report_errors: true
