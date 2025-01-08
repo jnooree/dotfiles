@@ -119,21 +119,6 @@ fi
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(buffer-empty)
 
-# Related to pre{cmd,exec}
-function jnr_precmd() {
-	builtin print -Pn '\e]0;%n@%m: %1v\a'
-}
-
-function jnr_preexec() {
-	builtin print -Pn '\e]0;%n@%m: '
-	builtin print -rn -- "$1"
-	builtin print -n '\a'
-}
-
-autoload -U add-zsh-hook
-add-zsh-hook precmd jnr_precmd
-add-zsh-hook preexec jnr_preexec
-
 # Preferred editor for local and remote sessions
 export EDITOR=vim
 if [[ ${TERM_PROGRAM-} = vscode ]]; then
