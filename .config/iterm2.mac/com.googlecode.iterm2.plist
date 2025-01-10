@@ -1111,6 +1111,8 @@
 	<true/>
 	<key>DisableTransparencyForKeyWindow</key>
 	<true/>
+	<key>DisableWindowSizeSnap</key>
+	<false/>
 	<key>DisallowCopyEmptyString</key>
 	<true/>
 	<key>DoubleClickPerformsSmartSelection</key>
@@ -2958,6 +2960,8 @@ Select Current Command</string>
 	<integer>4</integer>
 	<key>TabTransform</key>
 	<integer>0</integer>
+	<key>TmuxIncludeClientNameInWindowTitle</key>
+	<false/>
 	<key>TmuxSyncClipboard</key>
 	<true/>
 	<key>TmuxUsesDedicatedProfile</key>
