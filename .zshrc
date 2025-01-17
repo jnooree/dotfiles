@@ -182,7 +182,6 @@ if command -v zoxide &>/dev/null; then
 fi
 
 export DFT_BACKGROUND=light
-jnooree="$(realpath "$HOME")"
 
 _source_if_readable "${ZDOTDIR-$HOME}/.zshrc.local"
 
