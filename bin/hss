@@ -7,7 +7,7 @@ import sys
 from argparse import REMAINDER, ArgumentParser
 from asyncio import subprocess as sp
 from pathlib import Path
-from typing import List, Optional
+from typing import List, Optional, Union
 from unicodedata import normalize
 
 _HOST = os.getenv("LC_HOSTNAME", "MBP")
@@ -15,7 +15,7 @@ _TMPDIR = "/Volumes/RAMDisk"
 
 
 async def run(
-    *command,
+    *command: Union[str, Path],
     stdin: Optional[str] = None,
     stdout=None,
     stderr=None,
@@ -40,16 +40,16 @@ async def run(
     return proc.returncode, out, err
 
 
-async def hash_file(file):
-    _, stdout, _ = await run("md5sum", str(file), stdout=sp.PIPE)
+async def hash_file(file: Union[str, Path]):
+    _, stdout, _ = await run("md5sum", file, stdout=sp.PIPE)
     return stdout.decode("utf-8").split()[0]
 
 
-async def ssh(*command, **kwargs):
+async def ssh(*command: str, **kwargs):
     return await run("ssh", "-T", _HOST, *map(shlex.quote, command), **kwargs)
 
 
-async def rsync(sem, local_path, remote_path, **kwargs):
+async def rsync(sem, local_path: Union[str, Path], remote_path: str, **kwargs):
     async with sem:
         args = [
             "rsync",
