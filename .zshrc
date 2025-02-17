@@ -40,7 +40,7 @@ function _source_if_readable() {
 	if [[ -r $1 ]] builtin source "$1" || true
 }
 
-# environment managers: conda, jenv, rvm
+# environment managers
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -64,6 +64,10 @@ fi
 if [[ -x ~/.jenv/bin/jenv ]]; then
 	path=("$HOME/.jenv/bin" $path)
 	eval "$(jenv init -)"
+fi
+
+if command -v rbenv &>/dev/null; then
+	eval "$(rbenv init - --no-rehash zsh)"
 fi
 
 _source_if_readable "$HOME/.cargo/env"
