@@ -69,6 +69,7 @@ brew "spectra"
 brew "sponge"
 brew "ssh-copy-id"
 brew "swift-format"
+brew "tealdeer", link: false
 brew "telnet"
 brew "tlrc"
 brew "tmux"
