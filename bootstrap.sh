@@ -72,7 +72,7 @@ function _auto_install_conda() {
 if [[ -z ${SKIP_HOMEBREW-} ]]; then
 	_auto_install_brew
 
-	brew install coreutils fd ripgrep fzf zsh icu4c
+	brew install coreutils fd ripgrep fzf zsh icu4c git
 	export PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
 fi
 
@@ -80,7 +80,7 @@ if [[ -z ${SKIP_CONDA-} ]]; then
 	_auto_install_conda ~/anaconda3
 fi
 
-./link.sh
+./link.sh || exit 1
 
 # Create directories
 mkdir -p ~/opt ~/.config/zsh ~/.vim/{backup,swap,undo}
