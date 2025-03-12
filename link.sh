@@ -32,7 +32,7 @@ function to_home() {
 	mkdir -p "$dest_dir"
 
 	if [[ "${2-}" = copy ]]; then
-		cp -fT "$source" "$dest"
+		cp -rfT "$source" "$dest"
 	else
 		ln -sfT "$(realpath --relative-to "$dest_dir" "$source")" "$dest"
 	fi
@@ -54,7 +54,7 @@ for _fd in * bin/* .config/* .config/gh/*; do
 		bin | Library | LICENSE | README.md | bootstrap.sh | link.sh)
 		continue
 		;;
-	.config/htop | .config/gh)
+	.config/htop | .config/gh | .config/cron*)
 		continue
 		;;
 	esac
@@ -62,7 +62,7 @@ for _fd in * bin/* .config/* .config/gh/*; do
 	to_home "$_fd"
 done
 
-for _fd in .config/htop/*; do
+for _fd in .config/htop/* .config/cron*; do
 	if is_tracked "$_fd"; then
 		to_home "$_fd" copy
 	fi
