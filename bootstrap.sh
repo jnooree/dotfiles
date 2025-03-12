@@ -74,6 +74,9 @@ if [[ -z ${SKIP_HOMEBREW-} ]]; then
 
 	brew install coreutils fd ripgrep fzf zsh icu4c git
 	export PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
+
+	mkdir -p ~/bin
+	ln -st ~/bin "$HOMEBREW_PREFIX/opt/git/share/git-core/contrib/diff-highlight/diff-highlight"
 fi
 
 if [[ -z ${SKIP_CONDA-} ]]; then
@@ -83,7 +86,7 @@ fi
 ./link.sh || exit 1
 
 # Create directories
-mkdir -p ~/opt ~/.config/zsh ~/.vim/{backup,swap,undo}
+mkdir -p ~/opt ~/.cache/zsh ~/.vim/{backup,swap,undo}
 
 if [[ -z ${CODESPACES-} ]]; then
 	# Link git autocompletion
