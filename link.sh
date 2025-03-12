@@ -51,7 +51,7 @@ for _fd in * bin/* .config/* .config/gh/*; do
 
 	case "$_fd" in
 	.github | .gitignore | .gitmessage | .config | .zfunc | \
-		bin | Library | LICENSE | README.md | bootstrap.sh | link.sh)
+		bin | Library | LICENSE | README.md | *.sh | *.json)
 		continue
 		;;
 	.config/htop | .config/gh | .config/cron*)
