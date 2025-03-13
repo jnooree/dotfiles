@@ -11,13 +11,13 @@ function _brew_update() {
 
 	brew update && brew upgrade || retval="$?"
 	brew cleanup
-	brew bundle install --global --no-lock &&
-		brew bundle dump --global --force && {
-		# Fixup
-		brewfile="$(realpath .Brewfile)"
-		gsed -i -E '/^vscode /d' "$brewfile"
-		gsed -i -E '0,/^brew "python@.*/s//brew "python"/' "$brewfile"
-	} || retval="$?"
+
+	if [[ -f .Brewfile ]]; then
+		brew bundle install --global &&
+			brew bundle dump --global --force --no-vscode &&
+			gsed -i -E '0,/^brew "python@.*/s//brew "python"/' "$(realpath .Brewfile)" ||
+			retval="$?"
+	fi
 
 	return "$retval"
 }
