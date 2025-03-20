@@ -50,7 +50,7 @@ for _fd in * bin/* .config/* .config/gh/*; do
 	fi
 
 	case "$_fd" in
-	.github | .gitignore | .gitmessage | .config | .zfunc | \
+	.github | .gitignore | .gitmessage | .bundle | .config | .zfunc | \
 		bin | Library | LICENSE | README.md | *.sh | *.json)
 		continue
 		;;
@@ -62,7 +62,7 @@ for _fd in * bin/* .config/* .config/gh/*; do
 	to_home "$_fd"
 done
 
-for _fd in .config/htop/* .config/cron*; do
+for _fd in .bundle/* .config/htop/* .config/cron*; do
 	if is_tracked "$_fd"; then
 		to_home "$_fd" copy
 	fi
