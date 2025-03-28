@@ -23,13 +23,17 @@ function _brew_update() {
 }
 
 function _conda_update() {
-	if [[ ! -x ~/anaconda3/bin/mamba ]]; then
-		echo "skipping conda update" >&2
-		return 0
-	fi
-
 	(
 		set -e
+
+		export MAMBA_ROOT_PREFIX="$HOME/anaconda3";
+		export MAMBA_EXE="$MAMBA_ROOT_PREFIX/bin/mamba"
+
+		if [[ ! -x $MAMBA_EXE ]]; then
+			echo "skipping conda update" >&2
+			return 0
+		fi
+
 		~/anaconda3/bin/mamba update -n base conda mamba
 		~/anaconda3/bin/mamba update -n default --all || true
 	)
