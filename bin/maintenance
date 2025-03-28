@@ -34,7 +34,6 @@ function _conda_update() {
 			return 0
 		fi
 
-		~/anaconda3/bin/mamba update -n base conda mamba
 		~/anaconda3/bin/mamba update -n default --all || true
 	)
 }
