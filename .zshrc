@@ -117,6 +117,11 @@ fi
 unset __mamba_setup
 # <<< mamba initialize <<<
 
+if ! command -v conda &>/dev/null && command -v mamba &>/dev/null; then
+	alias conda=mamba
+	export CONDA_EXE="$HOME/anaconda3/bin/conda"
+fi
+
 # Preferred editor for local and remote sessions
 export EDITOR=vim
 if [[ ${TERM_PROGRAM-} = vscode ]]; then
