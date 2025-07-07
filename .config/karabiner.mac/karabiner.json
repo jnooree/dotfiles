@@ -15,7 +15,10 @@
                                         "type": "frontmost_application_if"
                                     },
                                     {
-                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "is_built_in_keyboard": true }
+                                        ],
                                         "type": "device_if"
                                     }
                                 ],
@@ -35,7 +38,10 @@
                                         "type": "frontmost_application_unless"
                                     },
                                     {
-                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "is_built_in_keyboard": true }
+                                        ],
                                         "type": "device_unless"
                                     }
                                 ],
@@ -55,7 +61,10 @@
                                         "type": "frontmost_application_if"
                                     },
                                     {
-                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "is_built_in_keyboard": true }
+                                        ],
                                         "type": "device_unless"
                                     }
                                 ],
@@ -69,7 +78,10 @@
                             {
                                 "conditions": [
                                     {
-                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "is_built_in_keyboard": true }
+                                        ],
                                         "type": "device_if"
                                     }
                                 ],
@@ -120,7 +132,10 @@
                             {
                                 "conditions": [
                                     {
-                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "is_built_in_keyboard": true }
+                                        ],
                                         "type": "device_unless"
                                     }
                                 ],
@@ -142,7 +157,10 @@
                             {
                                 "conditions": [
                                     {
-                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "is_built_in_keyboard": true }
+                                        ],
                                         "type": "device_unless"
                                     }
                                 ],
@@ -159,7 +177,10 @@
                             {
                                 "conditions": [
                                     {
-                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "is_built_in_keyboard": true }
+                                        ],
                                         "type": "device_unless"
                                     }
                                 ],
@@ -186,7 +207,10 @@
                             {
                                 "conditions": [
                                     {
-                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "is_built_in_keyboard": true }
+                                        ],
                                         "type": "device_if"
                                     }
                                 ],
@@ -203,7 +227,10 @@
                             {
                                 "conditions": [
                                     {
-                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "is_built_in_keyboard": true }
+                                        ],
                                         "type": "device_if"
                                     }
                                 ],
@@ -220,7 +247,10 @@
                             {
                                 "conditions": [
                                     {
-                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "is_built_in_keyboard": true }
+                                        ],
                                         "type": "device_if"
                                     }
                                 ],
@@ -237,7 +267,10 @@
                             {
                                 "conditions": [
                                     {
-                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "is_built_in_keyboard": true }
+                                        ],
                                         "type": "device_if"
                                     }
                                 ],
@@ -254,7 +287,10 @@
                             {
                                 "conditions": [
                                     {
-                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "is_built_in_keyboard": true }
+                                        ],
                                         "type": "device_unless"
                                     }
                                 ],
@@ -271,7 +307,10 @@
                             {
                                 "conditions": [
                                     {
-                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "is_built_in_keyboard": true }
+                                        ],
                                         "type": "device_unless"
                                     }
                                 ],
@@ -285,7 +324,10 @@
                             {
                                 "conditions": [
                                     {
-                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "is_built_in_keyboard": true }
+                                        ],
                                         "type": "device_unless"
                                     }
                                 ],
@@ -299,7 +341,10 @@
                             {
                                 "conditions": [
                                     {
-                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "is_built_in_keyboard": true }
+                                        ],
                                         "type": "device_unless"
                                     }
                                 ],
@@ -426,7 +471,10 @@
                             {
                                 "conditions": [
                                     {
-                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "is_built_in_keyboard": true }
+                                        ],
                                         "type": "device_if"
                                     }
                                 ],
@@ -443,7 +491,10 @@
                             {
                                 "conditions": [
                                     {
-                                        "identifiers": [{ "vendor_id": 1452 }],
+                                        "identifiers": [
+                                            { "vendor_id": 1452 },
+                                            { "is_built_in_keyboard": true }
+                                        ],
                                         "type": "device_if"
                                     }
                                 ],
@@ -1308,7 +1359,8 @@
                                     {
                                         "identifiers": [
                                             { "vendor_id": 1452 },
-                                            { "vendor_id": 13364 }
+                                            { "vendor_id": 13364 },
+                                            { "is_built_in_keyboard": true }
                                         ],
                                         "type": "device_unless"
                                     }
@@ -1328,7 +1380,8 @@
                                     {
                                         "identifiers": [
                                             { "vendor_id": 1452 },
-                                            { "vendor_id": 13364 }
+                                            { "vendor_id": 13364 },
+                                            { "is_built_in_keyboard": true }
                                         ],
                                         "type": "device_unless"
                                     }
@@ -1348,7 +1401,8 @@
                                     {
                                         "identifiers": [
                                             { "vendor_id": 1452 },
-                                            { "vendor_id": 13364 }
+                                            { "vendor_id": 13364 },
+                                            { "is_built_in_keyboard": true }
                                         ],
                                         "type": "device_unless"
                                     }
@@ -1368,7 +1422,8 @@
                                     {
                                         "identifiers": [
                                             { "vendor_id": 1452 },
-                                            { "vendor_id": 13364 }
+                                            { "vendor_id": 13364 },
+                                            { "is_built_in_keyboard": true }
                                         ],
                                         "type": "device_unless"
                                     }
@@ -1388,7 +1443,8 @@
                                     {
                                         "identifiers": [
                                             { "vendor_id": 1452 },
-                                            { "vendor_id": 13364 }
+                                            { "vendor_id": 13364 },
+                                            { "is_built_in_keyboard": true }
                                         ],
                                         "type": "device_unless"
                                     }
@@ -1408,7 +1464,8 @@
                                     {
                                         "identifiers": [
                                             { "vendor_id": 1452 },
-                                            { "vendor_id": 13364 }
+                                            { "vendor_id": 13364 },
+                                            { "is_built_in_keyboard": true }
                                         ],
                                         "type": "device_unless"
                                     }
@@ -1428,7 +1485,8 @@
                                     {
                                         "identifiers": [
                                             { "vendor_id": 1452 },
-                                            { "vendor_id": 13364 }
+                                            { "vendor_id": 13364 },
+                                            { "is_built_in_keyboard": true }
                                         ],
                                         "type": "device_unless"
                                     }
@@ -1448,7 +1506,8 @@
                                     {
                                         "identifiers": [
                                             { "vendor_id": 1452 },
-                                            { "vendor_id": 13364 }
+                                            { "vendor_id": 13364 },
+                                            { "is_built_in_keyboard": true }
                                         ],
                                         "type": "device_unless"
                                     }
@@ -1468,7 +1527,8 @@
                                     {
                                         "identifiers": [
                                             { "vendor_id": 1452 },
-                                            { "vendor_id": 13364 }
+                                            { "vendor_id": 13364 },
+                                            { "is_built_in_keyboard": true }
                                         ],
                                         "type": "device_unless"
                                     }
@@ -1488,7 +1548,8 @@
                                     {
                                         "identifiers": [
                                             { "vendor_id": 1452 },
-                                            { "vendor_id": 13364 }
+                                            { "vendor_id": 13364 },
+                                            { "is_built_in_keyboard": true }
                                         ],
                                         "type": "device_unless"
                                     }
@@ -1508,7 +1569,8 @@
                                     {
                                         "identifiers": [
                                             { "vendor_id": 1452 },
-                                            { "vendor_id": 13364 }
+                                            { "vendor_id": 13364 },
+                                            { "is_built_in_keyboard": true }
                                         ],
                                         "type": "device_unless"
                                     }
@@ -1528,7 +1590,8 @@
                                     {
                                         "identifiers": [
                                             { "vendor_id": 1452 },
-                                            { "vendor_id": 13364 }
+                                            { "vendor_id": 13364 },
+                                            { "is_built_in_keyboard": true }
                                         ],
                                         "type": "device_unless"
                                     }
@@ -1548,7 +1611,8 @@
                                     {
                                         "identifiers": [
                                             { "vendor_id": 1452 },
-                                            { "vendor_id": 13364 }
+                                            { "vendor_id": 13364 },
+                                            { "is_built_in_keyboard": true }
                                         ],
                                         "type": "device_unless"
                                     }
@@ -1562,7 +1626,8 @@
                                     {
                                         "identifiers": [
                                             { "vendor_id": 1452 },
-                                            { "vendor_id": 13364 }
+                                            { "vendor_id": 13364 },
+                                            { "is_built_in_keyboard": true }
                                         ],
                                         "type": "device_unless"
                                     }
@@ -1576,7 +1641,8 @@
                                     {
                                         "identifiers": [
                                             { "vendor_id": 1452 },
-                                            { "vendor_id": 13364 }
+                                            { "vendor_id": 13364 },
+                                            { "is_built_in_keyboard": true }
                                         ],
                                         "type": "device_unless"
                                     }
@@ -1593,7 +1659,8 @@
                                     {
                                         "identifiers": [
                                             { "vendor_id": 1452 },
-                                            { "vendor_id": 13364 }
+                                            { "vendor_id": 13364 },
+                                            { "is_built_in_keyboard": true }
                                         ],
                                         "type": "device_unless"
                                     }
@@ -1610,7 +1677,8 @@
                                     {
                                         "identifiers": [
                                             { "vendor_id": 1452 },
-                                            { "vendor_id": 13364 }
+                                            { "vendor_id": 13364 },
+                                            { "is_built_in_keyboard": true }
                                         ],
                                         "type": "device_unless"
                                     }
@@ -1627,7 +1695,8 @@
                                     {
                                         "identifiers": [
                                             { "vendor_id": 1452 },
-                                            { "vendor_id": 13364 }
+                                            { "vendor_id": 13364 },
+                                            { "is_built_in_keyboard": true }
                                         ],
                                         "type": "device_unless"
                                     }
@@ -1644,7 +1713,8 @@
                                     {
                                         "identifiers": [
                                             { "vendor_id": 1452 },
-                                            { "vendor_id": 13364 }
+                                            { "vendor_id": 13364 },
+                                            { "is_built_in_keyboard": true }
                                         ],
                                         "type": "device_unless"
                                     }
@@ -1661,7 +1731,8 @@
                                     {
                                         "identifiers": [
                                             { "vendor_id": 1452 },
-                                            { "vendor_id": 13364 }
+                                            { "vendor_id": 13364 },
+                                            { "is_built_in_keyboard": true }
                                         ],
                                         "type": "device_unless"
                                     }
