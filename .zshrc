@@ -5,8 +5,6 @@ case "$TERM" in
 xterm*) unset NO_COLOR ;;
 esac
 
-bindkey -e
-
 # Set via .zshenv
 # shellcheck disable=SC2154
 if [[ $_OS_ARCH = *Linux* ]]; then

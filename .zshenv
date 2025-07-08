@@ -5,6 +5,7 @@ if [[ ! -o interactive && -n ${ZDOTDIR-} ]]; then
 	return
 fi
 
+bindkey -e
 setopt autonamedirs
 skip_global_compinit=1
 
