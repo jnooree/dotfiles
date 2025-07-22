@@ -98,7 +98,25 @@
                             {
                                 "from": {
                                     "key_code": "print_screen",
-                                    "modifiers": { "optional": ["caps_lock"] }
+                                    "modifiers": {
+                                        "mandatory": ["option"],
+                                        "optional": ["caps_lock", "control"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "3",
+                                        "modifiers": ["command", "shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "print_screen",
+                                    "modifiers": {
+                                        "optional": ["caps_lock", "control"]
+                                    }
                                 },
                                 "to": [
                                     {
@@ -112,89 +130,14 @@
                                 "from": {
                                     "key_code": "print_screen",
                                     "modifiers": {
-                                        "mandatory": ["control"],
+                                        "mandatory": ["command"],
                                         "optional": ["caps_lock"]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "3",
+                                        "key_code": "5",
                                         "modifiers": ["command", "shift"]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "Allow original screenshot shortcuts",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "identifiers": [
-                                            { "vendor_id": 1452 },
-                                            { "is_built_in_keyboard": true }
-                                        ],
-                                        "type": "device_unless"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "3",
-                                    "modifiers": {
-                                        "mandatory": ["command", "shift"],
-                                        "optional": ["caps_lock", "control"]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f13",
-                                        "modifiers": ["option"]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "identifiers": [
-                                            { "vendor_id": 1452 },
-                                            { "is_built_in_keyboard": true }
-                                        ],
-                                        "type": "device_unless"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "4",
-                                    "modifiers": {
-                                        "mandatory": ["command", "shift"],
-                                        "optional": ["caps_lock", "control"]
-                                    }
-                                },
-                                "to": [{ "key_code": "f13" }],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "identifiers": [
-                                            { "vendor_id": 1452 },
-                                            { "is_built_in_keyboard": true }
-                                        ],
-                                        "type": "device_unless"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "5",
-                                    "modifiers": {
-                                        "mandatory": ["command", "shift"],
-                                        "optional": ["caps_lock", "control"]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f13",
-                                        "modifiers": ["command"]
                                     }
                                 ],
                                 "type": "basic"
