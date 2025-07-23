@@ -74,6 +74,7 @@ brew "socat"
 brew "spectra"
 brew "sponge"
 brew "ssh-copy-id"
+brew "swift"
 brew "swift-format"
 brew "tealdeer", link: false
 brew "telnet"
