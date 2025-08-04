@@ -80,6 +80,7 @@ brew "tealdeer", link: false
 brew "telnet"
 brew "tlrc"
 brew "tmux"
+brew "uv"
 brew "vcsh"
 brew "vim"
 brew "watch"
