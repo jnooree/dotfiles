@@ -59,6 +59,7 @@ export PYTHONNOUSERSITE=1
 if [[ $_OS_ARCH = *Darwin* ]]; then
 	export ramdisk="/Volumes/RAMDisk"
 	alias chimera='open -n /Applications/Chimera.app --args'
+	alias chimerax='open -n /Applications/ChimeraX.app --args'
 fi
 
 # Add options for pagers; set here for ssh sessions
