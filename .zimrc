@@ -7,7 +7,6 @@ zmodule jnooree/zoxide-zsh-completion -u git
 zmodule completion
 zmodule ohmyzsh/ohmyzsh -r lib -s correction.zsh -s clipboard.zsh
 zmodule ohmyzsh/ohmyzsh -r plugins/git
-zmodule ohmyzsh/ohmyzsh -r plugins/copyfile
 zmodule ohmyzsh/ohmyzsh -r plugins/copypath
 zmodule jnooree/zim-cfg -n jnooree -u git
 zmodule jnooree/magic-enter -u git
