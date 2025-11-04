@@ -24,6 +24,7 @@ elif [[ -n ${HOMEBREW_PREFIX-} ]]; then
 		"$_brew_opt/icu4c/bin"
 		"$_brew_opt/binutils/bin"
 		"$_brew_opt/node@20/bin"
+		"$_brew_opt/file-formula/bin"
 		"$HOMEBREW_PREFIX/bin"
 		"$HOMEBREW_PREFIX/sbin"
 		$path
