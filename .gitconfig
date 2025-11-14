@@ -11,7 +11,7 @@
 [merge]
 	ff = false
 	autoStash = true
-	conflictstyle = diff3
+	conflictstyle = zdiff3
 [init]
 	defaultBranch = main
 [core]
