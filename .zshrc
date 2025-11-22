@@ -230,3 +230,6 @@ if command -v neofetch &>/dev/null &&
 	echo
 	neofetch
 fi
+
+# bun completions
+[ -s "/data/galaxy4/user/jnooree/.bun/_bun" ] && source "/data/galaxy4/user/jnooree/.bun/_bun"
