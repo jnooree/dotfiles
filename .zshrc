@@ -160,17 +160,6 @@ if command -v it2copy &>/dev/null; then
 	}
 fi
 
-if command -v direnv &>/dev/null; then
-	function _direnv_hook() {
-		trap -- '' SIGINT;
-		eval "$(direnv export zsh)";
-		trap - SIGINT;
-	}
-
-	add-zsh-hook precmd _direnv_hook
-	add-zsh-hook preexec _direnv_hook
-fi
-
 if command -v zoxide &>/dev/null; then
 	eval "$(zoxide init zsh --hook pwd --no-cmd)"
 
