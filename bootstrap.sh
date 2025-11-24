@@ -1,7 +1,7 @@
-#!/bin/bash -eu
+#!/bin/bash
 # shellcheck disable=SC1090,SC1091
 
-set -o pipefail
+set -euo pipefail
 
 _os_arch="$(uname -sm)"
 

@@ -43,6 +43,7 @@ function is_tracked() {
 }
 
 shopt -s dotglob
+export GIT_CONFIG_GLOBAL=/dev/null
 
 for _fd in * bin/* .config/* .config/gh/*; do
 	if ! is_tracked "$_fd"; then
