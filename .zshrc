@@ -73,6 +73,22 @@ zstyle ':completion::complete:*' cache-path \
 	"${XDG_CACHE_HOME-$HOME/.cache}/zsh/zcompcache-$SHORT_HOST-$ZSH_VERSION"
 zstyle ':zim:zmodule' use degit
 
+function __jnr_magic_enter_display_dirstack() {
+	local i dentries=${#dirstack}
+
+	for (( i = 1; i < $dentries; i++ )); do
+		print -n "($i) \e[90m${(Dq)dirstack[$i]}$reset_color "
+	done
+	if [[ $i -eq $dentries ]]; then
+		print "($i) \e[90m${(Dq)dirstack[$i]}$reset_color"
+	fi
+}
+
+zstyle ':zim:magic-enter' commands \
+	__jnr_magic_enter_display_dirstack \
+	ls \
+	'command git status -sb 2>/dev/null'
+
 # For oh-my-zsh
 ENABLE_CORRECTION=true
 
