@@ -26,6 +26,8 @@ tags
 # Persistent undo
 [._]*.un~
 
+!*.smk
+
 # From Linux.gitignore
 *~
 
