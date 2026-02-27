@@ -4,6 +4,7 @@ perf.data*
 .envrc
 vendor/cache/
 .snakemake/
+.codex-memory/
 
 # From Vim.gitignore
 # Swap
