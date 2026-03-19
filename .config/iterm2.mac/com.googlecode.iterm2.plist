@@ -1459,6 +1459,10 @@ Select Current Command</string>
 	<integer>0</integer>
 	<key>LanguageAgnosticKeyBindings</key>
 	<true/>
+	<key>NeverWarnAboutShortLivedSessions_CDB13F8E-36F0-4BBA-AD60-AEF5F18DB332</key>
+	<true/>
+	<key>NeverWarnAboutShortLivedSessions_CDB13F8E-36F0-4BBA-AD60-AEF5F18DB332_selection</key>
+	<integer>0</integer>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
