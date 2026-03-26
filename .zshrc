@@ -238,3 +238,7 @@ fi
 
 # bun completions
 [ -s "/data/galaxy4/user/jnooree/.bun/_bun" ] && source "/data/galaxy4/user/jnooree/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
