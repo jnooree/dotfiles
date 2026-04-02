@@ -5,6 +5,7 @@ perf.data*
 vendor/cache/
 .snakemake/
 .codex-memory/
+.codex
 
 # From Vim.gitignore
 # Swap
