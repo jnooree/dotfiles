@@ -32,7 +32,7 @@
 	date = format-local:%F %I:%M %p
 [diff]
 	wordRegex = [a-zA-Z0-9_-]+
-	algorithm = patience
+	algorithm = histogram
 [pager]
 	diff = diff-highlight | less
 	log = diff-highlight | less
