@@ -118,6 +118,7 @@ if [[ -o rematchpcre ]]; then
 fi
 
 # Autocomplete settings
+export LC_COLLATE=C.UTF-8
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(buffer-empty)
 
