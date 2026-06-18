@@ -30,3 +30,45 @@ jobs:
       - run: ln -s $PWD ~/.dotfiles
 
       - run: ./bootstrap.sh
+
+  # Regression test for the cross-tree symlink bug: when $HOME and the repo live
+  # in different trees and the repo is reached through a ~/.dotfiles symlink,
+  # link.sh must still emit symlinks that stay inside ~/.dotfiles instead of
+  # cross-tree targets like ../../../../home/<user>/.dotfiles/... that resolve
+  # outside $HOME and miscreate $HOME/home/<user>/... directories.
+  test-linking:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Link into an isolated cross-tree HOME
+        run: |
+          fake_home="$(mktemp -d)/home"
+          mkdir -p "$fake_home"
+          ln -s "$PWD" "$fake_home/.dotfiles"
+          # Invoke through the symlink so script_dir is the logical ~/.dotfiles.
+          HOME="$fake_home" "$fake_home/.dotfiles/link.sh"
+          echo "FAKE_HOME=$fake_home" >>"$GITHUB_ENV"
+
+      - name: Assert symlinks stay inside ~/.dotfiles
+        run: |
+          rc=0
+          while IFS= read -r -d '' link; do
+            target="$(readlink "$link")"
+            rel="$target"
+            while [[ $rel == ../* ]]; do rel="${rel#../}"; done
+            if [[ $rel != .dotfiles && $rel != .dotfiles/* ]]; then
+              echo "::error::cross-tree symlink: $link -> $target"
+              rc=1
+            fi
+            if [[ ! -e $link ]]; then
+              echo "::error::broken symlink: $link -> $target"
+              rc=1
+            fi
+          done < <(find "$FAKE_HOME" -maxdepth 3 -type l -not -path "$FAKE_HOME/.dotfiles" -print0)
+          if [[ -e $FAKE_HOME/home ]]; then
+            echo "::error::miscreated nested home directory: $FAKE_HOME/home"
+            rc=1
+          fi
+          exit "$rc"
