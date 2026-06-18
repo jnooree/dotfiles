@@ -5,7 +5,7 @@ set -o pipefail
 
 _os_arch="$(uname -sm)"
 
-script_dir="$(dirname "$(realpath "$0")")"
+script_dir="$(dirname "$(realpath -s "$0")")"
 cd "$script_dir"
 
 function to_home() {
@@ -34,7 +34,7 @@ function to_home() {
 	if [[ "${2-}" = copy ]]; then
 		cp -rfT "$source" "$dest"
 	else
-		ln -sfT "$(realpath --relative-to "$dest_dir" "$source")" "$dest"
+		ln -sfT "$(realpath -s --relative-to "$dest_dir" "$source")" "$dest"
 	fi
 }
 

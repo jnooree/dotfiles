@@ -9,7 +9,7 @@ if [[ $_os_arch == *Darwin* ]]; then
 	./init-macos.sh
 fi
 
-script_dir="$(dirname "$(realpath "$0")")"
+script_dir="$(dirname "$(realpath -s "$0")")"
 cd "$script_dir"
 
 function _auto_install_brew() {
@@ -83,7 +83,9 @@ if [[ -z ${SKIP_CONDA-} ]]; then
 	_auto_install_conda ~/anaconda3
 fi
 
-./link.sh || exit 1
+# Invoke by absolute logical path (not ./link.sh) so link.sh's own `realpath -s`
+# does not re-resolve it against the physical cwd and undo the symlink handling.
+"$script_dir/link.sh" || exit 1
 
 # Create directories
 mkdir -p ~/opt ~/.cache/zsh ~/.vim/{backup,swap,undo}
