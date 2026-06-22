@@ -1,65 +1,99 @@
+# Identity & signing
 [user]
 	name = Nuri Jung
 	email = jnooree@snu.ac.kr
 	signingkey = D5BDFF67E90BACBE!
-[push]
-	default = simple
-	followTags = true
-	autoSetupRemote = true
-[pull]
-	rebase = true
-[merge]
-	ff = false
-	autoStash = true
-	conflictstyle = zdiff3
-[init]
-	defaultBranch = main
-[core]
-	quotepath = false
 [commit]
 	gpgsign = true
 	template = ~/.dotfiles/.gitmessage
 [tag]
 	gpgsign = true
+	sort = version:refname
+
+# Repo & branch setup
+[init]
+	defaultBranch = main
+[branch]
+	autoSetupMerge = simple
+	sort = -committerdate
 [submodule]
 	recurse = true
-[filter "lfs"]
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
+
+# Remote sync
+[push]
+	default = simple
+	followTags = true
+	autoSetupRemote = true
+[fetch]
+	prune = true
+	pruneTags = true
+[pull]
+	rebase = true
+
+# Integration & conflict resolution
+[merge]
+	ff = false
+	autoStash = true
+	conflictstyle = zdiff3
+[rebase]
+	autoSquash = true
+	autoStash = true
+	rebaseMerges = true
+	updateRefs = true
+	missingCommitsCheck = warn
+[rerere]
+	enabled = true
+	autoupdate = true
+[stash]
+	showIncludeUntracked = true
+
+# Display: diff, log, pager
+[diff]
+	mnemonicPrefix = true
+	algorithm = histogram
+	wordRegex = [a-zA-Z0-9_-]+
+	colorMovedWS = ignore-all-space
+	renames = copies
+[color "diff"]
+	oldMoved = yellow
+	newMoved = cyan
 [log]
 	date = format-local:%F %I:%M %p
-[diff]
-	wordRegex = [a-zA-Z0-9_-]+
-	algorithm = histogram
 [pager]
 	diff = diff-highlight | less
 	log = diff-highlight | less
 	show = diff-highlight | less
 [interactive]
 	diffFilter = diff-highlight
-[rerere]
-	enabled = true
-	autoupdate = true
-[stash]
-	showIncludeUntracked = true
-[rebase]
-	autoSquash = true
-	autoStash = true
-	rebaseMerges = true
+
+# Behavior & UX
+[core]
+	quotepath = false
+[help]
+	autocorrect = prompt
 [advice]
 	skippedCherryPicks = false
 	forceDeleteBranch = false
-[fetch]
-	prune = true
-[branch]
-	autoSetupMerge = simple
+
+# Content & storage
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+
+# Remote routing & auth
+[url "https://github.com/Galux-Inc/"]
+	insteadOf = galux:
+[url "https://github.com/seoklab/"]
+	insteadOf = seoklab:
 [credential "https://github.com"]
-	helper = 
+	helper =
 	helper = !gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
+	helper =
 	helper = !gh auth git-credential
+
+# Local overrides
 [include]
 	path = ~/.gitconfig.local
