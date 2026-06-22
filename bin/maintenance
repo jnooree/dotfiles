@@ -22,22 +22,6 @@ function _brew_update() {
 	return "$retval"
 }
 
-function _conda_update() {
-	(
-		set -e
-
-		export MAMBA_ROOT_PREFIX="$HOME/anaconda3"
-		export MAMBA_EXE="$MAMBA_ROOT_PREFIX/bin/mamba"
-
-		if [[ ! -x $MAMBA_EXE ]]; then
-			echo "skipping conda update" >&2
-			return 0
-		fi
-
-		~/anaconda3/bin/mamba update -n default --all -y || true
-	)
-}
-
 function _plugins_update() {
 	local -a folders retval=0
 	folders=(
@@ -128,7 +112,6 @@ function _maint() {
 	fi
 
 	_brew_update || retval="$?"
-	_conda_update || retval="$?"
 	_plugins_update || retval="$?"
 
 	local auto_commit_msg="[AUTOCOMMIT] $(date +'%y%m%d - %H:%M') @ $(hostname -s)"
