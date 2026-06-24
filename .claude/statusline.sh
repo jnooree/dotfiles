@@ -7,9 +7,9 @@ IFS=$'\t' read -r MODEL EFFORT CTX RL5 RL7 DUR < <(
 	[
 		(.model.display_name // "?"),
 		(.effort.level // "(no effort)"),
-		(.context_window.used_percentage // 0),
-		(.rate_limits.five_hour.used_percentage // 0),
-		(.rate_limits.seven_day.used_percentage // 0),
+		((.context_window.used_percentage // 0) * 10 | round / 10),
+		((.rate_limits.five_hour.used_percentage // 0) * 10 | round / 10),
+		((.rate_limits.seven_day.used_percentage // 0) * 10 | round / 10),
 		(.cost.total_duration_ms // 0)
 	] | map(tostring) | join("\t")'
 )
@@ -24,10 +24,17 @@ YELLOW=$'\033[33m'
 RED=$'\033[31m'
 RESET=$'\033[0m'
 
+function _floor() {
+	echo "${1%.*}"
+}
+
 function pick_color_pct() {
-	if [[ $1 -ge 90 ]]; then
+	local n color
+
+	n="$(_floor "$1")"
+	if [[ $n -ge 90 ]]; then
 		color="$RED"
-	elif [[ $1 -ge 70 ]]; then
+	elif [[ $n -ge 70 ]]; then
 		color="$YELLOW"
 	else
 		color="$GREEN"
@@ -44,7 +51,7 @@ function fmt_dur() {
 		return
 	fi
 
-	s="$(("${ms%.*}" / 1000))"
+	s="$(($(_floor "$ms") / 1000))"
 	if [[ $s -ge 3600 ]]; then
 		printf '%dh%dm' $((s / 3600)) $(((s % 3600) / 60))
 	elif [[ $s -ge 60 ]]; then
@@ -65,7 +72,7 @@ fi
 # context bar + duration
 bar_color="$(pick_color_pct "$CTX")"
 dur="$(fmt_dur "$DUR")"
-nfill=$((CTX / 10))
+nfill=$(($(_floor "$CTX") / 10))
 nempty=$((10 - nfill))
 printf -v ctx_fill "%${nfill}s"
 printf -v ctx_pad "%${nempty}s"
