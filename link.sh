@@ -45,15 +45,20 @@ function is_tracked() {
 shopt -s dotglob
 export GIT_CONFIG_GLOBAL=/dev/null
 
-for _fd in * bin/* .config/* .config/gh/*; do
+for _fd in * bin/* .claude/* .config/* .config/gh/*; do
 	if ! is_tracked "$_fd"; then
 		continue
 	fi
 
 	case "$_fd" in
-	.github | .gitignore | .gitmessage | .bundle | .config | .zfunc | \
-		bin | Library | LICENSE | README.md | *.sh | *.json)
+	.github | .gitignore | .gitmessage | .bundle | .claude | .config | .zfunc | \
+		bin | Library | LICENSE | README.md)
 		continue
+		;;
+	*.sh | *.json)
+		if [[ $_fd != */* ]]; then
+			continue
+		fi
 		;;
 	.config/htop | .config/gh | .config/cron*)
 		continue
