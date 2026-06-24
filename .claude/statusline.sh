@@ -54,11 +54,8 @@ function fmt_dur() {
 	fi
 }
 
-model_line="$MODEL"
-if [[ -n $EFFORT ]]; then
-	model_line="${model_line} · ${EFFORT}"
-fi
-model_line="${CYAN}[${model_line}]${RESET}"
+# model + effort + caveman
+model_line="${CYAN}[${MODEL} · ${EFFORT}]${RESET}"
 
 caveman="$("$CAVEMAN_SL" </dev/null 2>/dev/null || true)"
 if [[ -n $caveman ]]; then
