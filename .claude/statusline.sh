@@ -2,6 +2,7 @@
 
 set -euo pipefail
 
+# stdin JSON schema: https://code.claude.com/docs/en/statusline#available-data
 mapfile -d '' -t F < <(
 	jq --raw-output0 '
 		def xround1: (. // 0) * 10 | round / 10;

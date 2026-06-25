@@ -8,6 +8,9 @@ set -euo pipefail
 # TaskUpdate input is a single delta {taskId, status, ...}; status == completed
 # IS the tick event. A denied tick never executes, so the commit+retry cycle
 # (deny -> commit -> retry on a now-clean tree) needs no transcript history.
+#
+# stdin JSON schema:  https://code.claude.com/docs/en/hooks#pretooluse
+# deny output schema: https://code.claude.com/docs/en/hooks#pretooluse-decision-control
 
 mapfile -d '' -t F < <(
 	jq --raw-output0 '
