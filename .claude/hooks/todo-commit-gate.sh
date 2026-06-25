@@ -33,10 +33,13 @@ if [[ -z $dirty ]]; then
 fi
 
 # Dirty + completion -> deny.
-jq -n --arg d "$dirty" --arg t "$taskId" '{
+reason="Commit first, then tick task #${taskId}. Uncommitted changes:
+${dirty}"
+
+jq -n --arg r "$reason" '{
   hookSpecificOutput: {
     hookEventName: "PreToolUse",
     permissionDecision: "deny",
-    permissionDecisionReason: ("Commit first, then tick task #" + $t + ". Uncommitted changes:\n" + $d)
+    permissionDecisionReason: $r
   }
 }'
