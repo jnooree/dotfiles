@@ -2,13 +2,27 @@
 
 set -euo pipefail
 
-input=$(cat)
+# PreToolUse gate for TaskUpdate: block marking a task `completed` while the
+# working tree is dirty. Enforces CLAUDE.md "Task tick == committed change".
+#
+# TaskUpdate input is a single delta {taskId, status, ...}; status == completed
+# IS the tick event. A denied tick never executes, so the commit+retry cycle
+# (deny -> commit -> retry on a now-clean tree) needs no transcript history.
 
-IFS=$'\t' read -r tx cwd < <(
-	jq -r '[(.transcript_path // ""), (.cwd // "")] | @tsv' <<<"$input"
+IFS=$'\t' read -r status taskId cwd < <(
+	jq -r '[
+		(.tool_input.status // ""),
+		(.tool_input.taskId // "" | tostring),
+		(.cwd // "")
+	] | @tsv'
 )
-if [[ ! -f $tx ]] ||
-	! git -C "$cwd" rev-parse --is-inside-work-tree &>/dev/null; then
+
+# Only completions gate. in_progress / pending / subject-only / deleted pass.
+if [[ $status != completed ]]; then
+	exit 0
+fi
+
+if ! git -C "$cwd" rev-parse --is-inside-work-tree &>/dev/null; then
 	exit 0
 fi
 
@@ -17,40 +31,11 @@ if [[ -z $dirty ]]; then
 	exit 0
 fi
 
-curr=$(
-	jq -r '
-		[.tool_input.todos[]? | select(.status == "completed").content]
-		| unique
-		| join("\n")
-	' <<<"$input" 2>/dev/null
-)
-
-if [[ -z $curr ]]; then
-	exit 0
-fi
-
-prev=$(
-	jq -rs '
-		[ .[] | .message?.content?[]?
-			| select(.type == "tool_use" and .name == "TodoWrite") | .input.todos ]
-		| (last // [])
-		| map(select(.status == "completed") | .content)
-		| unique
-		| join("\n")
-	' "$tx" 2>/dev/null
-)
-
-new=$(LC_ALL=C comm -13 <(printf '%s\n' "$prev") <(printf '%s\n' "$curr"))
-if [[ -z $new ]]; then
-	exit 0
-fi
-
-# Dirty + new tick -> deny.
-jq -n --arg d "$dirty" '{
+# Dirty + completion -> deny.
+jq -n --arg d "$dirty" --arg t "$taskId" '{
   hookSpecificOutput: {
     hookEventName: "PreToolUse",
     permissionDecision: "deny",
-    permissionDecisionReason: ("Commit first, then tick. Uncommitted changes:\n" + $d)
+    permissionDecisionReason: ("Commit first, then tick task #" + $t + ". Uncommitted changes:\n" + $d)
   }
 }'
-exit 0
