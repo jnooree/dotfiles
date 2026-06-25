@@ -1,9 +1,11 @@
 # Global Instructions
 
-- When implementing a task list, always commit each task as a separate commit,
-  following concise Conventional Commit messages. When tasks are independent,
-  order them this way: chore, feat, fix, test, refactor, docs, style. When tasks
-  have dependencies, prefer dependency order.
+- All commits use concise Conventional Commit messages.
+- When working with todo lists:
+  - If tasks are independent, order them this way: chore, feat, fix, test,
+    refactor, docs, style. When tasks have dependencies, prefer dependency order.
+  - **Task tick == committed change.** The moment a todo task is marked
+    completed, its work MUST already be committed: commit first, then tick.
 - When asked to create a new worktree, branch off from the current branch and
   place it as a sibling of the main worktree, named
   `<name>-wt-<timestamp>-<distinguishing-suffix>`.
