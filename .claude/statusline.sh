@@ -2,30 +2,32 @@
 
 set -euo pipefail
 
-IFS=$'\t' read -r MODEL EFFORT CTX RL5 RM5 RL7 RM7 DUR < <(
+IFS=$'\t' read -r MODEL EFFORT CTX DUR RL5 RM5 RL7 RM7 < <(
 	jq -r '
+	def xround1: (. // 0) * 10 | round / 10;
 	[
 		(.model.display_name // "?"),
 		(.effort.level // "(no effort)"),
-		((.context_window.used_percentage // 0) * 10 | round / 10),
-		((.rate_limits.five_hour.used_percentage // 0) * 10 | round / 10),
-		((.rate_limits.five_hour.resets_at // 0) * 10 | round / 10),
-		((.rate_limits.seven_day.used_percentage // 0) * 10 | round / 10),
-		((.rate_limits.seven_day.resets_at // 0) * 10 | round / 10),
-		(.cost.total_duration_ms // 0)
-	] | map(tostring) | join("\t")'
+		(.context_window.used_percentage | xround1),
+		(.cost.total_duration_ms // 0),
+		(.rate_limits.five_hour.used_percentage | xround1),
+		(.rate_limits.five_hour.resets_at // 0),
+		(.rate_limits.seven_day.used_percentage | xround1),
+		(.rate_limits.seven_day.resets_at // 0)
+	] | @tsv'
 )
 
 CAVEMAN_SL="$(
-	jq -r '.plugins["caveman@caveman"][0].installPath' ~/.claude/plugins/installed_plugins.json
+	jq -r '.plugins["caveman@caveman"][0].installPath' \
+		~/.claude/plugins/installed_plugins.json
 )/src/hooks/caveman-statusline.sh"
 
-CYAN=$'\033[36m'
-GREEN=$'\033[32m'
-YELLOW=$'\033[33m'
-RED=$'\033[31m'
-RESET=$'\033[0m'
-DIM=$'\033[2m'
+CYAN='\033[36m'
+GREEN='\033[32m'
+YELLOW='\033[33m'
+RED='\033[31m'
+RESET='\033[0m'
+DIM='\033[2m'
 
 function _floor() {
 	echo "${1%.*}"
@@ -43,7 +45,7 @@ function pick_color_pct() {
 		color="$GREEN"
 	fi
 
-	echo -n "$color"
+	echo "$color"
 }
 
 function fmt_dur() {
@@ -98,7 +100,7 @@ model_line="${CYAN}[${MODEL} · ${EFFORT}]${RESET}"
 
 caveman="$("$CAVEMAN_SL" </dev/null 2>/dev/null || true)"
 if [[ -n $caveman ]]; then
-	model_line="${model_line} | ${caveman}"
+	model_line="${model_line} ${caveman}"
 fi
 
 # context bar + duration
