@@ -9,13 +9,14 @@ set -euo pipefail
 # IS the tick event. A denied tick never executes, so the commit+retry cycle
 # (deny -> commit -> retry on a now-clean tree) needs no transcript history.
 
-IFS=$'\t' read -r status taskId cwd < <(
-	jq -r '[
+mapfile -d '' -t F < <(
+	jq --raw-output0 '
 		(.tool_input.status // ""),
 		(.tool_input.taskId // "" | tostring),
 		(.cwd // "")
-	] | @tsv'
+	'
 )
+status=${F[0]} taskId=${F[1]} cwd=${F[2]}
 
 # Only completions gate. in_progress / pending / subject-only / deleted pass.
 if [[ $status != completed ]]; then

@@ -2,20 +2,21 @@
 
 set -euo pipefail
 
-IFS=$'\t' read -r MODEL EFFORT CTX DUR RL5 RM5 RL7 RM7 < <(
-	jq -r '
-	def xround1: (. // 0) * 10 | round / 10;
-	[
+mapfile -d '' -t F < <(
+	jq --raw-output0 '
+		def xround1: (. // 0) * 10 | round / 10;
 		(.model.display_name // "?"),
-		(.effort.level // "(no effort)"),
+		(.effort.level // ""),
 		(.context_window.used_percentage | xround1),
 		(.cost.total_duration_ms // 0),
 		(.rate_limits.five_hour.used_percentage | xround1),
 		(.rate_limits.five_hour.resets_at // 0),
 		(.rate_limits.seven_day.used_percentage | xround1),
 		(.rate_limits.seven_day.resets_at // 0)
-	] | @tsv'
+	'
 )
+MODEL=${F[0]} EFFORT=${F[1]} CTX=${F[2]} DUR=${F[3]}
+RL5=${F[4]} RM5=${F[5]} RL7=${F[6]} RM7=${F[7]}
 
 CAVEMAN_SL="$(
 	jq -r '.plugins["caveman@caveman"][0].installPath' \
@@ -96,11 +97,15 @@ function fmt_epoch() {
 }
 
 # model + effort + caveman
-model_line="${CYAN}[${MODEL} · ${EFFORT}]${RESET}"
+model_line="${CYAN}[${MODEL}"
+if [[ -n $EFFORT ]]; then
+	model_line+=" · ${EFFORT}"
+fi
+model_line+="]${RESET}"
 
 caveman="$("$CAVEMAN_SL" </dev/null 2>/dev/null || true)"
 if [[ -n $caveman ]]; then
-	model_line="${model_line} ${caveman}"
+	model_line+=" ${caveman}"
 fi
 
 # context bar + duration
