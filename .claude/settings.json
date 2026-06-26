@@ -6,10 +6,6 @@
     ],
     "defaultMode": "auto"
   },
-  "statusLine": {
-    "type": "command",
-    "command": "~/.claude/statusline.sh"
-  },
   "hooks": {
     "PreToolUse": [
       {
@@ -23,8 +19,14 @@
       }
     ]
   },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.sh"
+  },
   "enabledPlugins": {
-    "caveman@caveman": true
+    "caveman@caveman": true,
+    "github@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "caveman": {
@@ -35,6 +37,6 @@
     }
   },
   "awaySummaryEnabled": false,
-  "theme": "auto",
-  "tui": "fullscreen"
+  "tui": "fullscreen",
+  "theme": "auto"
 }

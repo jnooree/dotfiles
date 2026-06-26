@@ -15,6 +15,10 @@
     e.g. `add_XXXX`
   - For example, if the main worktree is `my-repo`, a new worktree could be
     named `my-repo-wt-260625-add_XXXX`.
+  - Immediately after creating the worktree, switch into it by calling the
+    **EnterWorktree** tool (pass the new worktree's `path`). Keep all subsequent
+    work there, so the session cwd tracks the active worktree (the commit-gate
+    hook reads cwd to find the tree it checks).
 - When you need to locate a file/dir etc. outside worktrees, do not run
   grep/find/glob and similar commands. Instead, ask the user for the path. Only
   run them if the user explicitly approves it. We're on a shared cluster
