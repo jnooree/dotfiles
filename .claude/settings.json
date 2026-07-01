@@ -36,7 +36,11 @@
       }
     }
   },
+  "promptSuggestionEnabled": false,
   "awaySummaryEnabled": false,
   "tui": "fullscreen",
-  "theme": "auto"
+  "theme": "auto",
+  "preferredNotifChannel": "iterm2",
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true
 }
