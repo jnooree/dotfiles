@@ -3,6 +3,7 @@
 - All commits use concise Conventional Commit messages.
   - Subject only, unless the change carries subtle context or warrants a
     fuller explanation.
+  - Create new commits, unless specifically instructed to amend/fixup/squash.
 - When working with todo lists:
   - If tasks are independent, order them this way: chore, feat, fix, test,
     refactor, docs, style. When tasks have dependencies, prefer dependency order.
