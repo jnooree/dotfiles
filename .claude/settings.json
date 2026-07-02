@@ -26,7 +26,8 @@
   "enabledPlugins": {
     "caveman@caveman": true,
     "github@claude-plugins-official": true,
-    "code-review@claude-plugins-official": true
+    "code-review@claude-plugins-official": true,
+    "clangd-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "caveman": {
@@ -42,5 +43,6 @@
   "theme": "auto",
   "preferredNotifChannel": "iterm2",
   "inputNeededNotifEnabled": true,
-  "agentPushNotifEnabled": true
+  "agentPushNotifEnabled": true,
+  "showThinkingSummaries": true
 }
