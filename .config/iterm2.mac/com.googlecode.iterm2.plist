@@ -2549,7 +2549,7 @@ Select Current Command</string>
 			<key>Open Toolbelt</key>
 			<false/>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prevent Opening in a Tab</key>
 			<false/>
 			<key>Prompt Before Closing 2</key>
@@ -2819,6 +2819,8 @@ Select Current Command</string>
 			<integer>2</integer>
 			<key>Transparency</key>
 			<real>0.0</real>
+			<key>Treat Option as Alt</key>
+			<true/>
 			<key>Unicode Normalization</key>
 			<integer>1</integer>
 			<key>Unicode Version</key>
