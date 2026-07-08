@@ -7,6 +7,9 @@ vendor/cache/
 .codex-memory/
 .codex
 
+**/.claude/settings.local.json
+**/.claude/skills/local-*
+
 # From Vim.gitignore
 # Swap
 [._]*.s[a-v][a-z]
@@ -139,5 +142,3 @@ bh_unicode_properties.cache
 # Sublime-github package stores a github token in this file
 # https://packagecontrol.io/packages/sublime-github
 GitHub.sublime-settings
-
-**/.claude/settings.local.json
