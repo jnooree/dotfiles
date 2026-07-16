@@ -2884,7 +2884,7 @@ Select Current Command</string>
 	<key>OpenArrangementAtStartup</key>
 	<false/>
 	<key>OpenBookmark</key>
-	<false/>
+	<true/>
 	<key>OpenNewWindowAtStartup</key>
 	<false/>
 	<key>OpenNoWindowsAtStartup</key>
