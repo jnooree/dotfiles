@@ -40,9 +40,10 @@
   "promptSuggestionEnabled": false,
   "awaySummaryEnabled": false,
   "tui": "fullscreen",
+  "showThinkingSummaries": true,
   "theme": "auto",
   "preferredNotifChannel": "iterm2",
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
-  "showThinkingSummaries": true
+  "effortLevel": "xhigh"
 }
