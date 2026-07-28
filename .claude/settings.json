@@ -6,6 +6,7 @@
     ],
     "defaultMode": "auto"
   },
+  "model": "opus[1m]",
   "hooks": {
     "PreToolUse": [
       {
@@ -27,7 +28,8 @@
     "caveman@caveman": true,
     "github@claude-plugins-official": true,
     "code-review@claude-plugins-official": true,
-    "clangd-lsp@claude-plugins-official": true
+    "clangd-lsp@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "caveman": {
@@ -37,6 +39,7 @@
       }
     }
   },
+  "effortLevel": "high",
   "promptSuggestionEnabled": false,
   "awaySummaryEnabled": false,
   "tui": "fullscreen",
@@ -44,6 +47,5 @@
   "theme": "auto",
   "preferredNotifChannel": "iterm2",
   "inputNeededNotifEnabled": true,
-  "agentPushNotifEnabled": true,
-  "effortLevel": "xhigh"
+  "agentPushNotifEnabled": true
 }
