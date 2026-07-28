@@ -6,9 +6,11 @@ set -euo pipefail
 mapfile -d '' -t F < <(
 	jq --raw-output0 '
 		def xround1: (. // 0) * 10 | round / 10;
+		(.context_window.used_percentage | xround1) as $ctx |
 		(.model.display_name // "?"),
 		(.effort.level // ""),
-		(.context_window.used_percentage | xround1),
+		$ctx,
+		($ctx / 10 | ceil),
 		(.cost.total_duration_ms // 0),
 		(.rate_limits.five_hour.used_percentage | xround1),
 		(.rate_limits.five_hour.resets_at // 0),
@@ -16,8 +18,8 @@ mapfile -d '' -t F < <(
 		(.rate_limits.seven_day.resets_at // 0)
 	'
 )
-MODEL=${F[0]} EFFORT=${F[1]} CTX=${F[2]} DUR=${F[3]}
-RL5=${F[4]} RM5=${F[5]} RL7=${F[6]} RM7=${F[7]}
+MODEL=${F[0]} EFFORT=${F[1]} CTX=${F[2]} CTX_FILL=${F[3]} DUR=${F[4]}
+RL5=${F[5]} RM5=${F[6]} RL7=${F[7]} RM7=${F[8]}
 
 CAVEMAN_SL="$(
 	jq -r '.plugins["caveman@caveman"][0].installPath' \
@@ -112,9 +114,8 @@ fi
 # context bar + duration
 bar_color="$(pick_color_pct "$CTX")"
 dur="$(fmt_dur $(($(_floor "$DUR") / 1000)))"
-nfill=$(($(_floor "$CTX") / 10))
-nempty=$((10 - nfill))
-printf -v ctx_fill "%${nfill}s"
+nempty=$((10 - CTX_FILL))
+printf -v ctx_fill "%${CTX_FILL}s"
 printf -v ctx_pad "%${nempty}s"
 ctx_bar="${bar_color}${ctx_fill// /█}${ctx_pad// /░}${RESET}\
  ${CTX}%\
