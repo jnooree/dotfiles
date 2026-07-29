@@ -1,5 +1,6 @@
 # Global Instructions
 
+- I use zsh.
 - All commits use concise Conventional Commit messages.
   - Subject only, unless the change carries subtle context or warrants a
     fuller explanation.
