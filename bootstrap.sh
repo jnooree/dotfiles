@@ -123,4 +123,5 @@ fi
 export ZIM_HOME="$HOME/.zim"
 curl -fsSL --create-dirs -o "$ZIM_HOME/zimfw.zsh" \
 	https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
-zsh "$ZIM_HOME/zimfw.zsh" init -q
+zsh -c 'zstyle ":zim:zmodule" use degit; source "$0" init -q' \
+	"$ZIM_HOME/zimfw.zsh"
