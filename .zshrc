@@ -192,11 +192,12 @@ if command -v zoxide &>/dev/null; then
 fi
 
 export DFT_BACKGROUND=light
+export CLAUDE_CODE_ENABLE_TODO_TOOLS=1
 
 _source_if_readable "${ZDOTDIR-$HOME}/.zshrc.local"
 
 if [[ -z ${RCODE_REMOTE-} && -n ${LC_RCODE_REMOTE-} ]]; then
-  RCODE_REMOTE="$LC_RCODE_REMOTE"
+	RCODE_REMOTE="$LC_RCODE_REMOTE"
 fi
 
 unset _OS_ARCH
