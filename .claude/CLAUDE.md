@@ -11,3 +11,11 @@
     refactor, docs, style. When tasks have dependencies, prefer dependency order.
   - **Task tick == committed change.** The moment a todo task is marked
     completed, its work MUST already be committed: commit first, then tick.
+
+## Engineering preferences
+
+- Monitoring: a wrong alert beats no alert. Report unknown state
+  explicitly; never let "couldn't check" render as silence.
+- Encode invariants in structure (keys, types, partitions), enforce them
+  once, then rely on them — delete guards that can no longer fire.
+- Research before recommending (`git log -S`, upstream docs, run it).
