@@ -18,6 +18,25 @@
             "command": "~/.claude/hooks/todo-commit-gate.sh"
           }
         ]
+      },
+      {
+        "matcher": "EnterPlanMode",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/plan-tmux-gate.sh"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/plan-tmux-gate.sh"
+          }
+        ]
       }
     ]
   },
