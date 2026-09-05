@@ -5,7 +5,10 @@
   - Subject only, unless the change carries subtle context or warrants a
     fuller explanation.
   - Create new commits, unless specifically instructed to amend/fixup/squash.
-- Avoid code comments. Delete comments explaining *what*.
+- Avoid code comments.
+  - Never write *what* or *obvious why*. Delete them within edited hunks.
+  - Comment urge is a signal of design gap. Rename, split, or type instead.
+  - Compress survivors: 2 lines already borderline; 3+ only to cite verbatim.
 - When working with todo lists:
   - If tasks are independent, order them this way: chore, feat, fix, test,
     refactor, docs, style. When tasks have dependencies, prefer dependency order.
