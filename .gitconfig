@@ -1,7 +1,7 @@
 # Identity & signing
 [user]
 	name = Nuri Jung
-	email = jnooree@snu.ac.kr
+	email = jnooree@gmail.com
 	signingkey = D5BDFF67E90BACBE!
 [commit]
 	gpgsign = true
