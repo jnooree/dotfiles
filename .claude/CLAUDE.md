@@ -10,8 +10,8 @@
   - Comment urge is a signal of design gap. Rename, split, or type instead.
   - Compress survivors: 2 lines already borderline; 3+ only to cite verbatim.
 - When working with todo lists:
-  - If tasks are independent, order them this way: chore, feat, fix, test,
-    refactor, docs, style. When tasks have dependencies, prefer dependency order.
+  - If tasks are independent, order them this way: chore, fix, refactor, feat,
+    test, docs, style. When tasks have dependencies, prefer dependency order.
   - **Task tick == committed change.** The moment a todo task is marked
     completed, its work MUST already be committed: commit first, then tick.
 
