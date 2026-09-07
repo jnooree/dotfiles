@@ -45,6 +45,8 @@ brew "ffmpeg"
 brew "file-formula"
 # Collection of GNU find, xargs, and locate
 brew "findutils"
+# Scriptable ping program for checking if multiple hosts are up
+brew "fping"
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # GNU awk utility
