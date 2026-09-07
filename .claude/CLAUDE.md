@@ -1,6 +1,8 @@
 # Global Instructions
 
 - I use zsh.
+- Working tree and git history change between turns. Re-read before edit;
+  re-check `git status`/`git log` before commit or diff summary.
 - All commits use concise Conventional Commit messages.
   - Subject only, unless the change carries subtle context or warrants a
     fuller explanation.
