@@ -1,0 +1,17 @@
+[Unit]
+Description=nginx serving %h
+ConditionFileIsExecutable=/usr/sbin/nginx
+
+[Service]
+Type=forking
+PIDFile=%t/%N.pid
+ConfigurationDirectory=%N
+ExecStartPre=/usr/sbin/nginx -t -q -g 'pid %t/%N.pid;' -p %E/%N/ -c %E/%N/nginx.conf
+ExecStart=/usr/sbin/nginx -g 'pid %t/%N.pid;' -p %E/%N/ -c %E/%N/nginx.conf
+ExecReload=/usr/sbin/nginx -g 'pid %t/%N.pid;' -p %E/%N/ -c %E/%N/nginx.conf -s reload
+ExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile %t/%N.pid
+TimeoutStopSec=5
+KillMode=mixed
+
+[Install]
+WantedBy=default.target

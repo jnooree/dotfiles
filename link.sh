@@ -45,7 +45,7 @@ function is_tracked() {
 shopt -s dotglob
 export GIT_CONFIG_GLOBAL=/dev/null
 
-for _fd in * bin/* .claude/* .config/* .config/gh/*; do
+for _fd in * bin/* .claude/* .config/* .config/gh/* .config/systemd/user/*; do
 	if ! is_tracked "$_fd"; then
 		continue
 	fi
@@ -60,7 +60,7 @@ for _fd in * bin/* .claude/* .config/* .config/gh/*; do
 			continue
 		fi
 		;;
-	.config/htop | .config/gh | .config/cron*)
+	.config/htop | .config/gh | .config/cron* | .config/systemd)
 		continue
 		;;
 	esac
