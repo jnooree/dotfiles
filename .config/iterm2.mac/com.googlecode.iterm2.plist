@@ -2433,6 +2433,8 @@ Select Current Command</string>
 			</dict>
 			<key>Guid</key>
 			<string>CDB13F8E-36F0-4BBA-AD60-AEF5F18DB332</string>
+			<key>Harmonize 256 Colors (Dark)</key>
+			<false/>
 			<key>Horizontal Spacing</key>
 			<real>0.90000000000000002</real>
 			<key>Idle Code</key>
