@@ -40,11 +40,7 @@ if command -v groff &>/dev/null; then
 	export MANROFFOPT="-c"
 fi
 
-# For custom functions
-for _file in "$HOME/.dotfiles/.zfunc"/*; do
-	if [[ -f $_file ]]; then autoload -Uz "$_file"; fi
-done
-unset _file
+autoload -Uz "$HOME/.dotfiles/.zfunc"/*(-.)
 
 export ZDOTDIR="$HOME/.config/zsh"
 export SHORT_HOST="${HOST%%.*}"
