@@ -3,10 +3,14 @@
 unfunction conda 2>/dev/null
 
 if command -v conda &>/dev/null; then
-	conda "$@"
-	return "$?"
+	:
+elif [[ -x $HOME/anaconda3/condabin/conda ]]; then
+	export CONDA_EXE="$HOME/anaconda3/bin/conda"
+	path=("$HOME/anaconda3/condabin" $path)
+else
+	function conda() {
+		mamba "$@"
+	}
 fi
 
-export CONDA_EXE="$HOME/anaconda3/bin/conda"
-alias conda=mamba
-mamba "$@"
+conda "$@"

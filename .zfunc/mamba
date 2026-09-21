@@ -11,8 +11,10 @@ __mamba_setup="$(
 )"
 if [[ $? -eq 0 ]]; then
 	eval "$__mamba_setup"
-	mamba "$@"
 else
-	alias mamba="$MAMBA_EXE"
-	"$MAMBA_EXE" "$@"
+	function mamba() {
+		"$MAMBA_EXE" "$@"
+	}
 fi
+
+mamba "$@"
