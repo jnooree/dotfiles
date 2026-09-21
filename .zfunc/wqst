@@ -1,0 +1,10 @@
+# shellcheck disable=all
+
+local OPTIND=1 flag n_flag=1
+while getopts 'n:' flag; do
+	case "$flag" in
+	n) n_flag="$OPTARG" ;;
+	*) return ;;
+	esac
+done
+watch -n "$n_flag" qstat

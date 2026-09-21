@@ -122,24 +122,6 @@ export LC_COLLATE=C.UTF-8
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(buffer-empty)
 
-# >>> mamba initialize >>>
-# !! Contents within this block are managed by 'mamba shell init' !!
-export MAMBA_EXE="$HOME/anaconda3/bin/mamba";
-export MAMBA_ROOT_PREFIX="$HOME/anaconda3";
-__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__mamba_setup"
-else
-    alias mamba="$MAMBA_EXE"  # Fallback on help from mamba activate
-fi
-unset __mamba_setup
-# <<< mamba initialize <<<
-
-if ! command -v conda &>/dev/null && command -v mamba &>/dev/null; then
-	alias conda=mamba
-	export CONDA_EXE="$HOME/anaconda3/bin/conda"
-fi
-
 # Preferred editor for local and remote sessions
 export EDITOR=vim
 if [[ ${TERM_PROGRAM-} = vscode ]]; then

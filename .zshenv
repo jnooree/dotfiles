@@ -47,8 +47,8 @@ if command -v groff &>/dev/null; then
 fi
 
 # For custom functions
-for _file in ~/.dotfiles/.zfunc/*.zsh; do
-	. "$_file"
+for _file in "$HOME/.dotfiles/.zfunc"/*; do
+	[[ -f $_file ]] && autoload -Uz "$_file"
 done
 unset _file
 
