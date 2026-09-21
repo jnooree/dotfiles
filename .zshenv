@@ -13,21 +13,15 @@ if [[ -z $SAFEPATH ]]; then
 	SAFEPATH="$PATH"
 fi
 
-_OS_ARCH="$(uname -sm)"
-
 if command -v brew &>/dev/null; then
 	_brew_prefix="$(brew --prefix)"
-elif [[ $_OS_ARCH = *Linux* ]]; then
+elif [[ $OSTYPE = linux* ]]; then
 	_brew_prefix=/home/linuxbrew/.linuxbrew
-elif [[ $_OS_ARCH = *x86_64* ]]; then
+elif [[ $CPUTYPE = x86_64 ]]; then
 	_brew_prefix=/usr/local
 else
 	_brew_prefix=/opt/homebrew
 fi
-
-_stripped_path="\
-$(sed -E "s#:*$_brew_prefix/s?bin:*#:#g;s#:+#:#g;s#^:##g;s#:\$##g" <<<"$PATH")"
-unset _stripped_path
 
 if [[ -x $_brew_prefix/bin/brew ]]; then
 	eval "$("$_brew_prefix/bin/brew" shellenv)"
@@ -48,15 +42,15 @@ fi
 
 # For custom functions
 for _file in "$HOME/.dotfiles/.zfunc"/*; do
-	[[ -f $_file ]] && autoload -Uz "$_file"
+	if [[ -f $_file ]]; then autoload -Uz "$_file"; fi
 done
 unset _file
 
 export ZDOTDIR="$HOME/.config/zsh"
-export SHORT_HOST="$(hostname -s)"
+export SHORT_HOST="${HOST%%.*}"
 export PYTHONNOUSERSITE=1
 
-if [[ $_OS_ARCH = *Darwin* ]]; then
+if [[ $OSTYPE = darwin* ]]; then
 	export ramdisk="/Volumes/RAMDisk"
 	alias chimera='open -n /Applications/Chimera.app --args'
 	alias chimerax='open -n /Applications/ChimeraX.app --args'

@@ -5,9 +5,7 @@ case "$TERM" in
 xterm*) unset NO_COLOR ;;
 esac
 
-# Set via .zshenv
-# shellcheck disable=SC2154
-if [[ $_OS_ARCH = *Linux* ]]; then
+if [[ $OSTYPE = linux* ]]; then
 	ulimit -s 1048576
 elif [[ -n ${HOMEBREW_PREFIX-} ]]; then
 	_brew_opt="$HOMEBREW_PREFIX/opt"
@@ -140,7 +138,7 @@ elif command -v rsub &>/dev/null && [[ ${LC_TERMINAL-} != terminus ]]; then
 fi
 export SUDO_EDITOR="$EDITOR"
 
-if [[ $_OS_ARCH = *Linux* ]]; then
+if [[ $OSTYPE = linux* ]]; then
 	alias visudo="sudo visudo"
 	alias ufw-full-reload="sudo bash -c 'iptables -F; iptables -X; ip6tables -F; ip6tables -X; ufw disable; ufw enable'"
 	alias sinf='sinfo -N -o "%8N  %9P  %.2t  %.13C  %.8O  %.6m  %.8e  %$(( $COLUMNS - 68 ))E"'
@@ -150,6 +148,7 @@ fi
 
 _source_if_readable /etc/zsh_command_not_found
 _source_if_readable ~/.fzf.zsh
+_source_if_readable ~/.bun/_bun
 
 if command -v it2copy &>/dev/null; then
 	detect-clipboard
@@ -182,7 +181,6 @@ if [[ -z ${RCODE_REMOTE-} && -n ${LC_RCODE_REMOTE-} ]]; then
 	RCODE_REMOTE="$LC_RCODE_REMOTE"
 fi
 
-unset _OS_ARCH
 unfunction _source_if_readable
 
 function _cleanup_path_arr() {
@@ -219,9 +217,6 @@ if command -v neofetch &>/dev/null &&
 	echo
 	neofetch
 fi
-
-# bun completions
-[ -s "/data/galaxy4/user/jnooree/.bun/_bun" ] && source "/data/galaxy4/user/jnooree/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
