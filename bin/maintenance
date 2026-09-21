@@ -94,9 +94,9 @@ function _maint() {
 		return 1
 	fi
 
-	if [[ $(uname -s) = *Linux* ]]; then
+	if [[ $OSTYPE = linux* ]]; then
 		brew_prefix=/home/linuxbrew/.linuxbrew
-	elif [[ $(uname -m) = *arm64* ]]; then
+	elif [[ $HOSTTYPE = arm64 ]]; then
 		brew_prefix=/opt/homebrew
 	else
 		brew_prefix=/usr/local
@@ -106,7 +106,7 @@ function _maint() {
 		eval "$("$brew_prefix/bin/brew" shellenv)"
 	fi
 
-	if [[ $(uname -s) = *Linux* ]]; then
+	if [[ $OSTYPE = linux* ]]; then
 		# Backup crontab settings
 		crontab -l >.config/cron/mytab
 	fi

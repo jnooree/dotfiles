@@ -3,9 +3,7 @@
 
 set -euo pipefail
 
-_os_arch="$(uname -sm)"
-
-if [[ $_os_arch == *Darwin* ]]; then
+if [[ $OSTYPE == darwin* ]]; then
 	./init-macos.sh
 fi
 
@@ -18,9 +16,9 @@ function _auto_install_brew() {
 	if command -v brew &>/dev/null; then
 		brew_prefix="$(brew --prefix)"
 	else
-		if [[ $_os_arch = *Linux* ]]; then
+		if [[ $OSTYPE = linux* ]]; then
 			brew_prefix=/home/linuxbrew/.linuxbrew
-		elif [[ $_os_arch = *x86_64* ]]; then
+		elif [[ $HOSTTYPE = x86_64 ]]; then
 			brew_prefix=/usr/local
 		else
 			brew_prefix=/opt/homebrew
@@ -46,16 +44,16 @@ function _auto_install_conda() {
 		return 0
 	fi
 
-	case "$_os_arch" in
-	*Linux*) os_conda="Linux" ;;
-	*Darwin*) os_conda="MacOSX" ;;
+	case "$OSTYPE" in
+	linux*) os_conda="Linux" ;;
+	darwin*) os_conda="MacOSX" ;;
 	*)
-		echo "error: Invalid operating system '${os_conda}'" >&2
+		echo "error: Invalid operating system '${OSTYPE}'" >&2
 		exit 1
 		;;
 	esac
 
-	arch="$(uname -m)"
+	arch="$HOSTTYPE"
 	if ! [[ "$arch" = *arm64* || "$arch" = *aarch64* || "$arch" = *x86_64* ]]; then
 		echo "error: Invalid architecture '${arch}'" >&2
 		exit 1
@@ -94,14 +92,14 @@ if [[ -z ${CODESPACES-} ]]; then
 	# Link git autocompletion
 	if [[ -n ${HOMEBREW_PREFIX-} ]]; then
 		_zsh_git="$HOMEBREW_PREFIX/share/zsh/functions/_git"
-	elif [[ $_os_arch = *Linux* ]]; then
+	elif [[ $OSTYPE = linux* ]]; then
 		_zsh_git=/usr/share/zsh/functions/Completion/Unix/_git
 	else
 		_zsh_git="/usr/share/zsh/$(/bin/zsh -c 'echo $ZSH_VERSION')/functions/_git"
 	fi
 	ln -sfT "$_zsh_git" .zfunc/completion/_git
 
-	if [[ $_os_arch = *Linux* ]]; then
+	if [[ $OSTYPE = linux* ]]; then
 		# cron
 		crontab ~/.config/cron/mytab
 	fi

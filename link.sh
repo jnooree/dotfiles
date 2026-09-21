@@ -3,8 +3,6 @@
 
 set -o pipefail
 
-_os_arch="$(uname -sm)"
-
 script_dir="$(dirname "$(realpath -s "$0")")"
 cd "$script_dir"
 
@@ -13,14 +11,14 @@ function to_home() {
 
 	case "$dest" in
 	*.mac)
-		if [[ $_os_arch = *Darwin* ]]; then
+		if [[ $OSTYPE = darwin* ]]; then
 			dest="${dest%.mac}"
 		else
 			return 0
 		fi
 		;;
 	*.lnx)
-		if [[ $_os_arch = *Linux* ]]; then
+		if [[ $OSTYPE = linux* ]]; then
 			dest="${dest%.lnx}"
 		else
 			return 0
@@ -74,7 +72,7 @@ for _fd in .bundle/* .config/htop/* .config/cron*; do
 	fi
 done
 
-if [[ $_os_arch = *Darwin* ]]; then
+if [[ $OSTYPE = darwin* ]]; then
 	while IFS= read -r -d '' _fd; do
 		if is_tracked "$_fd"; then
 			to_home "$_fd"
