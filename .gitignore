@@ -8,6 +8,7 @@
 .zfunc/completion/git-completion.bash
 .config/iterm2.mac/AppSupport
 .config/nginx-home.lnx/listen.conf
+.claude/skills/synced
 
 # From Python.gitignore
 # Byte-compiled / optimized / DLL files
