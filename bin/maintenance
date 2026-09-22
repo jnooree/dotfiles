@@ -38,6 +38,21 @@ function _plugins_update() {
 	return "$retval"
 }
 
+function _zim_update() {
+	local zim_home="$HOME/.zim"
+
+	if [[ ! -w $zim_home/zimfw.zsh ]]; then
+		echo "skipping zim update" >&2
+		return 0
+	fi
+
+	ZIM_HOME="$zim_home" zsh -c '
+		zstyle ":zim:zmodule" use degit
+		zstyle ":zim" disable-version-check yes
+		source "$0" upgrade && source "$0" update
+	' "$zim_home/zimfw.zsh"
+}
+
 function _vcsh_update() {
 	local auto_commit_msg="$1" retval=0
 
@@ -113,6 +128,7 @@ function _maint() {
 
 	_brew_update || retval="$?"
 	_plugins_update || retval="$?"
+	_zim_update || retval="$?"
 
 	local auto_commit_msg="[AUTOCOMMIT] $(date +'%y%m%d - %H:%M') @ $(hostname -s)"
 
