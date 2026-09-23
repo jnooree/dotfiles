@@ -125,8 +125,6 @@ export EDITOR=vim
 if [[ ${TERM_PROGRAM-} = vscode ]]; then
 	export EDITOR="$(which code) --wait"
 elif [[ -z ${SSH_CONNECTION-} ]]; then
-	unfunction rcode
-	alias rcode=code
 	if command -v subl &>/dev/null; then
 		export HOMEBREW_EDITOR='subl -n'
 		export EDITOR='subl -n -w'
