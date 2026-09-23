@@ -68,6 +68,9 @@
 # Behavior & UX
 [core]
 	quotepath = false
+	untrackedCache = true
+[index]
+	version = 4
 [help]
 	autocorrect = prompt
 [advice]
