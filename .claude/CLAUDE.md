@@ -17,6 +17,21 @@
   - **Task tick == committed change.** The moment a todo task is marked
     completed, its work MUST already be committed: commit first, then tick.
 
+## Workflow
+
+H: prompt -> A: investigate, report -> H: review, ask for a plan ->
+loop(A: report or design sketch -> H: revise or approve) -> A: code.
+Code only after explicit approval, however obvious the fix.
+
+Verb cues (none = no code):
+
+- Plan mode: plan.
+- No code: suggest, investigate, discuss, review, explain, sketch, compare,
+  check, look into.
+- Code: go, implement, write, do it, apply, fix it, proceed, commit.
+- Mixed verdicts on a report ("1. fix. 2. skip. 3. why? discuss.") mean no
+  code yet: answer 3, restate 1, wait for approval.
+
 ## Engineering preferences
 
 - Monitoring: a wrong alert beats no alert. Report unknown state
