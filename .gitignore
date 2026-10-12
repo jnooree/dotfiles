@@ -9,6 +9,7 @@
 .config/iterm2.mac/AppSupport
 .config/nginx-home.lnx/listen.conf
 .claude/skills/synced
+.claude/skills/.*
 
 # From Python.gitignore
 # Byte-compiled / optimized / DLL files

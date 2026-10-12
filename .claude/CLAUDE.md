@@ -34,8 +34,6 @@ Verb cues (none = no code):
 
 ## Engineering preferences
 
-- Monitoring: a wrong alert beats no alert. Report unknown state
-  explicitly; never let "couldn't check" render as silence.
 - Encode invariants in structure (keys, types, partitions), enforce them
   once, then rely on them — delete guards that can no longer fire.
 - Research before recommending (`git log -S`, upstream docs, run it).
