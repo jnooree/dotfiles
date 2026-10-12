@@ -37,3 +37,5 @@ Verb cues (none = no code):
 - Encode invariants in structure (keys, types, partitions), enforce them
   once, then rely on them — delete guards that can no longer fire.
 - Research before recommending (`git log -S`, upstream docs, run it).
+- Define before reference, C-style: a symbol appears above its first use.
+  Within a file: types, then free functions, then entry point.
