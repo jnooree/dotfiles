@@ -25,9 +25,8 @@ Code only after explicit approval, however obvious the fix.
 
 Verb cues (none = no code):
 
-- Plan mode: plan.
 - No code: suggest, investigate, discuss, review, explain, sketch, compare,
-  check, look into.
+  check, look into, plan.
 - Code: go, implement, write, do it, apply, fix it, proceed, commit.
 - Mixed verdicts on a report ("1. fix. 2. skip. 3. why? discuss.") mean no
   code yet: answer 3, restate 1, wait for approval.
