@@ -109,6 +109,8 @@ brew "llvm"
 brew "make"
 # Fast Cross-Platform Package Manager
 brew "micromamba"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.15"
 # Lightweight PDF and XPS viewer
 brew "mupdf"
 # Fast, highly customisable system info script
@@ -127,8 +129,6 @@ brew "openjdk@11"
 brew "openssh"
 # Shell command parallelization utility
 brew "parallel"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.15"
 # Framework for managing multi-language pre-commit hooks
 brew "pre-commit"
 # Show ps output as a tree
