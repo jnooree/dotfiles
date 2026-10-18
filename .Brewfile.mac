@@ -89,6 +89,8 @@ brew "icu4c@77"
 brew "iftop"
 # Tools and libraries to manipulate images in select formats
 brew "imagemagick"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.14"
 # CLI wrapper for basic network utilities on macOS - ip command
 brew "iproute2mac"
 # Manage your Java environment
@@ -109,8 +111,6 @@ brew "llvm"
 brew "make"
 # Fast Cross-Platform Package Manager
 brew "micromamba"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.15"
 # Lightweight PDF and XPS viewer
 brew "mupdf"
 # Fast, highly customisable system info script
