@@ -1,16 +1,16 @@
 ---
 name: gh-writeup
-description: User's conventions for a PR summary or issue draft dumped into the worktree for them to paste into GitHub — file placement, length, structure, and the no-hard-wrap rule. Apply whenever asked to dump, write, or draft a PR summary, PR description, or issue.
+description: User's conventions for a PR summary, issue draft, or PR review reply dumped into the worktree for them to paste into GitHub — file placement, length, structure, commit references, and the no-hard-wrap rule. Apply whenever asked to dump, write, or draft a PR summary, PR description, issue, or reply to a PR review.
 ---
 
-# PR Summary / Issue Draft
+# PR Summary / Issue Draft / PR Reply
 
-The user creates the PR or issue themselves from this file. Do not call `gh` to create one, and do not commit the file.
+The user creates the PR or issue, or posts the reply, themselves from this file. Do not call `gh` to create or post one, and do not commit the file.
 
 ## Output
 
-- Write `pr-summary.md` or `issue.md` at the worktree root, untracked. Overwrite on revision.
-- Line 1: the title. Blank line. Then the body, exactly as it will be pasted.
+- Write `pr-summary.md`, `issue.md`, or `pr-reply.md` at the worktree root, untracked. Overwrite on revision, except `pr-reply.md`, which only grows.
+- Summary and issue: line 1 is the title. Blank line. Then the body, exactly as it will be pasted.
 - Extra constraints given in the instruction override this skill.
 
 ## Hard rules
@@ -20,7 +20,7 @@ The user creates the PR or issue themselves from this file. Do not call `gh` to 
 - Repo template, when one exists: drop checklist and boilerplate sections, but keep every remaining section, even empty. Pick the fitting one when several exist. A YAML issue form: one `## <field label>` per non-boilerplate field.
 - When at most one umbrella section remains after that, count it as no template. A checklist alone, even under a heading, is the common case.
 - Reference code with SHA permalinks to line ranges, never branch URLs.
-- Link issues and PRs as `#N` in the same repo, `<owner>/<repo>#N` otherwise.
+- Link issues and PRs as `#N` in the same repo, `<owner>/<repo>#N` otherwise. Commits are bare SHAs, `<owner>/<repo>@<sha>` across repos. Never put any of these in backticks, because that stops GitHub from auto-linking them.
 - English unless instructed otherwise.
 
 ## PR summary
@@ -54,3 +54,31 @@ Title: a plain sentence-case phrase naming the action or the thing. No type pref
 Link the prior art a proposal mirrors. `Ref: #N` on its own last line for a related issue/PR this one does not track.
 
 No repo template, or the user asks for the "personal template": `## Problem` then `## Proposal`, a fenced example and bulleted rules.
+
+## PR reply
+
+No title. One block per review point, in review order:
+
+```
+## `<path>:<line>` (<tag>)
+
+<verdict> <summary>
+
+<discussion: only when the summary line fails>
+```
+
+- Header: the point's `path:line` and a short tag that tells apart points on the same or nearby lines. A point with no line gets the tag alone.
+- `<verdict>` choices:
+  - `Accepted in <sha>:` or `Accepted with revision in <sha>:`
+  - `Rejected:`
+  - `Deferred to #N:`
+  - An answer to a question gets no verdict.
+- `<summary>` is a single line gives the change or the reason. It never restates the point.
+- Try to put each point into the summary line alone. Add a discussion, as a short paragraph or bullets, only when that line fails, which means the point needs one of these:
+  - a reasoning chain, where a second sentence builds on the first;
+  - a code block, example, or log;
+  - a question back to the reviewer.
+
+  Plain Accepted and Deferred never fail, because the commit or the issue holds the rest.
+- Deferred: draft `issue.md` following the Issue draft rules, with the review point quoted directly. Stop, ask the user to post it, and finish the item with the `#N` they send back.
+- When a new review round arrives, append its blocks. Rewrite an earlier block only when its verdict changes.
