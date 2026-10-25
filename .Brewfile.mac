@@ -174,7 +174,7 @@ brew "tealdeer", link: false
 # User interface to the TELNET protocol
 brew "telnet"
 # Official tldr client written in Rust
-brew "tlrc"
+brew "tlrc", link: false
 # Terminal multiplexer
 brew "tmux"
 # Extremely fast Python package installer and resolver, written in Rust
