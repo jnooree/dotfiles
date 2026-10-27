@@ -23,7 +23,9 @@
   - Never write *what* or *obvious why*. Delete them within edited hunks.
   - Comment urge is a signal of design gap. Rename, split, or type instead.
   - Compress survivors: 2 lines already borderline; 3+ only to cite verbatim.
-  - Deferred work is a `TODO(jnooree): <what>` line, never a bare TODO.
+  - Deferred work is a `TODO(jnooree): <what>` (missing) or
+    `FIXME(jnooree): <what>` (broken) line, never bare. `XXX: <what>` flags
+    a hazard that works today but must not be touched carelessly.
 - When working with todo lists:
   - If tasks are independent, order them this way: chore, fix, refactor, feat,
     test, docs, style. When tasks have dependencies, prefer dependency order.
