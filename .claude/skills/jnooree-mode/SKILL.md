@@ -100,11 +100,13 @@ an issue.
 - Defer only what is rare, visible, and recoverable, or outside this change.
   Write the trigger down or file an issue instead of building machinery. A
   silent, late, or destructive failure is never deferred.
-- Design the clean shape first, ignoring current consumers and what would
-  break. Then retrofit it to the current shape so the break shrinks or
-  disappears. What still breaks after the retrofit is accepted only when the
-  old shape is itself a bug with no simple, canonical workaround, or is
-  documented as unstable.
+- Design on top of the current code first. If that stays messy and never
+  lands in a clean shape, redesign ignoring current consumers, then retrofit
+  the result so the break shrinks or disappears. What still breaks after the
+  retrofit is accepted only when the old shape is itself a bug with no
+  simple, canonical workaround, when it is documented as unstable, or when
+  the break was requested or already settled, in this session or in the
+  related issue.
 - When two versions are comparably good, the smaller diff wins. A rewrite
   needs a defect to fix. A wording nit or a vague ambiguity is not one.
 
