@@ -71,16 +71,18 @@ No title. One block per review point, in review order:
 
 - Header: the point's `path:line` and a short tag that tells apart points on the same or nearby lines. A point with no line gets the tag alone.
 - `<verdict>` choices:
-  - `Accepted in <sha>:` or `Accepted with revision in <sha>:`
-  - `Rejected:`
+  - `Fixed in <sha>:`, also when fixed by another approach; the summary then names it.
+  - `Partly fixed in <sha>:`, the summary names what remains and why. Append `; deferred to #N` when an issue tracks the rest.
+  - `Won't fix:`
   - `Deferred to #N:`
-  - An answer to a question gets no verdict.
-- `<summary>` is a single line gives the change or the reason. It never restates the point.
+  - `Ack:` for a point agreed with that needs no change.
+  - An answer, or a question back to the reviewer, gets no verdict.
+- `<summary>` is a single line that gives the change or the reason. It never restates the point.
 - Try to put each point into the summary line alone. Add a discussion, as a short paragraph or bullets, only when that line fails, which means the point needs one of these:
   - a reasoning chain, where a second sentence builds on the first;
   - a code block, example, or log;
   - a question back to the reviewer.
 
-  Plain Accepted and Deferred never fail, because the commit or the issue holds the rest.
+  Plain Fixed and Deferred never fail, because the commit or the issue holds the rest.
 - Deferred: draft `issue.md` following the Issue draft rules, with the review point quoted directly. Stop, ask the user to post it, and finish the item with the `#N` they send back.
 - When a new review round arrives, append its blocks. Rewrite an earlier block only when its verdict changes.
