@@ -100,10 +100,11 @@ an issue.
 - Defer only what is rare, visible, and recoverable, or outside this change.
   Write the trigger down or file an issue instead of building machinery. A
   silent, late, or destructive failure is never deferred.
-- Suggest breaking a user-visible contract only when one of these holds: the
-  break buys a significant gain in flexibility or extensibility; the contract
-  is a broken feature by standard engineering practice with no simple,
-  canonical workaround; or the contract is documented as unstable.
+- Design the clean shape first, ignoring current consumers and what would
+  break. Then retrofit it to the current shape so the break shrinks or
+  disappears. What still breaks after the retrofit is accepted only when the
+  old shape is itself a bug with no simple, canonical workaround, or is
+  documented as unstable.
 - When two versions are comparably good, the smaller diff wins. A rewrite
   needs a defect to fix. A wording nit or a vague ambiguity is not one.
 
