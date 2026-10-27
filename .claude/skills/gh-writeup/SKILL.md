@@ -44,6 +44,8 @@ Design change: these sections, in this order, only those that carry content. Bul
 - `### Breaking changes`
 - `## Deferred`
 
+Editing a posted PR body: minimal diff. Keep the previous content, wrap stale text in `~~`, and add the correction after **EDIT**:.
+
 ## Issue draft
 
 Title: a plain sentence-case phrase naming the action or the thing. No type prefix, symbols in backticks. Examples:
@@ -51,7 +53,7 @@ Title: a plain sentence-case phrase naming the action or the thing. No type pref
 - Deduplicate `write_dummy_outputs` and the scdeco empty-lane writer
 - A campaign-wide `context` shared by every agent
 
-Link the prior art a proposal mirrors. `Ref: #N` on its own last line for a related issue/PR this one does not track.
+Cross-references between draft issues use `#<{i}-slug>` placeholders until the numbers exist. Link the prior art a proposal mirrors. `Ref: #N` on its own last line for a related issue/PR this one does not track.
 
 No repo template, or the user asks for the "personal template": `## Problem` then `## Proposal`, a fenced example and bulleted rules.
 

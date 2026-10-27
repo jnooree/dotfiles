@@ -5,6 +5,9 @@ description: User's git worktree creation conventions — naming, placement, and
 
 # Worktree Creation
 
+"switch off" means a new branch in place. Create a worktree only on the
+literal word.
+
 When asked to create a new worktree:
 
 - Branch off from the current branch.
@@ -20,3 +23,4 @@ When asked to create a new worktree:
   **EnterWorktree** tool (pass the new worktree's `path`). Keep all subsequent
   work there, so the session cwd tracks the active worktree (the commit-gate
   hook reads cwd to find the tree it checks).
+- Before removing a worktree, save its uncommitted changes as a patch.
