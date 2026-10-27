@@ -3,7 +3,8 @@
   "permissions": {
     "allow": [
       "WebSearch",
-      "Read(//tmp/**)"
+      "Read(//tmp/**)",
+      "Bash(tmux rename-session:*)"
     ],
     "defaultMode": "auto"
   },
@@ -35,6 +36,10 @@
           {
             "type": "command",
             "command": "~/.claude/hooks/plan-tmux-gate.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/tmux-title.sh"
           }
         ]
       }
