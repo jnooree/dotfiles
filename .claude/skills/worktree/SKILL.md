@@ -6,7 +6,7 @@ description: User's git worktree creation conventions — naming, placement, and
 # Worktree Creation
 
 "switch off" means a new branch in place. Create a worktree only on the
-literal word.
+literal word "worktree" or "wt".
 
 When asked to create a new worktree:
 

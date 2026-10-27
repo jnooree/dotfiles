@@ -16,9 +16,6 @@ says. Related skills by path: `~/.claude/skills/gh-writeup`,
 
 ## Reply
 
-- English always. Korean only on request or to match a Korean precedent.
-- Lead with the verdict. One section per sub-question, in the order asked.
-- Decisions, rationale, caveats. A few bullets and one summary line.
 - Number every finding, option, and question. The user rules by index
   ("1 - fix. 3 - skip. unmentioned = yes"). After rulings, re-list with the
   verdicts applied, merged and renumbered, before writing anything.
@@ -64,7 +61,10 @@ says. Related skills by path: `~/.claude/skills/gh-writeup`,
 
 - Expect hand edits, fixup! commits, and other agents in the tree. Re-read the
   diff, infer intent, review for correctness and clarity, keep their version.
-  Never stage, revert, or overwrite their hunks.
+  Never revert or overwrite their hunks. Stage them only when told to commit
+  or fold.
+- While another agent runs in the tree, work read-only and expect code
+  changes between turns.
 - "review again" means the diff since the last review plus a rerun of the
   checks. Report new findings and what is still pending.
 - "commit if no issues" and "fold if no issues" mean run the usual pass (build,
@@ -90,35 +90,36 @@ an issue.
 - Finish the shape you started. A refactor or generalization gets its
   complete, idiomatic API in this pass, not a verbatim move or a two-callers
   minimum.
-- Invariants live in types, names, constraints, or lint rules. Never in a
-  comment, a convention, or a tolerance. A "can't happen" is proven or fixed
-  structurally. A tolerance that crawls back in is a redesign signal.
 - The platform's standard mechanism beats a hand-written guard, lock, or glue.
   If the standard tool also blocks legitimate use, drop the guard and rely on
   tests.
 - Shape for the likely future, build nothing for it. Pick structures that do
   not block a plausible next consumer, but add no feature, overload, binding,
   field, or wrapper for a consumer that does not exist yet. Those are separate
-  design tasks.
+  design tasks. A consumer the user names or the plan schedules is real.
 - Defer only what is rare, visible, and recoverable, or outside this change.
   Write the trigger down or file an issue instead of building machinery. A
   silent, late, or destructive failure is never deferred.
-- A breaking change is fine when the contract already allows it, such as a
-  format documented as unstable or an API still in design.
+- Suggest breaking a user-visible contract only when one of these holds: the
+  break buys a significant gain in flexibility or extensibility; the contract
+  is a broken feature by standard engineering practice with no simple,
+  canonical workaround; or the contract is documented as unstable.
 - When two versions are comparably good, the smaller diff wins. A rewrite
   needs a defect to fix. A wording nit or a vague ambiguity is not one.
 
 ## Code and design posture
 
-- Make the literal edit asked for. No adjacent rewrites, no new helpers, no
-  lint workarounds. Defend every hunk with its origin and reason, or revert it
-  together with what depends on it.
+- A hunk-scoped ask ("fill in X", "drop Y") gets that edit only. No adjacent
+  rewrites, no new helpers. No suppression in place of a fix; a justified
+  suppression is its own chore commit. Defend every hunk with its origin and
+  reason, or revert it together with what depends on it.
 - Guard only where the failure would be silent, late, or destructive. Where
   misuse already fails on its own, no guard for "usability". Fail loudly on
   ambiguous input.
 - Reuse upstream and stock defaults verbatim. Question each extra read, cache,
   and table. Re-derive a cheap value instead of adding bookkeeping.
-  Delete dead code before any other change.
+- Dead code this change touches goes first, in a chore commit. Other dead
+  code goes to the backlog.
 - A swept literal becomes a named constant.
 - New code matches the patterns that predate the branch.
 
@@ -127,13 +128,12 @@ an issue.
 - Each commit passes lint on its own and its touched tests. The full suite
   runs before the PR summary, and per commit when it is fast.
 - A bug fix reproduces the failure on the real artifact before and after, and
-  carries its regression test in the fix commit.
+  carries its regression test in the fix commit unless the fix is already
+  pushed.
 - "Done" covers every variant and dataset, not one sample.
 - A causal or historical claim ("this exists because", "it mirrors") needs a
   file read in the same turn, else say "no rationale recorded". A data claim
-  is measured, not derived from the code. A diagnosis that needs privileged
-  output asks for that output instead of reconstructing a story from
-  timestamps and side logs.
+  is measured, not derived from the code.
 - Propose a tunable or optimization only against measured pain in absolute
   rates. List the unmeasured ones as considered and dropped.
 
@@ -149,8 +149,8 @@ an issue.
 
 ## Commits and history
 
-- Tests ride in the feature commit. Docs, ADRs, and plan edits are separate
-  docs commits, placed ahead of the code they govern.
+- Tests ride in the feature commit. An ADR is its own docs commit before the
+  code that depends on it. Plan drift goes in a trailing plan-only commit.
 - Existing hacks of the same kind as the one being replaced are converted in
   one refactor commit before the feature.
 - Revert a design decision by restoring the hunks verbatim with
@@ -160,9 +160,9 @@ an issue.
 
 ## Changelog and docs
 
-- With no repo rules, a changelog entry follows Keep a Changelog, as a
-  Debian-style short heads-up pointer for users, relative to main, for
-  user-visible changes only, in its own docs commit.
+- Changelog only when asked. With no repo rules, an entry follows Keep a
+  Changelog, as a Debian-style short heads-up pointer for users, relative to
+  main, for user-visible changes only. Commit placement follows the request.
 - Docs describe the current state only. Fix only wrong wording, add only
   missing content. Content that would duplicate another part links to it
   instead of re-explaining, so the two cannot drift.
@@ -180,8 +180,8 @@ Everything in this section happens only on request.
 - Propose memory candidates as a numbered list. The user picks. Drop anything
   recoverable from code, comments, or git, anything whose root cause is fixed,
   and duplicates of global preferences.
-- Deferred work goes in one backlog per repo, grouped by area: the repo's
-  backlog file when it has one, else a single backlog memory. Never a
+- Deferred work goes in one backlog per repo, grouped by area. That is the
+  repo's backlog file when it has one, else a single backlog memory. Never a
   per-topic memory or a plan file. Delete an item when it lands; nothing is
   marked done.
 - A handoff is a concise initiator prompt for the next agent that does not

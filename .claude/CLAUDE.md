@@ -2,8 +2,8 @@
 
 - I use zsh interactively. Scripts are bash.
 - US spelling everywhere: code, docs, commits, replies.
-- Blocked by a missing tool, package, or permission: stop and say what to
-  install or grant. No ad-hoc venvs, no workarounds.
+- When blocked by a missing tool, package, or permission, stop and say what
+  to install or grant. No ad-hoc venvs, no workarounds.
 - Never run sudo or other privileged commands. Hand over a copy-pasteable
   command and say what to look for in its output.
 - Wait on a PID or one exact status file, never on `pgrep -f` from a shell
