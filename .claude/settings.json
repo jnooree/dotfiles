@@ -103,5 +103,6 @@
   "theme": "auto",
   "preferredNotifChannel": "iterm2",
   "inputNeededNotifEnabled": true,
-  "agentPushNotifEnabled": true
+  "agentPushNotifEnabled": true,
+  "switchModelsOnFlag": true
 }
