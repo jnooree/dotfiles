@@ -38,7 +38,7 @@ It must distinguish this task from the other sessions on this server:
 
 $others
 
-If the natural slug collides, choose a more specific one, never a numeric suffix."
+If the natural slug collides, make it more specific instead of appending a counter."
 fi
 
 cat <<EOF
@@ -46,7 +46,7 @@ This tmux session still has its default name "$name". Before you reply to this p
 
     tmux rename-session -t '$id' '$prefix-<slug>'
 
-The slug is lowercase kebab-case, 1 to 3 words, ASCII letters, digits, and hyphens only. Do not mention the rename in your reply.${collision_hint-}
+The slug is lowercase kebab-case, 1 to 3 words, ASCII letters, digits, and hyphens only. Digits that belong to the task itself count as part of a word, not as extra words: step 2.2 is \`step-2-2\`. Do not mention the rename in your reply.${collision_hint-}
 
 If you end this turn asking for clarification because the task is unclear, skip the rename; you will be reminded on the next prompt.
 EOF
