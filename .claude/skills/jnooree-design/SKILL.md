@@ -18,6 +18,12 @@ or amended item keeps its number when re-listed.
 severe first, each with where the fix goes and a recommended action. A
 finding that changes a shape opens the full design round.
 
+`/pstack:<name>` is user-only, so the Skill tool refuses it. Run it by
+reading `<pstack>/skills/<name>/SKILL.md` and following it, as
+`<pstack>/docs/harness/claude-code.md` prescribes; read that adapter once per
+session first. `<pstack>` is the `installPath` of `pstack@cursor-plugins` in
+`~/.claude/plugins/installed_plugins.json`.
+
 ## 1. Frame
 
 - Restate the change in one line with its scope boundary.
