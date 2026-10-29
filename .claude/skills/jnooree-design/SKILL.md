@@ -75,10 +75,10 @@ Exit: the hint has a verdict and every new symbol has a prior-art line.
 
 ## 5. Converge, on request
 
-Each launch needs its own go: a fresh reviewer on the artifact, identical
-prompt per round and blind when designs are compared; a prover for math; a
-comparison table against the old design with row ids. Converged when a
-round finds no defect.
+Each launch here needs its own go: a fresh reviewer on the artifact,
+identical prompt per round and blind when designs are compared; a prover for
+math; a comparison table against the old design with row ids. Converged when
+a round finds no defect.
 
 ## 6. Settle
 
@@ -88,18 +88,23 @@ round finds no defect.
   the round is fixed in this change, as its own fix commit placed first.
 - Sequencing contract: commit order, ADR first, the droppable change last,
   fixup or forward, who edits what, when the tree must compile, who
-  verifies, coder subagents per chunk when the change is large, and the
-  fresh reviewer after code (Step 8). The plan lists these, so plan approval
-  is their go.
+  verifies, coder subagents per chunk when the change is large. The plan
+  lists these, so plan approval is their go.
+- Audit line: the plan ends with `Audit: fresh reviewer on the diff against
+  <HEAD before code>`, unless the user ruled out a reviewer during the
+  round. Plan approval is its go.
 
 ## 7. Plan and code
 
 The ruling on the last open decision is the go for the plan. Plan mode, no
 further go. A plan rejection is a late input: fold it and resubmit; it does
-not reopen the round. Plan approval is go.
+not reopen the round. Plan approval is go, including every launch the plan
+lists.
 
 ## 8. Audit, after code
 
-One reply: the postmortem, then the reviewer's findings as "got a review.
-verdict?" (Steps 2, 3, 6), each verified yourself first. A ruling that
-changes code reruns Steps 7 and 8, until an audit changes no code.
+One reply: the postmortem, then, when the plan carries the audit line, the
+fresh reviewer's findings as "got a review" (Steps 2, 3, 6), each verified
+yourself first. The reviewer is a subagent briefed with the diff only, not
+the round. A ruling that changes code reruns Steps 7 and 8, until an audit
+changes no code.
