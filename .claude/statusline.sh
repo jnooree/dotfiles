@@ -20,6 +20,7 @@ mapfile -d '' -t F < <(
 )
 MODEL=${F[0]} EFFORT=${F[1]} CTX=${F[2]} CTX_FILL=${F[3]} DUR=${F[4]}
 RL5=${F[5]} RM5=${F[6]} RL7=${F[7]} RM7=${F[8]}
+CONFIG_DIR=${CLAUDE_CONFIG_DIR:-$HOME/.claude}
 
 CAVEMAN_SL="$(
 	jq -r '.plugins["caveman@caveman"][0].installPath' \
@@ -30,6 +31,7 @@ CYAN='\033[36m'
 GREEN='\033[32m'
 YELLOW='\033[33m'
 RED='\033[31m'
+MAGENTA='\033[35m'
 RESET='\033[0m'
 DIM='\033[2m'
 
@@ -110,6 +112,8 @@ caveman="$("$CAVEMAN_SL" </dev/null 2>/dev/null || true)"
 if [[ -n $caveman ]]; then
 	model_line+=" ${caveman}"
 fi
+
+model_line+=" | cfg ${MAGENTA}${CONFIG_DIR/#$HOME/\~}${RESET}"
 
 # context bar + duration
 bar_color="$(pick_color_pct "$CTX")"
