@@ -1,7 +1,6 @@
 ---
 name: gh-writeup
 description: User's conventions for a PR summary, issue draft, or PR review reply dumped into the worktree for them to paste into GitHub — file placement, length, structure, commit references, and the no-hard-wrap rule. Apply whenever asked to dump, write, or draft a PR summary, PR description, issue, or reply to a PR review.
-disable-model-invocation: true
 ---
 
 # PR Summary / Issue Draft / PR Reply
