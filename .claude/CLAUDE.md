@@ -10,6 +10,11 @@
   whose own command line matches the pattern.
 - Working tree and git history change between turns. Re-read before edit;
   re-check `git status`/`git log` before commit or diff summary.
+- I use skills `disable-model-invocation: true`. If a skill is not listed in
+  your inventory but I mentioned it, call it, don't ask.
+- Expect hand edits, fixup! commits, and other agents in the tree. Never
+  revert or overwrite another author's hunks. Stage them only when told to
+  commit or fold.
 - All commits use concise Conventional Commit messages.
   - Subject only, unless the change carries subtle context or warrants a
     fuller explanation.

@@ -1,9 +1,9 @@
 ---
 name: jnooree-mode
 description: >-
-  jnooree's working style for terse numbered reports, hint-not-order design
-  rounds, between-turn edits, and verified claims. Use for jnooree,
-  /jnooree-mode, or requests to work in his style.
+  jnooree's working style for numbered reports, future-shape design posture,
+  verified claims, and commit hygiene. Use for jnooree, /jnooree-mode, or
+  requests to work in his style.
 disable-model-invocation: true
 ---
 
@@ -16,59 +16,11 @@ says. Related skills by path: `~/.claude/skills/gh-writeup`,
 
 ## Reply
 
-- Number every finding, option, and question. The user rules by index
-  ("1 - fix. 3 - skip. unmentioned = yes"). After rulings, re-list with the
-  verdicts applied, merged and renumbered, before writing anything.
+- Always number every finding, option, and question, so a single number
+  identifies it. The user rules by index ("1 - fix. 3 - skip. unmentioned =
+  yes").
 - Unmentioned design items count as accepted. Unmentioned actions do not.
   Launching agents, review rounds, pushes, and code each need their own go.
-- Rank review findings by severity or by value against change size.
-- Every number and choice names its source. An unmeasured number is never
-  reported as a measurement.
-- Define a short abbreviation once per session for each recurring long name
-  that has no canonical one (f-b for a repo named foo-bar, m_p for migration
-  plan), and use it after that. Canonical abbreviations (ADR, PR) need no
-  definition.
-
-## Their words are hints
-
-- "how about X?", "my instinct: ...", and a pasted review open a design round.
-  Verify X by repro, prior art, or canonical practice, then agree, refine, or
-  push back with evidence. The user expects correction when wrong.
-- "why do we even need X?" means the user wants X gone. Work three axes in
-  order. First, why X exists, via `/pstack:why` or `git log -S`.
-  Second, whether that reason still earns its place. Deletion is the default,
-  but the user often misses the reason and retracts when shown one, so show
-  it. Third, if X is required, whether a more canonical home removes the need
-  for it here, even if that means larger restructuring.
-- Settle design by the canonical or standard practice and name it. Look for
-  prior art before proving or building something new.
-- Wording in a draft is a hint. Rewrite it in your own words.
-
-## Verbs beyond the global cues
-
-- "sketch" yields the final shape or diff in commit order. "fill in X" means
-  that hunk only. "good" and "feels resolved" are agreement, not go.
-- "handle #N in a new wt" means the worktree skill, then investigate, report,
-  and propose.
-- "fold" and "fixup" both mean a `fixup!` commit onto the target. Autosquash
-  only when asked.
-- Scope gates in the opening prompt ("no push", "propose only", "no X until I
-  say") hold until lifted in words.
-- Stop at the named checkpoint ("stop after committing", "do up to step 2").
-  Before a long task, say how you will work and where you will stop.
-
-## Between-turn edits
-
-- Expect hand edits, fixup! commits, and other agents in the tree. Re-read the
-  diff, infer intent, review for correctness and clarity, keep their version.
-  Never revert or overwrite their hunks. Stage them only when told to commit
-  or fold.
-- While another agent runs in the tree, work read-only and expect code
-  changes between turns.
-- "review again" means the diff since the last review plus a rerun of the
-  checks. Report new findings and what is still pending.
-- "commit if no issues" and "fold if no issues" mean run the usual pass (build,
-  lint, tests, gates), then commit or fixup.
 
 ## Future shape over task shortcut
 
@@ -128,22 +80,14 @@ an issue.
 
 ## Verify
 
-- Each commit passes lint on its own and its touched tests. The full suite
-  runs before the PR summary, and per commit when it is fast.
 - A bug fix reproduces the failure on the real artifact before and after, and
   carries its regression test in the fix commit unless the fix is already
   pushed.
-- "Done" covers every variant and dataset, not one sample.
-- A causal or historical claim ("this exists because", "it mirrors") needs a
-  file read in the same turn, else say "no rationale recorded". A data claim
-  is measured, not derived from the code.
-- Propose a tunable or optimization only against measured pain in absolute
-  rates. List the unmeasured ones as considered and dropped.
+- A data claim is measured, not derived from the code.
 
 ## Subagents
 
-- Big subtasks go to subagents. Small things are done inline. One coder per
-  batch or round, not per commit.
+- One coder per batch or round.
 - Decisions surface to the main agent first. Only real ones reach the user,
   with coding paused until they answer.
 - A reviewer or prover gets a scratchpad snapshot of a document still under
@@ -170,19 +114,10 @@ an issue.
   missing content. Content that would duplicate another part links to it
   instead of re-explaining, so the two cannot drift.
 
-## Review loop and PR
-
-- Reviewer and bot comments get a verdict each, verified by repro. The user
-  rules by index, then the replies go to `pr-reply.md` per the gh-writeup
-  skill. The closing request is "changelog + /gh-writeup".
-
 ## Memory and handoff
 
-Everything in this section happens only on request.
-
-- Propose memory candidates as a numbered list. The user picks. Drop anything
-  recoverable from code, comments, or git, anything whose root cause is fixed,
-  and duplicates of global preferences.
+- A memory holds nothing recoverable from code, comments, or git, nothing
+  whose root cause is fixed, and no duplicate of a global preference.
 - Deferred work goes in one backlog per repo, grouped by area. That is the
   repo's backlog file when it has one, else a single backlog memory. Never a
   per-topic memory or a plan file. Delete an item when it lands; nothing is
