@@ -31,69 +31,59 @@ says. Related skills by path: `~/.claude/skills/gh-writeup`,
 - Pending actions are listed once, when they become pending, never repeated
   as a trailer.
 
-## Future shape over task shortcut
+## Design
 
 The user judges a change by what the code looks like afterwards, not by
-whether it closes the task. "Now" is anything this change already touches
-that is mechanical, or whose absence fails silently. "Later" is a visible,
-recoverable rare path, or work outside this change, recorded as a trigger or
-an issue.
+whether it closes the task. "Now" is anything this change touches that is
+mechanical or whose absence fails silently. "Later" is a rare, visible,
+recoverable path, or work outside this change, recorded as a trigger or an
+issue.
 
-- One owner per meaning, not per shape. Unify when a change to one copy would
-  silently require the same change to another: a value, a derivation, a
-  predicate, a kernel, a convention. Sites that merely share syntax stay
-  inline, however alike they look. Size does not decide it.
-- Reuse the existing owner, refactoring it to serve both, before creating one.
-  A new helper, class, wrapper, or variable needs a second real consumer or
-  state of its own. Otherwise it is an inline expression or a file-private
-  function. A deliberate generalization pass is the exception, and then it is
-  finished.
-- Finish the shape you started. A refactor or generalization gets its
-  complete, idiomatic API in this pass, not a verbatim move or a two-callers
-  minimum.
-- The platform's standard mechanism beats a hand-written guard, lock, or glue.
-  If the standard tool also blocks legitimate use, drop the guard and rely on
-  tests.
-- Shape for the likely future, build nothing for it. Pick structures that do
-  not block a plausible next consumer, but add no feature, overload, binding,
-  field, or wrapper for a consumer that does not exist yet. Those are separate
-  design tasks. A consumer the user names or the plan schedules is real.
-- Defer only what is rare, visible, and recoverable, or outside this change.
-  Write the trigger down or file an issue instead of building machinery. A
-  silent, late, or destructive failure is never deferred.
-- Design on top of the current code first. If that stays messy and never
-  lands in a clean shape, redesign ignoring current consumers, then retrofit
-  the result so the break shrinks or disappears. What still breaks after the
-  retrofit is accepted only when the old shape is itself a bug with no
-  simple, canonical workaround, when it is documented as unstable, or when
-  the break was requested or already settled, in this session or in the
-  related issue.
-- When two versions are comparably good, the smaller diff wins. A rewrite
-  needs a defect to fix. A wording nit or a vague ambiguity is not one.
-
-## Code and design posture
-
-- A hunk-scoped ask ("fill in X", "drop Y") gets that edit only. No adjacent
-  rewrites, no new helpers. No suppression in place of a fix; a justified
-  suppression is its own chore commit. Defend every hunk with its origin and
-  reason, or revert it together with what depends on it.
-- Guard only where the failure would be silent, late, or destructive. Where
-  misuse already fails on its own, no guard for "usability". Fail loudly on
-  ambiguous input.
-- Reuse upstream and stock defaults verbatim. Question each extra read, cache,
-  and table. Re-derive a cheap value instead of adding bookkeeping.
-- Dead code this change touches goes first, in a chore commit. Other dead
-  code goes to the backlog.
+- Research before opening a design round:
+  - Find the existing owner
+  - Name the canonical practice
+  - Read history (`/pstack:why`, `/pstack:how`, `git log -S`)
+- Your first proposal must:
+  - Report the research as a numbered "Prior art" item; "none" only after
+    the search is shown.
+  - New code matches the patterns that predate the branch: design based on
+    what you've found.
+  - Extrapolate patterns for plausible future consumers: don't "just do the
+    task".
+- Citing a rule: name the choice it changed. Against the user's hint, the rule
+  yields until repro or prior art backs it. Pushback is grounding evidence.
+- Refactoring: finish the shape this pass, no verbatim move.
+  `/pstack:principle-redesign-from-first-principles`, then retrofit so the
+  break shrinks. A remaining break is accepted only when the old shape is a
+  bug with no canonical workaround, is documented unstable, or was settled.
+- Deferring: only what is rare, visible, and recoverable. Write the trigger
+  down instead of building machinery.
+- Alike sites: one owner per meaning, not per shape. Shared syntax stays
+  inline. `/pstack:principle-foundational-thinking`, screened by the red
+  flags in `/pstack:architect`.
+- Adding a helper, wrapper, field, or variable: a second real consumer or own
+  state, else inline. A consumer the user names or the plan schedules is real.
+  `/pstack:principle-minimize-reader-load`,
+  `/pstack:principle-model-the-domain`.
+- Adding a guard, lock, or glue: the platform's mechanism, else none. Guard
+  only where failure would be silent, late, or destructive.
+  `/pstack:principle-boundary-discipline`, `/pstack:principle-fix-root-causes`.
+- Adding a read, cache, or table: stock defaults verbatim; re-derive a cheap
+  value instead of bookkeeping.
+- Comparable versions: the smaller diff. A rewrite needs a defect; a wording
+  nit is not one. `/pstack:principle-laziness-protocol`.
+- Hunk-scoped ask: that edit only. No suppression in place of a fix; a
+  justified one is its own chore commit. Defend every hunk or revert it.
+- Dead code this change touches: chore commit first,
+  `/pstack:principle-subtract-before-you-add`. Other dead code: backlog.
 - A swept literal becomes a named constant.
-- New code matches the patterns that predate the branch.
 
 ## Verify
 
-- A bug fix reproduces the failure on the real artifact before and after, and
-  carries its regression test in the fix commit unless the fix is already
-  pushed.
-- Rendered docs are checked as rendered. A warning-free build is not a check.
-- A data claim is measured, not derived from the code.
+- `/pstack:principle-prove-it-works`: the real artifact, rendered output,
+  measured data. Never a proxy, a build log, or a derivation from the code.
+- A bug fix reproduces before and after and carries its regression test in
+  the fix commit unless the fix is already pushed.
 
 ## Subagents
 
