@@ -12,8 +12,8 @@ disable-model-invocation: true
 `~/.claude/CLAUDE.md` holds the workflow gate, verb cues, commit and comment
 rules. Each repo's `CLAUDE.md` holds its tooling. This skill adds what neither
 says. Related skills by path: `~/.claude/skills/jnooree-design`,
-`~/.claude/skills/gh-writeup`, `~/.claude/skills/worktree`,
-`~/.claude/skills/python`.
+`~/.claude/skills/gh-writeup`, `~/.claude/skills/worktree`. Language
+conventions are path-scoped rules under `~/.claude/rules`.
 
 ## Reply
 

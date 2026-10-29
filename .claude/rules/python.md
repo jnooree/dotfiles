@@ -1,9 +1,9 @@
 ---
-name: python
-description: User's Python conventions — apply whenever working with Python
+paths:
+  - "**/*.py"
 ---
 
-# Python Conventions
+# Python conventions
 
 ## Imports
 
