@@ -83,31 +83,35 @@
   "enabledPlugins": {
     "caveman@caveman": true,
     "github@claude-plugins-official": true,
-    "code-review@claude-plugins-official": true,
+    "code-review@claude-plugins-official": false,
     "clangd-lsp@claude-plugins-official": true,
     "pyright-lsp@claude-plugins-official": true,
     "understand-anything@understand-anything": true,
     "mattpocock-skills@claude-plugins-official": true,
-    "pstack@cursor-plugins": true
+    "pstack@cursor-plugins": true,
+    "cowork-plugin-management@synced": false
   },
   "extraKnownMarketplaces": {
     "caveman": {
       "source": {
         "source": "github",
         "repo": "JuliusBrussee/caveman"
-      }
+      },
+      "autoUpdate": true
     },
     "understand-anything": {
       "source": {
         "source": "github",
         "repo": "Egonex-AI/Understand-Anything"
-      }
+      },
+      "autoUpdate": true
     },
     "cursor-plugins": {
       "source": {
         "source": "github",
         "repo": "cursor/plugins"
-      }
+      },
+      "autoUpdate": true
     }
   },
   "effortLevel": "high",
@@ -122,7 +126,7 @@
   "showThinkingSummaries": true,
   "theme": "auto",
   "preferredNotifChannel": "iterm2",
+  "switchModelsOnFlag": true,
   "inputNeededNotifEnabled": true,
-  "agentPushNotifEnabled": true,
-  "switchModelsOnFlag": true
+  "agentPushNotifEnabled": true
 }
