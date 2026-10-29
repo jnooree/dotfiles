@@ -74,7 +74,7 @@ Exit: the hint has a verdict and every new symbol has a prior-art line.
 - Unmentioned is accepted, except items deferred in words. Earlier rulings
   hold. An amendment to a settled item is recorded under its number.
 - Pushback against a ruling needs a repro or prior art. The user's pushback
-  is grounding evidence: return to Step 2 for it.
+  asks for facts.
 
 ## 5. Converge, on request
 
@@ -103,5 +103,6 @@ not reopen the round. Plan approval is go.
 
 ## 8. Audit, after code
 
-Deliver a postmortem. Also each reviewer finding, verified yourself, with a
-verdict; unresolved items, which go back to Step 2.
+One reply: the postmortem, then the reviewer's findings as "got a review.
+verdict?" (Steps 2, 4, 6), each verified yourself first. A ruling that
+changes code reruns Steps 7 and 8, until an audit changes no code.
