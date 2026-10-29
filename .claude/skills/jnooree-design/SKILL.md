@@ -3,20 +3,19 @@ name: jnooree-design
 description: >-
   jnooree's design round: frame, ground, sketch, decide, settle, plan, audit.
   Use for /jnooree-design, "design decisions", "suggest a shape", "sketch the
-  refactor", or "got a review. verdict?".
+  refactor", or "got a review".
 ---
 
 # jnooree design round
 
-The rubric a shape is judged by is `## Design` in
-`~/.claude/skills/jnooree-mode/SKILL.md`. Read it first; this skill is the
-procedure around it. Numbering runs through the whole round: facts F1..,
-decisions D1.., hunks H1... A number is never reused or renumbered. A settled
-or amended item keeps its number when re-listed.
+The rubric a shape is judged by is `## Design` in `/jnooree-mode`. Invoke it
+first; this skill is the procedure around it. Numbering runs through
+the whole round: facts F1.., decisions D1.., hunks H1... A number is never
+reused or renumbered. A settled or amended item keeps its number when re-listed.
 
-"got a review. verdict?" runs Steps 2, 4, 6 only. Findings ranked most
-severe first, each with where the fix goes and a recommended action. A
-finding that changes a shape opens the full design round.
+"got a review" runs Steps 2, 3, 6 only. Findings ranked most severe first, each
+with where the fix goes and a recommended action. A finding that changes a shape
+opens the full design round.
 
 `/pstack:<name>` is user-only, so the Skill tool refuses it. Run it by
 reading `<pstack>/skills/<name>/SKILL.md` and following it, as
@@ -50,7 +49,18 @@ or measurement. Cover:
 
 Exit: the hint has a verdict and every new symbol has a prior-art line.
 
-## 3. Sketch
+## 3. Decide
+
+- Invoke `/mattpocock-skills:grilling`.
+- Facts are yours to find; decisions are the user's. "find it first",
+  "verify", "better or worse?", "do we even need X?" ask for facts: answer
+  with evidence, then re-ask.
+- Items deferred in words stay open. Earlier rulings hold. An amendment to
+  a settled item is recorded under its number.
+- Pushback against a ruling needs a repro or prior art. The user's pushback
+  asks for facts.
+
+## 4. Sketch, on request
 
 - The shape as an artifact that fits one screen: header or API block, ERD,
   tree, table, per-commit diff. Never a prose description of a shape.
@@ -62,19 +72,6 @@ Exit: the hint has a verdict and every new symbol has a prior-art line.
   else.
 - Iterations are versioned (v2, v3); earlier versions stay in the
   scratchpad.
-
-## 4. Decide
-
-- Run `/mattpocock-skills:grilling` for the rounds. Each decision carries
-  lettered options, a recommendation, and the precedent behind it, worded
-  so "yes" accepts.
-- Facts are yours to find; decisions are the user's. "find it first",
-  "verify", "better or worse?", "do we even need X?" ask for facts: answer
-  with evidence, then re-ask.
-- Unmentioned is accepted, except items deferred in words. Earlier rulings
-  hold. An amendment to a settled item is recorded under its number.
-- Pushback against a ruling needs a repro or prior art. The user's pushback
-  asks for facts.
 
 ## 5. Converge, on request
 
@@ -104,5 +101,5 @@ not reopen the round. Plan approval is go.
 ## 8. Audit, after code
 
 One reply: the postmortem, then the reviewer's findings as "got a review.
-verdict?" (Steps 2, 4, 6), each verified yourself first. A ruling that
+verdict?" (Steps 2, 3, 6), each verified yourself first. A ruling that
 changes code reruns Steps 7 and 8, until an audit changes no code.

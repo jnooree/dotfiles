@@ -2,6 +2,7 @@
 
 - I use zsh interactively. Scripts are bash.
 - US spelling everywhere: code, docs, commits, replies.
+- No remote write (issue, PR, etc.) unless specifically requested.
 - When blocked by a missing tool, package, or permission, stop and say what
   to install or grant. No ad-hoc venvs, no workarounds.
 - Never run sudo or other privileged commands. Hand over a copy-pasteable
@@ -17,8 +18,9 @@
 - All commits use concise Conventional Commit messages.
   - Subject only, unless the change carries subtle context or warrants a
     fuller explanation.
-  - A correction to an unpushed commit from this session is a `fixup!` onto
-    it. Everything else is a new commit; amend only when told.
+  - A correction to an unpushed commit from this session, or a pushed one
+    not yet reviewed, is a `fixup!` onto it. Everything else is a new
+    commit; amend only when told.
   - The type follows what the change ships. Library or app code takes feat,
     fix, refactor, or perf. A change confined to docs, tests, CI, or build
     config takes docs, test, ci, or build, even when it is a fix or a
@@ -41,6 +43,9 @@
 H: prompt -> A: investigate, report -> H: review, ask for a plan ->
 loop(A: report or design sketch -> H: revise or approve) -> A: code.
 Code only after explicit approval, however obvious the fix.
+
+Number every finding, option, and question; I rule by index. Unmentioned
+findings are accepted, unmentioned actions are not.
 
 Verb cues (none = no code):
 
