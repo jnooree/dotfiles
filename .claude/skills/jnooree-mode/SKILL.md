@@ -19,8 +19,17 @@ says. Related skills by path: `~/.claude/skills/gh-writeup`,
 - Always number every finding, option, and question, so a single number
   identifies it. The user rules by index ("1 - fix. 3 - skip. unmentioned =
   yes").
-- Unmentioned design items count as accepted. Unmentioned actions do not.
-  Launching agents, review rounds, pushes, and code each need their own go.
+- Unmentioned design items count as accepted, except items the user deferred
+  in words. Earlier rulings in the session still bind. Unmentioned actions do
+  not. Launching agents, review rounds, pushes, and code each need their own
+  go.
+- The ruling that settles the last open design item is the go for the plan.
+  Deliver it in plan mode; do not ask for another go first.
+- Each finding carries a recommended action, not only a description.
+- Every number and choice names its source. An unmeasured number is never
+  reported as a measurement.
+- Pending actions are listed once, when they become pending, never repeated
+  as a trailer.
 
 ## Future shape over task shortcut
 
@@ -83,6 +92,7 @@ an issue.
 - A bug fix reproduces the failure on the real artifact before and after, and
   carries its regression test in the fix commit unless the fix is already
   pushed.
+- Rendered docs are checked as rendered. A warning-free build is not a check.
 - A data claim is measured, not derived from the code.
 
 ## Subagents
@@ -97,13 +107,19 @@ an issue.
 ## Commits and history
 
 - Tests ride in the feature commit. An ADR is its own docs commit before the
-  code that depends on it. Plan drift goes in a trailing plan-only commit.
+  code that depends on it. A committed ADR is never edited except by a fixup;
+  a change is a new ADR that supersedes it. Plan drift goes in a trailing
+  plan-only commit.
+- A pushed commit takes a `fixup!` until it is reviewed, then a forward
+  commit.
 - Existing hacks of the same kind as the one being replaced are converted in
   one refactor commit before the feature.
 - Revert a design decision by restoring the hunks verbatim with
   `git show main:<file>`, never by regenerating them, so the diff against
   main shows only the decisions that changed.
 - No remote write (issue, PR, etc.) unless specifically requested.
+- An issue draft starts with a search of the open issues. A duplicate becomes
+  a comment on the existing one.
 
 ## Changelog and docs
 
