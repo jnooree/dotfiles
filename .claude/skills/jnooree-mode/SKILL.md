@@ -11,8 +11,9 @@ disable-model-invocation: true
 
 `~/.claude/CLAUDE.md` holds the workflow gate, verb cues, commit and comment
 rules. Each repo's `CLAUDE.md` holds its tooling. This skill adds what neither
-says. Related skills by path: `~/.claude/skills/gh-writeup`,
-`~/.claude/skills/worktree`, `~/.claude/skills/python`.
+says. Related skills by path: `~/.claude/skills/jnooree-design`,
+`~/.claude/skills/gh-writeup`, `~/.claude/skills/worktree`,
+`~/.claude/skills/python`.
 
 ## Reply
 
@@ -37,43 +38,32 @@ The user judges a change by what the code looks like afterwards, not by
 whether it closes the task. "Now" is anything this change touches that is
 mechanical or whose absence fails silently. "Later" is a rare, visible,
 recoverable path, or work outside this change, recorded as a trigger or an
-issue.
+issue. The round that applies this is `~/.claude/skills/jnooree-design`.
 
-- Research before opening a design round:
-  - Find the existing owner
-  - Name the canonical practice
-  - Read history (`/pstack:why`, `/pstack:how`, `git log -S`)
-- Your first proposal must:
-  - Report the research as a numbered "Prior art" item; "none" only after
-    the search is shown.
-  - New code matches the patterns that predate the branch: design based on
-    what you've found.
-  - Extrapolate patterns for plausible future consumers: don't "just do the
-    task".
-- Citing a rule: name the choice it changed. Against the user's hint, the rule
-  yields until repro or prior art backs it. Pushback is grounding evidence.
-- Refactoring: finish the shape this pass, no verbatim move.
-  `/pstack:principle-redesign-from-first-principles`, then retrofit so the
-  break shrinks. A remaining break is accepted only when the old shape is a
-  bug with no canonical workaround, is documented unstable, or was settled.
+- New code matches the patterns that predate the branch, extrapolated for
+  plausible future consumers.
+- A cited rule names the choice it changed. Against the user's hint it
+  yields until a repro or prior art backs it.
+- Refactoring finishes the shape this pass, no verbatim move
+  (`/pstack:principle-redesign-from-first-principles`). A remaining break is
+  accepted only when the old shape is a bug with no canonical workaround, is
+  documented unstable, or was settled.
 - Deferring: only what is rare, visible, and recoverable. Write the trigger
   down instead of building machinery.
 - Alike sites: one owner per meaning, not per shape. Shared syntax stays
-  inline. `/pstack:principle-foundational-thinking`, screened by the red
-  flags in `/pstack:architect`.
-- Adding a helper, wrapper, field, or variable: a second real consumer or own
-  state, else inline. A consumer the user names or the plan schedules is real.
-  `/pstack:principle-minimize-reader-load`,
+  inline. `/pstack:principle-foundational-thinking`.
+- A helper, wrapper, field, or variable needs a second real consumer or own
+  state, else inline. A consumer the user names or the plan schedules is
+  real. `/pstack:principle-minimize-reader-load`,
   `/pstack:principle-model-the-domain`.
-- Adding a guard, lock, or glue: the platform's mechanism, else none. Guard
-  only where failure would be silent, late, or destructive.
+- A guard, lock, or glue is the platform's mechanism, else none. Guard only
+  where failure would be silent, late, or destructive.
   `/pstack:principle-boundary-discipline`, `/pstack:principle-fix-root-causes`.
-- Adding a read, cache, or table: stock defaults verbatim; re-derive a cheap
-  value instead of bookkeeping.
+- A read, cache, or table: stock defaults verbatim; re-derive a cheap value
+  instead of bookkeeping.
 - Comparable versions: the smaller diff. A rewrite needs a defect; a wording
   nit is not one. `/pstack:principle-laziness-protocol`.
-- Hunk-scoped ask: that edit only. No suppression in place of a fix; a
-  justified one is its own chore commit. Defend every hunk or revert it.
+- No suppression in place of a fix; a justified one is its own chore commit.
 - Dead code this change touches: chore commit first,
   `/pstack:principle-subtract-before-you-add`. Other dead code: backlog.
 - A swept literal becomes a named constant.
