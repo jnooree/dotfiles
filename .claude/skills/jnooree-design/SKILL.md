@@ -90,9 +90,10 @@ a round finds no defect.
   fixup or forward, who edits what, when the tree must compile, who
   verifies, coder subagents per chunk when the change is large. The plan
   lists these, so plan approval is their go.
-- Audit line: the plan ends with `Audit: fresh reviewer on the diff against
-  <HEAD before code>`, unless the user ruled out a reviewer during the
-  round. Plan approval is its go.
+- Audit line: the plan ends with `**Audit**: fresh reviewer on the diff
+  against <HEAD before the first code pass>`. The sha is captured in the
+  first plan and copied verbatim into every rerun plan. Omit the line only
+  when the user ruled out a reviewer during the round.
 
 ## 7. Plan and code
 
@@ -105,6 +106,6 @@ lists.
 
 One reply: the postmortem, then, when the plan carries the audit line, the
 fresh reviewer's findings as "got a review" (Steps 2, 3, 6), each verified
-yourself first. The reviewer is a subagent briefed with the diff only, not
-the round. A ruling that changes code reruns Steps 7 and 8, until an audit
-changes no code.
+yourself first. The reviewer is always a fresh subagent: never brief the
+round's reasoning, rejected alternatives, or your own findings. A ruling
+that changes code reruns Steps 7 and 8, until an audit changes no code.
