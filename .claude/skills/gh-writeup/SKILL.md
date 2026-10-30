@@ -66,7 +66,7 @@ No title. One block per review point, in review order:
 
 <verdict> <summary>
 
-<discussion: only when the summary line fails>
+<discussion: only on overflow or a question back>
 ```
 
 - Header: the point's `path:line` and a short tag that tells apart points on the same or nearby lines. A point with no line gets the tag alone.
@@ -77,13 +77,8 @@ No title. One block per review point, in review order:
   - `Deferred to #N:`
   - `Ack:` for a point agreed with that needs no change.
   - An answer, or a question back to the reviewer, gets no verdict.
-- `<summary>` is a single line that gives the change or the reason. It never restates the point.
-- Try to put each point into the summary line alone. Add a discussion, as a short paragraph or bullets, only when that line fails, which means the point needs one of these:
-  - a reasoning chain, where a second sentence builds on the first;
-  - a code block, example, or log;
-  - a question back to the reviewer.
-
-  Plain Fixed and Deferred never fail, because the commit or the issue holds the rest.
+- `<summary>` is a single line that gives the change or the reason, at most 80 characters after the verdict, not counting markup. It never restates the point.
+- Discussion: single-sentence bullets, never more than 3, the fewer the better; a single bullet is written as a plain paragraph. Add one only when the summary would exceed the limit or the point asks the reviewer a question. No code block, example, or log: that content belongs in a commit or an issue. Plain Fixed and Deferred get no discussion: stick to the limit.
 - Deferred: draft `issue.md` following the Issue draft rules, with the review point quoted directly. Stop, ask the user to post it, and finish the item with the `#N` they send back.
 - When a new review round arrives, append its blocks. Rewrite an earlier block only when its verdict changes.
 
@@ -95,10 +90,13 @@ For a PR the user reviews. No title. The verdict first, then one block per point
 ## `<path>:<line>` (<tag>)
 
 <tier> <point>
+
+<discussion: only on overflow or a code fence>
 ```
 
 - Verdict, first line: `LGTM`, `LGTM with comments`, or `Blocking:` followed by the blockers' headers.
 - Header as in PR reply.
 - `<tier>` is `[blocker]`, `[optional]`, `[nit]`, or `[fyi]` per `## Review` in `/jnooree-mode`.
-- `<point>` is one line: the problem and the fix, or the question. A discussion follows only under the PR reply rules.
+- `<point>` is one line: the problem and the fix, or the question. The `<summary>` length rule applies, with `<tier>` in place of the verdict.
+- Discussion follows the PR reply rules. One exception: a fenced block, such as a GitHub suggestion, code, or log, is also allowed and on its own justifies a discussion.
 - A new round is appended after `---`, verdict first.
