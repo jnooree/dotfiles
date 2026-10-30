@@ -3,7 +3,7 @@ name: jnooree-design
 description: >-
   jnooree's design round: frame, ground, sketch, decide, settle, plan, audit.
   Use for /jnooree-design, "design decisions", "suggest a shape", "sketch the
-  refactor", or "got a review".
+  refactor", "got a review", "want a review", or "review this".
 ---
 
 # jnooree design round
@@ -13,9 +13,19 @@ first; this skill is the procedure around it. Numbering runs through
 the whole round: facts F1.., decisions D1.., hunks H1... A number is never
 reused or renumbered. A settled or amended item keeps its number when re-listed.
 
-"got a review" runs Steps 2, 3, 6 only. Findings ranked most severe first, each
-with where the fix goes and a recommended action. A finding that changes a shape
-opens the full design round.
+This skill has three modes:
+
+1. Design mode, the default: the full procedure.
+2. Review mode, "want a review": review the diff against the base the user
+   names, else the merge base with the base branch, through the working
+   tree. Grade findings by `## Review` in `/jnooree-mode`, verify each, then
+   continue in follow-up mode. A PR the user reviews ends in `pr-review.md`
+   per `/gh-writeup` instead.
+3. Follow-up mode, "got a review": Steps 2, 3, 6 only. In Step 3: decisions
+   by tier, blockers first, each tagged with its tier. One per blocker or
+   optional; one for all nits. A finding that changes a shape opens the full
+   design round. A review from GitHub ends in `pr-reply.md` per
+   `/gh-writeup`.
 
 `/pstack:<name>` is user-only, so the Skill tool refuses it. Run it by
 reading `<pstack>/skills/<name>/SKILL.md` and following it, as
@@ -104,8 +114,8 @@ lists.
 
 ## 8. Audit, after code
 
-One reply: the postmortem, then, when the plan carries the audit line, the
-fresh reviewer's findings as "got a review" (Steps 2, 3, 6), each verified
-yourself first. The reviewer is always a fresh subagent: never brief the
-round's reasoning, rejected alternatives, or your own findings. A ruling
-that changes code reruns Steps 7 and 8, until an audit changes no code.
+One reply: the postmortem, then, when the plan carries the audit line, "want
+a review" against the sha it names, with the review done by a blind, fresh
+subagent: never brief the round's reasoning, rejected alternatives, or your
+own findings. A ruling that changes code reruns Steps 7 and 8, until an
+audit changes no code.

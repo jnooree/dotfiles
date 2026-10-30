@@ -1,15 +1,15 @@
 ---
 name: gh-writeup
-description: User's conventions for a PR summary, issue draft, or PR review reply dumped into the worktree for them to paste into GitHub — file placement, length, structure, commit references, and the no-hard-wrap rule. Apply whenever asked to dump, write, or draft a PR summary, PR description, issue, or reply to a PR review.
+description: User's conventions for a PR summary, issue draft, PR review reply, or PR review dumped into the worktree for them to paste into GitHub — file placement, length, structure, commit references, and the no-hard-wrap rule. Apply whenever asked to dump, write, or draft a PR summary, PR description, issue, reply to a PR review, or review of a PR.
 ---
 
-# PR Summary / Issue Draft / PR Reply
+# PR Summary / Issue Draft / PR Reply / PR Review
 
 The user creates the PR or issue, or posts the reply, themselves from this file. Do not call `gh` to create or post one, and do not commit the file.
 
 ## Output
 
-- Write `pr-summary.md`, `issue.md`, or `pr-reply.md` at the worktree root, untracked. Overwrite on revision, except `pr-reply.md`, which only grows.
+- Write `pr-summary.md`, `issue.md`, `pr-reply.md`, or `pr-review.md` at the worktree root, untracked. Overwrite on revision, except `pr-reply.md` and `pr-review.md`, which only grow.
 - Summary and issue: line 1 is the title. Blank line. Then the body, exactly as it will be pasted.
 - Extra constraints given in the instruction override this skill.
 
@@ -86,3 +86,19 @@ No title. One block per review point, in review order:
   Plain Fixed and Deferred never fail, because the commit or the issue holds the rest.
 - Deferred: draft `issue.md` following the Issue draft rules, with the review point quoted directly. Stop, ask the user to post it, and finish the item with the `#N` they send back.
 - When a new review round arrives, append its blocks. Rewrite an earlier block only when its verdict changes.
+
+## PR review
+
+For a PR the user reviews. No title. The verdict first, then one block per point, in file order:
+
+```
+## `<path>:<line>` (<tag>)
+
+<tier> <point>
+```
+
+- Verdict, first line: `LGTM`, `LGTM with comments`, or `Blocking:` followed by the blockers' headers.
+- Header as in PR reply.
+- `<tier>` is `[blocker]`, `[optional]`, `[nit]`, or `[fyi]` per `## Review` in `/jnooree-mode`.
+- `<point>` is one line: the problem and the fix, or the question. A discussion follows only under the PR reply rules.
+- A new round is appended after `---`, verdict first.
