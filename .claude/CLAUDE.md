@@ -51,7 +51,8 @@ Verb cues (none = no code):
 
 - No code: suggest, investigate, discuss, review, explain, sketch, compare,
   check, look into, plan.
-- Code: go, implement, write, do it, apply, fix it, proceed, commit.
+- Code: go, implement, write, do it, apply, fix it, proceed, commit,
+  rb (rebase), rb! (rebase with autosquash).
 - Mixed verdicts on a report ("1. fix. 2. skip. 3. why? discuss.") mean no
   code yet: answer 3, restate 1, wait for approval.
 
