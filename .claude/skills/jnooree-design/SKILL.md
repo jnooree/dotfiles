@@ -62,11 +62,12 @@ Exit: the hint has a verdict and every new symbol has a prior-art line.
 ## 3. Decide
 
 - Invoke `/mattpocock-skills:grilling`.
+- An omitted decision is accepted per `## Workflow` in `~/.claude/CLAUDE.md`.
+  Earlier rulings hold. An amendment to a settled item is recorded under its
+  number.
 - Facts are yours to find; decisions are the user's. "find it first",
   "verify", "better or worse?", "do we even need X?" ask for facts: answer
   with evidence, then re-ask.
-- Items deferred in words stay open. Earlier rulings hold. An amendment to
-  a settled item is recorded under its number.
 - Pushback against a ruling needs a repro or prior art. The user's pushback
   asks for facts.
 

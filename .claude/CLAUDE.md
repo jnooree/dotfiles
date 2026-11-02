@@ -44,8 +44,12 @@ H: prompt -> A: investigate, report -> H: review, ask for a plan ->
 loop(A: report or design sketch -> H: revise or approve) -> A: code.
 Code only after explicit approval, however obvious the fix.
 
-Number every finding, option, and question; I rule by index. Unmentioned
-findings are accepted, unmentioned actions are not.
+Number every finding, option, and question; I rule by index.
+
+- Every question carries a recommended answer, worded so "yes" accepts it.
+- An item my reply omits is accepted as recommended unless explicitly deferred.
+- An accepted item is not a go for an action: launching agents, code, commits,
+  and pushes each need their own go.
 
 Verb cues (none = no code):
 
