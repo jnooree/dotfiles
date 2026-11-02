@@ -84,19 +84,37 @@ No title. One block per review point, in review order:
 
 ## PR review
 
-For a PR the user reviews. No title. The verdict first, then one block per point, in file order:
+For a PR the user reviews. No title. The headline first, then one block per point. A new round is appended after `---`, headline first.
 
 ```
-## `<path>:<line>` (<tag>)
+<decision>: <comment>
+
+<groups: only when several sites share a point>
+
+## `<path>:<start>-<end>` (<tag>)
 
 <tier> <point>
 
 <discussion: only on overflow or a code fence>
 ```
 
-- Verdict, first line: `LGTM`, `LGTM with comments`, or `Blocking:` followed by the blockers' headers.
-- Header as in PR reply.
+### Headline
+
+- `<decision>` is one of `LGTM`, `LGTM with comments`, or `Blocking`. The user picks the GitHub verdict from this.
+- `<comment>` is one or two friendly sentences to the author: what the PR does well and the main ask.
+- `<groups>`: points that apply at several sites.
+  - Each is `- **[<keyword>]**: <point>`, the keyword a short kebab-case name for the pattern, such as `xref` or `triple-quote`.
+  - Overflow nests under the declaration as discussion bullets; a fence never does.
+  - Every site is still its own block, written `<tier> **[<keyword>]**` plus only what is specific to that site, often nothing but a suggestion. Tiers may differ between sites.
+
+### Points
+
+- Header: `<path>:<start>-<end>` is the whole range the comment anchors to, `<path>:<line>` for one line, `<path>` alone for a point on the whole file. `<tag>` as in PR reply.
 - `<tier>` is `[blocker]`, `[optional]`, `[nit]`, or `[FYI]` per `## Review` in `/jnooree-mode`.
-- `<point>` is one line: the problem and the fix, or the question. The `<summary>` length rule applies, with `<tier>` in place of the verdict.
-- Discussion follows the PR reply rules. One exception: a fenced block, such as a GitHub suggestion, code, or log, is also allowed and on its own justifies a discussion.
-- A new round is appended after `---`, verdict first.
+- `<point>` is one line: the problem and the fix, or the question. The `<summary>` length rule applies, with `<tier>` in place of the reply's `<verdict>`.
+- `<discussion>` follows the PR reply rules. One exception: a fenced block, such as a GitHub suggestion, code, or log, is also allowed and on its own justifies a discussion.
+
+### Order
+
+- By tier, blockers first, ties in file order. GitHub lists inline comments in posted order, so this is the author's reading order.
+- The sites of a group stay adjacent, placed where the first site falls in the order, and within the group by tier then file order.
