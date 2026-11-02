@@ -96,7 +96,7 @@ For a PR the user reviews. No title. The verdict first, then one block per point
 
 - Verdict, first line: `LGTM`, `LGTM with comments`, or `Blocking:` followed by the blockers' headers.
 - Header as in PR reply.
-- `<tier>` is `[blocker]`, `[optional]`, `[nit]`, or `[fyi]` per `## Review` in `/jnooree-mode`.
+- `<tier>` is `[blocker]`, `[optional]`, `[nit]`, or `[FYI]` per `## Review` in `/jnooree-mode`.
 - `<point>` is one line: the problem and the fix, or the question. The `<summary>` length rule applies, with `<tier>` in place of the verdict.
 - Discussion follows the PR reply rules. One exception: a fenced block, such as a GitHub suggestion, code, or log, is also allowed and on its own justifies a discussion.
 - A new round is appended after `---`, verdict first.
