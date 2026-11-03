@@ -57,6 +57,17 @@ Cross-references between draft issues use `#<{i}-slug>` placeholders until the n
 
 No repo template, or the user asks for the "personal template": `## Problem` then `## Proposal`, a fenced example and bulleted rules.
 
+Citing a comment or review point: a quote reply. GitHub only builds it in the web UI, so write it by hand. `> ` on every quoted line, the original markdown kept, then the attribution line. The login and permalink are `user.login` and `html_url` of the comment from `gh api`.
+
+The quote is verbatim. Every departure is marked in square brackets, as in print: `*[...]*` for a cut, "[O]ne" for a changed letter, `[sic]` after an error kept from the original, "[that is]" for a gloss supplied.
+
+```
+> <quoted lines, verbatim>
+> - <a list item stays a list item>
+
+_Originally posted by @<login> in <html_url>_
+```
+
 ## PR reply
 
 No title. The headline first, when the review has one, then one block per review point, in review order. A new round is appended after `---`.
@@ -82,7 +93,7 @@ No title. The headline first, when the review has one, then one block per review
   - An answer, or a question back to the reviewer, gets no verdict.
 - `<summary>` is a single line that gives the change or the reason, at most 80 characters after the verdict, not counting markup. It never restates the point.
 - Discussion: single-sentence bullets, never more than 3, the fewer the better; a single bullet is written as a plain paragraph. Add one only when the summary would exceed the limit or the point asks the reviewer a question. No code block, example, or log: that content belongs in a commit or an issue. Plain Fixed and Deferred get no discussion: stick to the limit.
-- Deferred: draft `issue.md` following the Issue draft rules, with the review point quoted directly. Stop, ask the user to post it, and finish the item with the `#N` they send back.
+- Deferred: draft `issue.md` following the Issue draft rules, with the review point cited as a quote reply. Stop, ask the user to post it, and finish the item with the `#N` they send back.
 - When a new review round arrives, append it after `---`. Rewrite an earlier block only when its verdict changes.
 
 ## PR review
