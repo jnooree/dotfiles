@@ -3,7 +3,8 @@
 set -euo pipefail
 
 # PreToolUse gate for TaskUpdate: block marking a task `completed` while the
-# working tree is dirty. Enforces CLAUDE.md "Task tick == committed change".
+# working tree is dirty. Enforces the rules/commits.md rule "Task tick ==
+# committed change".
 #
 # TaskUpdate input is a single delta {taskId, status, ...}; status == completed
 # IS the tick event. A denied tick never executes, so the commit+retry cycle

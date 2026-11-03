@@ -8,17 +8,18 @@ description: >-
 
 # jnooree design round
 
-The rubric a shape is judged by is `## Design` in `/jnooree-mode`. Invoke it
-first; this skill is the procedure around it. Numbering runs through
-the whole round: facts F1.., decisions D1.., hunks H1... A number is never
-reused or renumbered. A settled or amended item keeps its number when re-listed.
+The rubric a shape is judged by is `design.md` beside this file; read it
+first, this skill is the procedure around it. Read `subagents.md` before the
+first launch. Numbering runs through the whole round: facts F1.., decisions
+D1.., hunks H1... A number is never reused or renumbered. A settled or
+amended item keeps its number when re-listed.
 
 This skill has three modes:
 
 1. Design mode, the default: the full procedure.
 2. Review mode, "want a review": review the diff against the base the user
    names, else the merge base with the base branch, through the working
-   tree. Grade findings by `## Review` in `/jnooree-mode`, verify each, then
+   tree. Grade findings by `~/.claude/rules/review.md`, verify each, then
    continue in follow-up mode. A PR the user reviews ends in `pr-review.md`
    per `/gh-writeup` instead.
 3. Follow-up mode, "got a review": Steps 2, 3, 6 only. In Step 3: decisions
@@ -62,7 +63,7 @@ Exit: the hint has a verdict and every new symbol has a prior-art line.
 ## 3. Decide
 
 - Invoke `/mattpocock-skills:grilling`.
-- An omitted decision is accepted per `## Workflow` in `~/.claude/CLAUDE.md`.
+- An omitted decision is accepted per `~/.claude/rules/workflow.md`.
   Earlier rulings hold. An amendment to a settled item is recorded under its
   number.
 - Facts are yours to find; decisions are the user's. "find it first",

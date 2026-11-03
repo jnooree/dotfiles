@@ -110,7 +110,7 @@ For a PR the user reviews. No title. The headline first, then one block per poin
 ### Points
 
 - Header: `<path>:<start>-<end>` is the whole range the comment anchors to, `<path>:<line>` for one line, `<path>` alone for a point on the whole file. `<tag>` as in PR reply.
-- `<tier>` is `[blocker]`, `[optional]`, `[nit]`, or `[FYI]` per `## Review` in `/jnooree-mode`.
+- `<tier>` is `[blocker]`, `[optional]`, `[nit]`, or `[FYI]` per `~/.claude/rules/review.md`.
 - `<point>` is one line: the problem and the fix, or the question. The `<summary>` length rule applies, with `<tier>` in place of the reply's `<verdict>`.
 - `<discussion>` follows the PR reply rules. One exception: a fenced block, such as a GitHub suggestion, code, or log, is also allowed and on its own justifies a discussion.
 
