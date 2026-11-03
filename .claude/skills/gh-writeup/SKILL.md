@@ -59,9 +59,11 @@ No repo template, or the user asks for the "personal template": `## Problem` the
 
 ## PR reply
 
-No title. One block per review point, in review order:
+No title. The headline first, when the review has one, then one block per review point, in review order. A new round is appended after `---`.
 
 ```
+<headline: only when the review has a summary comment>
+
 ## `<path>:<line>` (<tag>)
 
 <verdict> <summary>
@@ -69,6 +71,7 @@ No title. One block per review point, in review order:
 <discussion: only on overflow or a question back>
 ```
 
+- Headline: one or two friendly sentences to the reviewer that answer the summary comment: the round's outcome and the response to its main ask. Never a per-point recap, and no verdict.
 - Header: the point's `path:line` and a short tag that tells apart points on the same or nearby lines. A point with no line gets the tag alone.
 - `<verdict>` choices:
   - `Fixed in <sha>:`, also when fixed by another approach; the summary then names it.
@@ -80,7 +83,7 @@ No title. One block per review point, in review order:
 - `<summary>` is a single line that gives the change or the reason, at most 80 characters after the verdict, not counting markup. It never restates the point.
 - Discussion: single-sentence bullets, never more than 3, the fewer the better; a single bullet is written as a plain paragraph. Add one only when the summary would exceed the limit or the point asks the reviewer a question. No code block, example, or log: that content belongs in a commit or an issue. Plain Fixed and Deferred get no discussion: stick to the limit.
 - Deferred: draft `issue.md` following the Issue draft rules, with the review point quoted directly. Stop, ask the user to post it, and finish the item with the `#N` they send back.
-- When a new review round arrives, append its blocks. Rewrite an earlier block only when its verdict changes.
+- When a new review round arrives, append it after `---`. Rewrite an earlier block only when its verdict changes.
 
 ## PR review
 
