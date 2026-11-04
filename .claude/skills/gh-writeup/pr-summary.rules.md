@@ -21,4 +21,10 @@ Design change: these sections, in this order, only those that carry content. Bul
 - `### Breaking changes`
 - `## Deferred`
 
-Editing a posted PR body: minimal diff. Keep the previous content, wrap stale text in `~~`, and add the correction after **EDIT**:.
+Editing a posted PR body:
+
+- Sync with the current PR body first from GitHub. The user occasionally edits the PR online, and the posted one is the authoritative version.
+- Minimize diff. Change only what the request covers; everything else carries over verbatim.
+- Two modes:
+  - "redline" mode, the default: keep the previous content, wrap stale text in `~~`, and add the correction after **EDIT**:.
+  - "rewrite" mode, on request: write the body fresh, carrying over whatever in the posted one still holds.
