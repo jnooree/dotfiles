@@ -43,14 +43,14 @@ function is_tracked() {
 shopt -s dotglob
 export GIT_CONFIG_GLOBAL=/dev/null
 
-for _fd in * bin/* .claude/* .config/* .config/gh/* .config/systemd/user/*; do
+for _fd in * bin/* .agents/skills/* .claude/* .codex/* .config/* .config/gh/* .config/systemd/user/*; do
 	if ! is_tracked "$_fd"; then
 		continue
 	fi
 
 	case "$_fd" in
-	.github | .gitignore | .gitmessage | .bundle | .claude | .config | .zfunc | \
-		bin | Library | LICENSE | README.md)
+	.github | .gitignore | .gitmessage | .bundle | .agents | .claude | .codex | \
+		.config | .zfunc | bin | Library | LICENSE | README.md)
 		continue
 		;;
 	*.sh | *.json)
