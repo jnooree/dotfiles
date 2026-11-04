@@ -6,7 +6,9 @@ description: User's git worktree conventions — when to create one, how to name
 # Worktrees
 
 "switch off" means a new branch in place. Create a worktree only on the
-literal word "worktree" or "wt".
+literal word "worktree" or "wt". If there is a worktree already for the
+branch, enter that tree with **EnterWorktree** `path` instead of creating
+one; from inside another worktree, **ExitWorktree** `keep` first.
 
 A WorktreeCreate hook owns placement and naming: it puts the worktree beside
 the main checkout as `<main>-wt-<YYMMDD>-<suffix>` and branches it from the
