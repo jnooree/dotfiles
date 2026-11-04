@@ -11,8 +11,9 @@ description: >-
 The rubric a shape is judged by is `design.md` beside this file; read it
 first, this skill is the procedure around it. Read `subagents.md` before the
 first launch. Numbering runs through the whole round: facts F1.., decisions
-D1.., hunks H1... A number is never reused or renumbered. A settled or
-amended item keeps its number when re-listed.
+D1.., hunks H1... A number is never reused or renumbered. When re-listed, an
+unchanged item keeps its number; an amended item takes the next version suffix
+(`D1v2`, `D1v3`, ...).
 
 This skill has three modes:
 
@@ -64,8 +65,7 @@ Exit: the hint has a verdict and every new symbol has a prior-art line.
 
 - Invoke `/mattpocock-skills:grilling`.
 - An omitted decision is accepted per `~/.claude/rules/workflow.md`.
-  Earlier rulings hold. An amendment to a settled item is recorded under its
-  number.
+  Earlier rulings hold.
 - Facts are yours to find; decisions are the user's. "find it first",
   "verify", "better or worse?", "do we even need X?" ask for facts: answer
   with evidence, then re-ask.
