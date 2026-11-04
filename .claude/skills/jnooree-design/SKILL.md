@@ -18,11 +18,16 @@ unchanged item keeps its number; an amended item takes the next version suffix
 This skill has three modes:
 
 1. Design mode, the default: the full procedure.
-2. Review mode, "want a review": review the diff against the base the user
-   names, else the merge base with the base branch, through the working
-   tree. Grade findings by `~/.claude/rules/review.md`, verify each, then
-   continue in follow-up mode. A PR the user reviews ends in `pr-review.md`
-   per `/gh-writeup` instead.
+2. Review mode, "want a review":
+   a. Review the diff against the base the user names, else the merge base
+      with the base branch, through the working tree.
+   b. Grade findings by `~/.claude/rules/review.md` and verify each.
+   c. (PR only) Then read the PR description, optionally go back to a–b once,
+      and grade and verify any new finding the same way.
+   d. Continue in follow-up mode.
+      (PR only) Step 3 lists first the findings the description refutes, each
+      with the passage, for the user to restore, and the round ends in
+      `pr-review.md` per `/gh-writeup` without the unrestored ones.
 3. Follow-up mode, "got a review": Steps 2, 3, 6 only. In Step 3: decisions
    by tier, blockers first, each tagged with its tier. One per blocker or
    optional; one for all nits. A finding that changes a shape opens the full
