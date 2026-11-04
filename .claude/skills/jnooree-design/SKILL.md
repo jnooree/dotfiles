@@ -22,10 +22,11 @@ This skill has three modes:
    a. Review the diff against the base the user names, else the merge base
       with the base branch, through the working tree.
    b. Grade findings by `~/.claude/rules/review.md` and verify each.
-   c. (PR only) Then read the PR description, optionally go back to a–b once,
-      and grade and verify any new finding the same way.
+   c. (PR only) Then read the PR context (description, comments, reviews),
+      optionally go back to a–b once, and grade and verify any new finding
+      the same way.
    d. Continue in follow-up mode.
-      (PR only) Step 3 lists first the findings the description refutes, each
+      (PR only) Step 3 lists first the findings the context refutes, each
       with the passage, for the user to restore, and the round ends in
       `pr-review.md` per `/gh-writeup` without the unrestored ones.
 3. Follow-up mode, "got a review": Steps 2, 3, 6 only. In Step 3: decisions
