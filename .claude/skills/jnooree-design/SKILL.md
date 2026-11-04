@@ -100,24 +100,34 @@ a round finds no defect.
   the round is fixed in this change, as its own fix commit placed first.
 - Sequencing contract: commit order, ADR first, the droppable change last,
   fixup or forward, who edits what, when the tree must compile, who
-  verifies, coder subagents per chunk when the change is large. The plan
-  lists these, so plan approval is their go.
+  verifies. The plan lists these, so plan approval is their go.
+- One coder per plan is the default. When the coder's brief would be longer
+  than the change itself, the plan says no coder.
+- The plan opens with every subagent launch it makes, the audit reviewer
+  included when the plan carries the audit line.
 - Audit line: the plan ends with `**Audit**: fresh reviewer on the diff
   against <HEAD before the first code pass>`. The sha is captured in the
   first plan and copied verbatim into every rerun plan. Omit the line only
-  when the user ruled out a reviewer during the round.
+  when the user ruled out the audit during the round.
 
 ## 7. Plan and code
 
-The ruling on the last open decision is the go for the plan. Plan mode, no
-further go. A plan rejection is a late input: fold it and resubmit; it does
-not reopen the round. Plan approval is go, including every launch the plan
-lists.
+- The ruling on the last open decision is the go for plan mode. If plan is
+  skipped by the ruling, give the plan inline once and continue as if it
+  were approved.
+- A plan rejection is a late input: fold it and resubmit; it does not reopen
+  the round.
+- Plan approval is go, including every launch the plan lists.
 
 ## 8. Audit, after code
 
-One reply: the postmortem, then, when the plan carries the audit line, "want
-a review" against the sha it names, with the review done by a blind, fresh
-subagent: never brief the round's reasoning, rejected alternatives, or your
-own findings. A ruling that changes code reruns Steps 7 and 8, until an
-audit changes no code.
+- One reply: the postmortem, then the audit report when the plan carries
+  the audit line.
+- Audit report: "want a review" against the sha the line names, done by a
+  blind, fresh subagent. Never brief the round's reasoning, rejected
+  alternatives, or your own findings.
+- A ruling that changes code reruns Steps 7 and 8, until a pass changes
+  no code.
+- A sequencing ruling by the user (plan skipped, coder count, audit ruled
+  out) holds for every rerun in the round until the user changes it.
+  A no-coder the plan chose by brief length is re-decided per plan.
