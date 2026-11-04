@@ -11,3 +11,5 @@
   whose own command line matches the pattern.
 - I use skills `disable-model-invocation: true`. If a skill is not listed in
   your inventory but I mentioned it, call it, don't ask.
+- Resolve plan or memory file path (`realpath`) before writing to it. The
+  parent directories might be a symlink.
