@@ -35,8 +35,8 @@ This skill has three modes:
    design round. A review from GitHub ends in `pr-reply.md` per
    `/gh-writeup`.
 
-`/pstack:<name>` is user-only, so the Skill tool refuses it. Run it by
-reading `<pstack>/skills/<name>/SKILL.md` and following it, as
+In Claude Code, `/pstack:<name>` is user-only, so the Skill tool refuses it.
+Run it by reading `<pstack>/skills/<name>/SKILL.md` and following it, as
 `<pstack>/docs/harness/claude-code.md` prescribes; read that adapter once per
 session first. `<pstack>` is the `installPath` of `pstack@cursor-plugins` in
 `~/.claude/plugins/installed_plugins.json`.
@@ -121,6 +121,8 @@ a round finds no defect.
 - The ruling on the last open decision is the go for plan mode. If plan is
   skipped by the ruling, give the plan inline once and continue as if it
   were approved.
+- When the ruling did not skip the plan and there is no plan-mode tool
+  (Codex), give it inline and wait for approval.
 - A plan rejection is a late input: fold it and resubmit; it does not reopen
   the round.
 - Plan approval is go, including every launch the plan lists.
