@@ -10,6 +10,7 @@
 .config/nginx-home.lnx/listen.conf
 .claude/skills/synced
 .claude/skills/.*
+!/.codex/
 
 # From Python.gitignore
 # Byte-compiled / optimized / DLL files
