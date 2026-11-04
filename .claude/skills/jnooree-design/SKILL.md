@@ -107,8 +107,9 @@ a round finds no defect.
 - Sequencing contract: commit order, ADR first, the droppable change last,
   fixup or forward, who edits what, when the tree must compile, who
   verifies. The plan lists these, so plan approval is their go.
-- One coder per plan is the default. When the coder's brief would be longer
-  than the change itself, the plan says no coder.
+- One coder per plan carries every commit in order. When the coder's
+  brief would be longer than or comparable to the change itself, the plan
+  says no coder instead. More coders only on the user's request.
 - The plan opens with every subagent launch it makes, the audit reviewer
   included when the plan carries the audit line.
 - Audit line: the plan ends with `**Audit**: fresh reviewer on the diff
