@@ -9,6 +9,15 @@
   edit. Planners are briefed read-only.
 - Repeated reviews of one artifact or diff (Step 5 rounds, Step 8 reruns):
   the reviewer stays blind; you rescale each later finding to the tiers the
-  first review set, so a like finding keeps a like tier. Later reviewers
-  promote their most severe finding to blocker as blockers run out. Tag the
-  reviewer's tier when it differs.
+  first review set, so a like finding keeps a like tier. Later reviewers promote
+  their most severe finding to blocker as blockers run out. Every later finding
+  opens with the reviewer's tier and ends in a `Rescale:` trailer: `kept`,
+  `lowered`, or `raised`, then the first-review findings it is like, or `none`:
+
+  ```
+  **Optional**
+
+  1. (reviewer: blocker) <finding and its description>
+
+     Rescale: lowered. Same class as O1, O3 in the first review.
+  ```
