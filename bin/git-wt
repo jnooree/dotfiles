@@ -2,42 +2,111 @@
 
 set -euo pipefail
 
-spec="\
-git wt [-b <base>] <branch>
---
-b,base=!base	start point (default HEAD)
-"
-eval "$(echo "$spec" | git rev-parse --parseopt -- "$@" || echo exit $?)"
+hint() {
+	local color='' reset='' tty=false
+	[[ -t 2 ]] && tty=true
+	if [[ $(git config --get-colorbool color.advice "$tty") == true ]]; then
+		color=$(git config --get-color color.advice.hint yellow)
+		reset=$(git config --get-color '' reset)
+	fi
+	printf '%shint: %s%s\n' "$color" "$1" "$reset"
+}
 
-base=HEAD
-while [[ $1 != -- ]]; do
-	case $1 in
-	-b | --base)
-		base=$2
-		shift
-		;;
-	esac
-	shift
-done
-shift
-if [[ $# != 1 || -z $base ]]; then
-	git wt -h >&2
+fatal() {
+	echo "fatal: $1"
+}
+
+usage() {
+	git wt -h
 	exit 2
-fi
+}
 
-branch=$1
-
-top=$(git rev-parse --path-format=absolute --git-common-dir)
-top=${top%/.git}
-suffix=${branch#*/}
-suffix=${suffix//[-\/]/_}
-dir=${top}-wt-$(date +%y%m%d)-${suffix}
-
-if ! mkdir "$dir" 2>/dev/null; then
-	echo "worktree path already exists: $dir" >&2
+die() {
+	fatal "$1"
 	exit 1
-fi
+}
 
-trap 'rmdir "$dir" 2>/dev/null' ERR
-git worktree add -b "$branch" -- "$dir" "$base" >&2
-echo "$dir"
+create() {
+	local branch=$1 base=${2:-HEAD} suffix
+	suffix=${branch#*/}
+	suffix=${suffix//[-\/]/_}
+	dir=${top}-wt-$(date +%y%m%d)-${suffix}
+
+	mkdir "$dir" 2>/dev/null || die "worktree path already exists: $dir"
+
+	trap 'rmdir "$dir" 2>/dev/null' ERR
+	git worktree add -b "$branch" -- "$dir" "$base"
+}
+
+delete() {
+	local dir=$1 branch ref
+	local -a remove_opts=() branch_opts=(-d)
+
+	dir=$(realpath -- "$dir")
+	[[ $dir != "$top" ]] || die "refusing to remove the main worktree: $dir"
+	branch=$(git -C "$dir" symbolic-ref --short -q HEAD) ||
+		die "detached HEAD at $dir; use git worktree remove"
+
+	if ((force >= 1)); then
+		branch_opts=(-D)
+	else
+		ref="$branch@{upstream}"
+		git -C "$top" rev-parse -q --verify "$ref" >/dev/null || ref=HEAD
+		if ! git -C "$top" merge-base --is-ancestor "$branch" "$ref"; then
+			ref=$(git -C "$top" rev-parse --abbrev-ref "$ref")
+			fatal "branch '$branch' is not merged into $ref"
+			hint "use -f to delete it anyway"
+			exit 1
+		fi
+	fi
+	((force >= 2)) && remove_opts=(--force)
+
+	git -C "$top" worktree remove "${remove_opts[@]}" -- "$dir"
+	git -C "$top" branch "${branch_opts[@]}" -- "$branch"
+}
+
+main() {
+	spec="\
+git wt [-b <base>] <branch>
+git wt -d [-f|-ff] <path>
+--
+b,base=!base  start point (default HEAD)
+d,delete!     remove the worktree at <path> and delete its branch
+f,force!      once: delete an unmerged branch; twice: also remove a dirty tree
+"
+	eval "$(echo "$spec" | git rev-parse --parseopt -- "$@" || echo exit $?)"
+
+	base='' delete='' force=0
+	while [[ $1 != -- ]]; do
+		case $1 in
+		-b | --base)
+			base=$2
+			shift
+			;;
+		-d | --delete) delete=1 ;;
+		-f | --force) force=$((force + 1)) ;;
+		esac
+		shift
+	done
+	shift
+	[[ $# == 1 ]] || usage
+
+	top=$(git rev-parse --path-format=absolute --git-common-dir)
+	top=${top%/.git}
+
+	if [[ -z $delete ]]; then
+		((force == 0)) || usage
+		create "$1" "$base"
+		REPLY=$dir
+	else
+		[[ -z $base ]] || usage
+		delete "$1"
+		REPLY=$top
+	fi
+}
+
+# Stdout carries only the resulting path, because:
+#   - for create, the Claude WorktreeCreate hook reads it, and
+#   - for both, makes cd "$(git wt ...)" convenient.
+main "$@" >&2
+echo "$REPLY"

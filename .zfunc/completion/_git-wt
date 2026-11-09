@@ -1,0 +1,27 @@
+#compdef git-wt
+
+_git-wt() {
+  local curcontext="$curcontext" state line ret=1
+  declare -A opt_args
+
+  _arguments -C -S -s \
+    '(-d --delete -f --force)'{-b+,--base=}'[start point (default HEAD)]: :__git_revisions' \
+    '(-b --base -d --delete)'{-d,--delete}'[remove the worktree at <path> and delete its branch]' \
+    '(-b --base)*'{-f,--force}'[once: delete an unmerged branch; twice: also remove a dirty tree]' \
+    ': :->target' && ret=0
+
+  case $state in
+    (target)
+      if (( $+opt_args[-d] || $+opt_args[--delete] )); then
+        __git_worktrees && ret=0
+      else
+        _alternative \
+          'branches::__git_branch_names' \
+          'remote-branch-names-noprefix::__git_remote_branch_names_noprefix' && ret=0
+      fi
+    ;;
+  esac
+  return ret
+}
+
+_git-wt "$@"
