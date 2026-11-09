@@ -6,6 +6,9 @@ Code only after explicit approval, however obvious the fix.
 
 Number every finding, option, and question; I rule by index.
 
+- Numbers are session-local. They never appear in anything read outside
+  the session: commit messages, `/gh-writeup` files, handoffs, memory.
+  A new session restarts at 1.
 - Every question carries a recommended answer, worded so "yes" accepts it.
 - An item my reply omits is accepted as recommended unless explicitly deferred.
 - An accepted item is not a go for an action: launching agents, code, commits,
