@@ -1,6 +1,7 @@
 # PR review
 
 For a PR the user reviews. No title. The headline first, then one block per anchored point. A new round is appended after `---`, headline first.
+Never link to lines the PR changes. A point about them is a block at that site, or a group when it spans several. A permalink is only for code outside the diff, where no comment can attach.
 
 ```
 <decision>: <comment>
