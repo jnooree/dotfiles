@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+usage='usage: git wt [-b <base> | --base <base>] <branch>'
+base=HEAD
+while [[ $# -gt 0 ]]; do
+	case $1 in
+	-h | --help)
+		echo "$usage"
+		exit 0
+		;;
+	-b | --base)
+		if [[ $# -lt 2 ]]; then
+			echo "$usage" >&2
+			exit 2
+		fi
+		base=$2
+		shift 2
+		;;
+	--base=*)
+		base=${1#*=}
+		shift
+		;;
+	-b?*)
+		base=${1#-b}
+		shift
+		;;
+	--)
+		shift
+		break
+		;;
+	-*)
+		echo "$usage" >&2
+		exit 2
+		;;
+	*) break ;;
+	esac
+done
+if [[ $# != 1 || -z $base ]]; then
+	echo "$usage" >&2
+	exit 2
+fi
+
+branch=$1
+if [[ $branch != */* ]]; then
+	branch=wt/$branch
+fi
+
+top=$(git rev-parse --path-format=absolute --git-common-dir)
+top=${top%/.git}
+suffix=${branch#*/}
+suffix=${suffix//[-\/]/_}
+dir=${top}-wt-$(date +%y%m%d)-${suffix}
+
+if ! mkdir "$dir" 2>/dev/null; then
+	echo "worktree path already exists: $dir" >&2
+	exit 1
+fi
+
+trap 'rmdir "$dir" 2>/dev/null' ERR
+git worktree add -b "$branch" -- "$dir" "$base" >&2
+echo "$dir"
