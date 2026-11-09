@@ -39,7 +39,7 @@ create() {
 }
 
 delete() {
-	local dir=$1 branch ref
+	local dir=$1 branch ref rc
 	local -a remove_opts=() branch_opts=(-d)
 
 	dir=$(realpath -- "$dir")
@@ -61,8 +61,16 @@ delete() {
 	fi
 	((force >= 2)) && remove_opts=(--force)
 
-	git -C "$top" worktree remove "${remove_opts[@]}" -- "$dir"
-	git -C "$top" branch "${branch_opts[@]}" -- "$branch"
+	git -C "$top" worktree remove "${remove_opts[@]}" -- "$dir" || {
+		rc=$?
+		((force >= 2)) || hint "use -ff to remove it with its changes"
+		exit $rc
+	}
+	git -C "$top" branch "${branch_opts[@]}" -- "$branch" || {
+		rc=$?
+		hint "worktree removed; delete the branch with: git branch -D $branch"
+		exit $rc
+	}
 }
 
 main() {
