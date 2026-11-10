@@ -11,9 +11,7 @@ description: >-
 The rubric a shape is judged by is `design.md` beside this file; read it
 first, this skill is the procedure around it. Read `subagents.md` before the
 first launch. Numbering runs through the whole round: facts F1.., decisions
-D1.., hunks H1... A number is never reused or renumbered. When re-listed, an
-unchanged item keeps its number; an amended item takes the next version suffix
-(`D1v2`, `D1v3`, ...).
+D1.., hunks H1... Numbering follows `~/.claude/rules/workflow.md`.
 
 This skill has three modes:
 
