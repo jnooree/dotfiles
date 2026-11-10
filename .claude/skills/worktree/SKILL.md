@@ -11,19 +11,20 @@ branch, enter that tree with **EnterWorktree** `path` instead of creating
 one; from inside another worktree, **ExitWorktree** `keep` first.
 
 `git wt`, called by the WorktreeCreate hook, owns placement and naming: it puts the worktree beside
-the main checkout as `<main>-wt-<YYMMDD>-<suffix>` and branches it from the
-current HEAD. Never run `git worktree add` yourself; the hook does not fire
-for it.
+the main checkout as `<main>-wt-<YYMMDD>-<suffix>`. Never run
+`git worktree add` yourself; the hook does not fire for it.
 
 To create one, call **EnterWorktree** with `name` set to the branch:
 
 - The branch is `<type>/<slug>`, e.g. `feat/cli-logging`. The type follows
   the commit-type rule: what the change ships.
+- A branch that already exists, locally or on a remote, is checked out as
+  is, with its upstream set: name `feat/foo` to work on `origin/feat/foo`.
+  Any other branch starts from the current HEAD.
 - When the prompt names a starting point, prefix it with `<base>..`, e.g.
-  `origin/main..feat/cli-logging`. Omitted, the branch starts from the
-  current HEAD. Run `git fetch` first if a remote base must be fresh.
-- When creating a worktree from an upstream branch, use matching names, e.g.
-  `origin/feat/foo..feat/foo`, so Git automatically sets the upstream.
+  `origin/main..feat/cli-logging`. The branch is then always created new
+  from that base.
+- Run `git fetch` first if a remote branch or base must be fresh.
 
 Keep all subsequent work in the worktree, so the session cwd tracks it (the
 commit-gate hook reads cwd to find the tree it checks).
