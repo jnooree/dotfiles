@@ -29,9 +29,9 @@ This skill has three modes:
       `pr-review.md` per `/gh-writeup` without the unrestored ones.
 3. Follow-up mode, "got a review": Steps 2, 3, 6, then Steps 7 and 8 when
    a ruling changes code. In Step 3: decisions by tier, blockers first,
-   each tagged with its tier. One per blocker or optional; one for all
-   nits. A review from GitHub ends, after the last pass, in `pr-reply.md`
-   per `/gh-writeup`.
+   each tagged with its tier, the rescaled one of `subagents.md` on a
+   repeat review. One per blocker or optional; one for all nits. A review
+   from GitHub ends, after the last pass, in `pr-reply.md` per `/gh-writeup`.
 
 In Claude Code, `/pstack:<name>` is user-only, so the Skill tool refuses it.
 Run it by reading `<pstack>/skills/<name>/SKILL.md` and following it, as
