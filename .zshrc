@@ -143,6 +143,7 @@ if [[ $OSTYPE = linux* ]]; then
 else
 	alias sdsubl="sudo '/Applications/Sublime Text.app/Contents/MacOS/sublime_text'"
 fi
+alias gwtgd='git for-each-ref --format="%(if:equals=[gone])%(upstream:track)%(then)%(worktreepath)%(end)" refs/heads | xargs >/dev/null -I{} git wt -d {}'
 
 _source_if_readable /etc/zsh_command_not_found
 _source_if_readable ~/.fzf.zsh
