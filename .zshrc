@@ -145,6 +145,11 @@ else
 fi
 alias gwtgd='git for-each-ref --format="%(if:equals=[gone])%(upstream:track)%(then)%(worktreepath)%(end)" refs/heads | xargs >/dev/null -I{} git wt -d {}'
 
+function gwtcd() {
+	cd "$(git wt "$@")"
+}
+compdef _git gwtcd=git-wt
+
 _source_if_readable /etc/zsh_command_not_found
 _source_if_readable ~/.fzf.zsh
 _source_if_readable ~/.bun/_bun
