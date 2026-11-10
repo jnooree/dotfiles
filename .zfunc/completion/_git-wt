@@ -5,7 +5,7 @@ _git-wt() {
   declare -A opt_args
 
   _arguments -C -S -s \
-    '(-d --delete -f --force)'{-b+,--base=}'[start point (default HEAD)]: :__git_revisions' \
+    '(-d --delete -f --force)'{-b+,--base=}'[start point (default <branch> if it exists, else HEAD)]: :__git_revisions' \
     '(-b --base -d --delete)'{-d,--delete}'[remove the worktree at <path> and delete its branch]' \
     '(-b --base)*'{-f,--force}'[once: delete an unmerged branch; twice: also remove a dirty tree]' \
     ': :->target' && ret=0

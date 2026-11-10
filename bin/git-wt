@@ -26,8 +26,13 @@ die() {
 	exit 1
 }
 
+known_branch() {
+	git show-ref --verify -q "refs/heads/$1" ||
+		[[ -n $(git for-each-ref --count=1 "refs/remotes/*/$1") ]]
+}
+
 create() {
-	local branch=$1 base=${2:-HEAD} suffix
+	local branch=$1 base=$2 suffix
 	suffix=${branch#*/}
 	suffix=${suffix//[-\/]/_}
 	dir=${top}-wt-$(date +%y%m%d)-${suffix}
@@ -35,7 +40,11 @@ create() {
 	mkdir "$dir" 2>/dev/null || die "worktree path already exists: $dir"
 
 	trap 'rmdir "$dir" 2>/dev/null' ERR
-	git worktree add -b "$branch" -- "$dir" "$base"
+	if [[ -z $base ]] && known_branch "$branch"; then
+		git worktree add -- "$dir" "$branch"
+	else
+		git worktree add -b "$branch" -- "$dir" "${base:-HEAD}"
+	fi
 }
 
 delete() {
@@ -78,7 +87,7 @@ main() {
 git wt [-b <base>] <branch>
 git wt -d [-f|-ff] <path>
 --
-b,base=!base  start point (default HEAD)
+b,base=!base  start point (default <branch> if it exists, else HEAD)
 d,delete!     remove the worktree at <path> and delete its branch
 f,force!      once: delete an unmerged branch; twice: also remove a dirty tree
 "
