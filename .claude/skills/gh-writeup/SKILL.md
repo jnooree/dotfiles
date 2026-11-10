@@ -1,18 +1,18 @@
 ---
 name: gh-writeup
-description: User's conventions for a PR summary, issue draft, PR review reply, or PR review dumped into the worktree for them to paste into GitHub — file placement, length, structure, commit references, and the no-hard-wrap rule. Apply whenever asked to dump, write, or draft a PR summary, PR description, issue, reply to a PR review, or review of a PR.
+description: User's conventions for a PR summary, issue draft, PR review reply, or PR review dumped into the worktree for them to paste into GitHub — file placement, length, structure, commit references, and the no-hard-wrap rule. Apply whenever asked to dump, write, or draft a PR summary, PR description, issue, reply to a PR review, or review of a PR, or to post a drafted review.
 ---
 
 # GitHub write-ups
 
-The user creates the PR or issue, or posts the reply, themselves from this file. Do not call `gh` to create or post one, and do not commit the file.
+The user creates the PR or issue, or posts the reply, themselves from this file. Do not call `gh` to create or post one, and do not commit the file. The one exception is Posting in `pr-review.rules.md`.
 
 Read the rules below, then `<name>.rules.md` beside this file, where `<name>.md` is the output file under Output.
 
 ## Output
 
-- Write `pr-summary.md`, `issue.md`, `pr-reply.md`, or `pr-review.md` at the worktree root, untracked. Overwrite on revision, except `pr-reply.md` and `pr-review.md`, which only grow.
-- Extra constraints given in the instruction override this skill.
+- Write `pr-summary.md`, `issue.md`, `pr-reply.md`, or `pr-review.md` at the worktree root, untracked. Overwrite on revision, except `pr-reply.md` and `pr-review.md`, where new rounds are appended after `---`.
+- Extra constraints given in the instruction override this skill, except the submit ban under Posting.
 
 ## Hard rules
 

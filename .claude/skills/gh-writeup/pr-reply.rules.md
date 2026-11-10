@@ -1,6 +1,6 @@
 # PR reply
 
-No title. The headline first, when the review has one, then one block per review point, in review order. A new round is appended after `---`.
+No title. The headline first, when the review has one, then one block per review point, in review order.
 
 ```
 <headline: only when the review has a summary comment>

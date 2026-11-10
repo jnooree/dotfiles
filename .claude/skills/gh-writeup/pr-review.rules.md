@@ -1,6 +1,6 @@
 # PR review
 
-For a PR the user reviews. No title. The headline first, then one block per anchored point. A new round is appended after `---`, headline first.
+For a PR the user reviews. No title. The headline first, then one block per anchored point.
 Never link to lines the PR changes. A point about them is a block at that site, or a group when it spans several. A permalink is only for code outside the diff, where no comment can attach.
 
 ```
@@ -42,3 +42,11 @@ Never link to lines the PR changes. A point about them is a block at that site, 
 - By tier, blockers first, ties in file order. GitHub lists inline comments in posted order, so this is the author's reading order.
 - Inline points stay in the headline, ordered by tier among themselves.
 - The sites of a group stay adjacent, placed where the first site falls in the order, and within the group by tier then file order.
+
+## Posting
+
+- When user requests "post", it means turning the latest round into a pending GitHub review batch.
+- Headers are for the user, so omitted when posting to GitHub.
+- The headline is never posted. The user pastes it when submitting.
+- Post one block at a time, in draft order. Stop and report on an existing pending review or a block GitHub rejects, and continue from the next block only when told.
+- Never submit the review even when requested.
