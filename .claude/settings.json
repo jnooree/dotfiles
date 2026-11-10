@@ -118,7 +118,13 @@
   "modelSettings": {
     "claude-opus-5-5": {
       "effortLevel": "high"
+    },
+    "claude-fable-5-2": {
+      "effortLevel": "high"
     }
+  },
+  "env": {
+    "CLAUDE_CODE_IDLE_COMPACT_MIN_TOKENS": "500000"
   },
   "promptSuggestionEnabled": false,
   "awaySummaryEnabled": false,
