@@ -68,6 +68,9 @@ Exit: the hint has a verdict and every new symbol has a prior-art line.
 ## 3. Decide
 
 - Invoke `/mattpocock-skills:grilling`.
+- Invoke `/mattpocock-skills:domain-modeling` when the repo has a
+  `GLOSSARY.md`, `GLOSSARY-MAP.md`, or `docs/adr/`. Its glossary and ADR
+  edits are decisions here and land in Step 7, never inline.
 - An omitted decision is accepted per `~/.claude/rules/workflow.md`.
   Earlier rulings hold.
 - Facts are yours to find; decisions are the user's. "find it first",
