@@ -3,6 +3,7 @@
 - Record HEAD before launching a coder, so its diff is reviewable against it.
 - Coder model: always a fresh agent, not a fork. When the main agent runs on
   Fable, `opus xhigh`; otherwise the parent model with default effort.
+- Ignore the coder's co-author trailer; it follows the coder's defaults.
 - Decisions surface to the main agent first. Only real ones reach the user,
   with coding paused until they answer.
 - A reviewer or prover gets a scratchpad snapshot of a document still under
