@@ -28,7 +28,7 @@ Never link to lines the PR changes. A point about them is a block at that site, 
   - Every site is still its own block, written `<tier> **[<keyword>]**` plus only what is specific to that site, often nothing but a suggestion. Tiers may differ between sites.
 - `<inline points>`: points with no file range to anchor to, such as the commit history or the PR description.
   - One plain sentence first that says why they are here, such as `One review item does not attach to a file, so it is presented here inline:`.
-  - Each is a paragraph `**<subject>**: <tier> <point>`, the subject a short sentence-case name for what the point is about. Its discussion follows as in a block.
+  - Each is `- **<subject>**: <tier> <point>`, the subject a short sentence-case name for what the point is about. Its discussion nests under the bullet.
 
 ## Points
 
