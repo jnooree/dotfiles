@@ -10,6 +10,7 @@ paths:
 - All imports stay at module level, top of file, unconditionally.
   - No `try`/`except ImportError` fallback imports.
   - No conditional (`if ...:`) imports.
+- `csv` is banned. Always use `pandas`.
 - Only deviate when the user explicitly instructs otherwise.
 
 ## Idioms
