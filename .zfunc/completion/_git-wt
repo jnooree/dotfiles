@@ -6,8 +6,9 @@ _git-wt() {
 
   _arguments -C -S -s \
     '(-d --delete -f --force)'{-b+,--base=}'[start point (default <branch> if it exists, else HEAD)]: :__git_revisions' \
-    '(-b --base -d --delete)'{-d,--delete}'[remove the worktree at <path> and delete its branch]' \
-    '(-b --base)*'{-f,--force}'[once: delete an unmerged branch; twice: also remove a dirty tree]' \
+    '(-o --orca -d --delete -f --force)'{-o,--orca}'[create through Orca, registering the repo if needed]' \
+    '(-b --base -o --orca -d --delete)'{-d,--delete}'[remove the worktree at <path> and delete its branch]' \
+    '(-b --base -o --orca)*'{-f,--force}'[once: delete an unmerged branch; twice: also remove a dirty tree]' \
     ': :->target' && ret=0
 
   case $state in

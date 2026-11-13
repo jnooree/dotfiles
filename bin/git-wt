@@ -33,16 +33,58 @@ known_branch() {
 		[[ -n $(git for-each-ref --count=1 "refs/remotes/*/$1") ]]
 }
 
+orca_json() {
+	REPLY=$(orca "$@" --json) ||
+		die "orca $1 $2: $(jq -r '.error.message' <<<"$REPLY")"
+}
+
+create_orca() {
+	local branch=$1 base=$2 follow=$3 got
+	local -a F
+
+	if [[ -n $follow ]]; then
+		git show-ref --verify -q "refs/heads/$branch" ||
+			git branch --track -- "$branch" \
+				"$(git for-each-ref --format='%(refname:short)' "refs/remotes/*/$branch")"
+		base=$branch
+	else
+		base=$(git rev-parse --verify "${base:-HEAD}^{commit}")
+	fi
+
+	orca_json repo add --path "$top"
+	orca_json worktree create --repo "path:$top" --name "${dir##*/}" \
+		--no-parent --branch "$branch" --base-branch "$base"
+	mapfile -d '' -t F < <(jq --raw-output0 '.result.worktree | .path, .branch' <<<"$REPLY")
+	dir="${F[0]}" got="${F[1]}"
+
+	# XXX: orca exits 0 after silently suffixing a branch it cannot check out.
+	if [[ $got != "refs/heads/$branch" ]]; then
+		orca_json worktree rm --worktree "path:$dir"
+		git branch -D -- "${got#refs/heads/}"
+		die "branch '$branch' or its worktree path is taken (orca created '${got#refs/heads/}')"
+	fi
+	orca_json worktree set --worktree "path:$dir" --display-name "$branch"
+}
+
 create() {
-	local branch=$1 base=$2 suffix
+	local branch=$1 base=$2 suffix follow=''
 	suffix=${branch#*/}
 	suffix=${suffix//[-\/]/_}
 	dir=${top}-wt-$(date +%y%m%d)-${suffix}
 
+	if [[ -z $base ]] && known_branch "$branch"; then
+		follow=1
+	fi
+
+	if [[ -n $orca ]]; then
+		create_orca "$branch" "$base" "$follow"
+		return
+	fi
+
 	mkdir "$dir" 2>/dev/null || die "worktree path already exists: $dir"
 
 	trap 'rmdir "$dir" 2>/dev/null' ERR
-	if [[ -z $base ]] && known_branch "$branch"; then
+	if [[ -n $follow ]]; then
 		git worktree add -- "$dir" "$branch"
 	else
 		git worktree add -b "$branch" -- "$dir" "${base:-HEAD}"
@@ -94,22 +136,24 @@ delete() {
 
 main() {
 	spec="\
-git wt [-b <base>] <branch>
+git wt [-b <base>] [-o] <branch>
 git wt -d [-f|-ff] <path>
 --
 b,base=!base  start point (default <branch> if it exists, else HEAD)
+o,orca!       create through Orca, registering the repo if needed
 d,delete!     remove the worktree at <path> and delete its branch
 f,force!      once: delete an unmerged branch; twice: also remove a dirty tree
 "
 	eval "$(echo "$spec" | git rev-parse --parseopt -- "$@" || echo exit $?)"
 
-	base='' delete='' force=0
+	base='' delete='' orca='' force=0
 	while [[ $1 != -- ]]; do
 		case $1 in
 		-b | --base)
 			base=$2
 			shift
 			;;
+		-o | --orca) orca=1 ;;
 		-d | --delete) delete=1 ;;
 		-f | --force) force=$((force + 1)) ;;
 		esac
@@ -126,7 +170,7 @@ f,force!      once: delete an unmerged branch; twice: also remove a dirty tree
 		create "$1" "$base"
 		REPLY=$dir
 	else
-		[[ -z $base ]] || usage
+		[[ -z $base && -z $orca ]] || usage
 		delete "$1"
 		REPLY=$top
 	fi
