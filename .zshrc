@@ -150,6 +150,12 @@ function gwtcd() {
 }
 compdef _git gwtcd=git-wt
 
+function addorca() {
+	local top
+	top="$(git -C "${1:-.}" rev-parse --path-format=absolute --git-common-dir)" || return
+	orca repo add --path "${top%/.git}"
+}
+
 _source_if_readable /etc/zsh_command_not_found
 _source_if_readable ~/.fzf.zsh
 _source_if_readable ~/.bun/_bun
