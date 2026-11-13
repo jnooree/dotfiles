@@ -23,6 +23,6 @@ No title. The headline first, when the review has one, then one block per review
   - An answer, or a question back to the reviewer, gets no verdict.
 - `<summary>` gives the change or the reason. It never restates the point.
 - Discussion: also when the point asks the reviewer a question. Plain Fixed and Deferred get no discussion: stick to the limit.
-- No code block, example, or log: that content belongs in a commit or an issue.
+- No code block, example, or log: that content belongs in a commit or an issue. A same-repo permalink takes the other-repo form in `SKILL.md`, so it stays a link.
 - Deferred: draft `issue.md` per `issue.rules.md`, with the review point cited as a quote reply. Stop, ask the user to post it, and finish the item with the `#N` they send back.
 - A point whose verdict changes after its round was written gets a new block under the same header in the current round. Earlier blocks are never edited.
