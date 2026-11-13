@@ -309,7 +309,7 @@
   "awaySummaryEnabled": false,
   "tui": "fullscreen",
   "showThinkingSummaries": true,
-  "theme": "auto",
+  "theme": "custom:orca",
   "preferredNotifChannel": "iterm2",
   "switchModelsOnFlag": true,
   "inputNeededNotifEnabled": true,
