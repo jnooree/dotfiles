@@ -2,12 +2,12 @@
 
 set -euo pipefail
 
-# Plan mode only inside tmux. Two entry paths, two events:
+# Plan mode only inside tmux or an Orca pane. Two entry paths, two events:
 #   PreToolUse(EnterPlanMode)  -> model-initiated, deny via JSON
 #   UserPromptSubmit           -> Shift+Tab toggle, block first prompt in plan mode
 # https://code.claude.com/docs/en/hooks
 
-if [[ -n ${TMUX:-} ]]; then
+if [[ -n ${TMUX:-} || -n ${ORCA_PANE_KEY:-} ]]; then
 	exit 0
 fi
 
@@ -25,7 +25,7 @@ PreToolUse)
 	  hookSpecificOutput: {
 	    hookEventName: "PreToolUse",
 	    permissionDecision: "deny",
-	    permissionDecisionReason: "Plan mode requires tmux, but claude is not running inside tmux. Ask the user to relaunch claude in a tmux session, then retry. Do not plan inline as a workaround."
+	    permissionDecisionReason: "Plan mode requires tmux or Orca, but claude is running in neither. Ask the user to relaunch claude inside tmux or an Orca pane, then retry. Do not plan inline as a workaround."
 	  }
 	}'
 	;;
@@ -33,7 +33,7 @@ UserPromptSubmit)
 	if [[ $mode != plan ]]; then
 		exit 0
 	fi
-	echo "Plan mode requires tmux. Exit plan mode (Shift+Tab) or relaunch claude inside tmux." >&2
+	echo "Plan mode requires tmux or Orca. Exit plan mode (Shift+Tab) or relaunch claude inside tmux or an Orca pane." >&2
 	exit 2
 	;;
 esac
