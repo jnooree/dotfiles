@@ -58,7 +58,6 @@ holds, each citing the F behind it. When no test holds, the answer is
 | The change belongs in another repo | `redirect` | that repo, and what lands there before here |
 | It waits on a decision made elsewhere | `hold` | what it waits on |
 | The current implementation already does it | `exists` | the path |
-| It is already agreed | `ack` | the agreement |
 | Evidence contradicts the claim | `refuted` | the evidence |
 | The choice is another person's | `delegate` | who decides |
 | Step 2 found the gap | `gap` | a proposal |
