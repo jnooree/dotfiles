@@ -3,13 +3,15 @@
 set -euo pipefail
 
 hint() {
-	local color='' reset='' tty=false
+	local color='' reset='' tty=false line
 	[[ -t 2 ]] && tty=true
 	if [[ $(git config --get-colorbool color.advice "$tty") == true ]]; then
 		color=$(git config --get-color color.advice.hint yellow)
 		reset=$(git config --get-color '' reset)
 	fi
-	printf '%shint: %s%s\n' "$color" "$1" "$reset"
+	while IFS= read -r line; do
+		printf '%shint: %s%s\n' "$color" "$line" "$reset"
+	done
 }
 
 fatal() {
@@ -47,6 +49,17 @@ create() {
 	fi
 }
 
+hint_denied() {
+	local dir=$1 range=$2 shown=10 hidden
+	hidden=$(($(git -C "$top" rev-list --count "$range") - shown))
+	{
+		git -C "$top" log --oneline -n "$shown" "$range"
+		((hidden <= 0)) || echo "... and $hidden more"
+		git -C "$dir" status -sb
+		echo "use -f/-ff to delete it anyway"
+	} | hint
+}
+
 delete() {
 	local dir=$1 branch ref rc
 	local -a remove_opts=() branch_opts=(-d)
@@ -56,28 +69,25 @@ delete() {
 	branch=$(git -C "$dir" symbolic-ref --short -q HEAD) ||
 		die "detached HEAD at $dir; use git worktree remove"
 
+	ref="$branch@{upstream}"
+	git -C "$top" rev-parse -q --verify "$ref" >/dev/null || ref=HEAD
 	if ((force >= 1)); then
 		branch_opts=(-D)
-	else
-		ref="$branch@{upstream}"
-		git -C "$top" rev-parse -q --verify "$ref" >/dev/null || ref=HEAD
-		if ! git -C "$top" merge-base --is-ancestor "$branch" "$ref"; then
-			ref=$(git -C "$top" rev-parse --abbrev-ref "$ref")
-			fatal "branch '$branch' is not merged into $ref"
-			hint "use -f to delete it anyway"
-			exit 1
-		fi
+	elif ! git -C "$top" merge-base --is-ancestor "$branch" "$ref"; then
+		fatal "branch '$branch' is not merged into $(git -C "$top" rev-parse --abbrev-ref "$ref")"
+		hint_denied "$dir" "$ref..$branch"
+		exit 1
 	fi
 	((force >= 2)) && remove_opts=(--force)
 
 	git -C "$top" worktree remove "${remove_opts[@]}" -- "$dir" || {
 		rc=$?
-		((force >= 2)) || hint "use -ff to remove it with its changes"
+		((force >= 2)) || hint_denied "$dir" "$ref..$branch"
 		exit $rc
 	}
 	git -C "$top" branch "${branch_opts[@]}" -- "$branch" || {
 		rc=$?
-		hint "worktree removed; delete the branch with: git branch -D $branch"
+		hint <<<"worktree removed; delete the branch with: git branch -D $branch"
 		exit $rc
 	}
 }
