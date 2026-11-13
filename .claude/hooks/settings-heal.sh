@@ -6,7 +6,7 @@ set -euo pipefail
 # Move such edits back into the repo and restore the symlinks.
 # https://code.claude.com/docs/en/hooks#sessionstart
 
-files=(settings.json CLAUDE.md)
+files=(settings.json CLAUDE.md keybindings.json)
 
 home_dir="$HOME/.claude"
 
