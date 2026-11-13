@@ -19,6 +19,10 @@ paths:
   never a variable bumped with `+= step`.
 - Grouping values under a key is a `collections.defaultdict`, never
   `.setdefault(key, []).append(value)`.
+- A record with fixed fields is a type, never a dict with literal keys: a
+  `dataclass`, a `pydantic` model, a `NamedTuple`, or a similar typed
+  record. The exception is a dict that a library API requires (e.g.,
+  pandas), built only to satisfy that call.
 
 ## Tests
 
