@@ -1,17 +1,17 @@
 ---
 name: gh-writeup
-description: User's conventions for a PR summary, issue draft, PR review reply, or PR review dumped into the worktree for them to paste into GitHub — file placement, length, structure, commit references, and the no-hard-wrap rule. Apply whenever asked to dump, write, or draft a PR summary, PR description, issue, reply to a PR review, or review of a PR, or to post a drafted review.
+description: User's conventions for a PR summary, issue draft, issue discussion, PR review reply, or PR review dumped into the worktree for them to paste into GitHub — file placement, length, structure, commit references, and the no-hard-wrap rule. Apply whenever asked to dump, write, or draft a PR summary, PR description, issue, issue discussion, reply to a PR review, or review of a PR, or to post a drafted review.
 ---
 
 # GitHub write-ups
 
 The user creates the PR or issue, or posts the reply, themselves from this file. Do not call `gh` to create or post one, and do not commit the file. The one exception is Posting in `pr-review.rules.md`.
 
-Read the rules below, then `<name>.rules.md` beside this file, where `<name>.md` is the output file under Output.
+Read the rules below, then `<name>.rules.md` beside this file, where `<name>.md` is the output file under Output. `issue-<N>-discussion.md` reads `issue-discussion.rules.md`.
 
 ## Output
 
-- Write `pr-summary.md`, `issue.md`, `pr-reply.md`, or `pr-review.md` at the worktree root, untracked. Overwrite on revision, except `pr-reply.md` and `pr-review.md`, where new rounds are appended after `---`.
+- Write `pr-summary.md`, `issue.md`, `issue-<N>-discussion.md`, `pr-reply.md`, or `pr-review.md` at the worktree root, untracked. Overwrite on revision, except `issue-<N>-discussion.md`, `pr-reply.md`, and `pr-review.md`, where new rounds are appended after `---`.
 - Extra constraints given in the instruction override this skill, except the submit ban under Posting.
 
 ## Hard rules
@@ -31,8 +31,8 @@ Shared by issue draft and PR summary.
 
 ## Point blocks
 
-Shared by PR reply and PR review.
+Shared by PR reply, PR review, and issue discussion.
 
 - `<tag>` is a short tag that tells apart points on the same or nearby lines. A point with no line gets the tag alone.
-- The line after `<verdict>` or `<tier>` is at most 80 characters, not counting markup.
+- The line after `<verdict>` or `<tier>`, or the `<answer>` line, is at most 80 characters, not counting markup.
 - `<discussion>`: single-sentence bullets, never more than 3, the fewer the better; a single bullet is written as a plain paragraph. Add one only when the line above would exceed its limit, or on the trigger the kind names.

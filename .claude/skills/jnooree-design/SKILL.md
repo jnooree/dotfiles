@@ -3,7 +3,8 @@ name: jnooree-design
 description: >-
   jnooree's design round: frame, ground, sketch, decide, settle, plan, audit.
   Use for /jnooree-design, "design decisions", "suggest a shape", "sketch the
-  refactor", "got a review", "want a review", or "review this".
+  refactor", "got a review", "want a review", "review this", or
+  "issue discussion".
 ---
 
 # jnooree design round
@@ -13,7 +14,7 @@ first, this skill is the procedure around it. Read `subagents.md` before the
 first launch. Numbering runs through the whole round: facts F1.., decisions
 D1.., hunks H1... Numbering follows `~/.claude/rules/workflow.md`.
 
-This skill has three modes:
+This skill has four modes:
 
 1. Design mode, the default: the full procedure.
 2. Review mode, "want a review":
@@ -21,8 +22,8 @@ This skill has three modes:
       with the base branch, through the working tree.
    b. Grade findings by `~/.claude/rules/review.md` and verify each.
    c. (PR only) Then read the PR context (description, comments, reviews),
-      optionally go back to a–b once, and grade and verify any new finding
-      the same way.
+      run Step 1, optionally go back to a–b once, and grade and verify any
+      new finding the same way.
    d. Continue in follow-up mode.
       (PR only) Step 3 lists first the findings the context refutes, each
       with the passage, for the user to restore, and the round ends in
@@ -32,6 +33,8 @@ This skill has three modes:
    each tagged with its tier, the rescaled one of `subagents.md` on a
    repeat review. One per blocker or optional; one for all nits. A review
    from GitHub ends, after the last pass, in `pr-reply.md` per `/gh-writeup`.
+4. Issue discussion mode, "discussion on #N": follow `discussion.md` beside
+   this file. It replaces Steps 1-8.
 
 In Claude Code, `/pstack:<name>` is user-only, so the Skill tool refuses it.
 Run it by reading `<pstack>/skills/<name>/SKILL.md` and following it, as
@@ -41,6 +44,8 @@ session first. `<pstack>` is the `installPath` of `pstack@cursor-plugins` in
 
 ## 1. Frame
 
+- In PR review mode, when reading the PR context, summarize what the
+  author changed and why: Motivation, Approach, Changes, one sentence each.
 - Restate the change in one line with its scope boundary.
 - The user's hint ("I'm pretty sure", "I suspect", "I'm leaning toward") is
   a claim for Step 2, not a ruling.
