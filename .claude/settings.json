@@ -1,5 +1,8 @@
 {
   "cleanupPeriodDays": 365,
+  "env": {
+    "CLAUDE_CODE_IDLE_COMPACT_MIN_TOKENS": "500000"
+  },
   "permissions": {
     "allow": [
       "WebSearch",
@@ -302,14 +305,11 @@
       "effortLevel": "high"
     }
   },
-  "env": {
-    "CLAUDE_CODE_IDLE_COMPACT_MIN_TOKENS": "500000"
-  },
   "promptSuggestionEnabled": false,
   "awaySummaryEnabled": false,
   "tui": "fullscreen",
   "showThinkingSummaries": true,
-  "theme": "custom:orca",
+  "theme": "auto",
   "preferredNotifChannel": "iterm2",
   "switchModelsOnFlag": true,
   "inputNeededNotifEnabled": true,
