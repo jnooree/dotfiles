@@ -1,7 +1,7 @@
 ---
 name: jnooree-design
 description: >-
-  jnooree's design round: frame, ground, sketch, decide, settle, plan, audit.
+  jnooree's design round: frame, ground, decide, sketch, settle, plan, audit.
   Use for /jnooree-design, "design decisions", "suggest a shape", "sketch the
   refactor", "got a review", "want a review", "review this", or
   "issue discussion".
@@ -13,6 +13,8 @@ The rubric a shape is judged by is `design.md` beside this file; read it
 first, this skill is the procedure around it. Read `subagents.md` before the
 first launch. Numbering runs through the whole round: facts F1.., decisions
 D1.., hunks H1... Numbering follows `~/.claude/rules/workflow.md`.
+Co-editing: when the user edits an artifact (`TODO(claude)` markers, HTML
+comments in a plan), answer each marker in place and change nothing else.
 
 This skill has four modes:
 
@@ -21,18 +23,20 @@ This skill has four modes:
    a. Review the diff against the base the user names, else the merge base
       with the base branch, through the working tree.
    b. Grade findings by `~/.claude/rules/review.md` and verify each.
-   c. (PR only) Then read the PR context (description, comments, reviews),
+   c. (PR review) Then read the PR context (description, comments, reviews),
       run Step 1, optionally go back to a–b once, and grade and verify any
       new finding the same way.
    d. Continue in follow-up mode.
-      (PR only) Step 3 lists first the findings the context refutes, each
+      (PR review) Step 3 lists first the findings the context refutes, each
       with the passage, for the user to restore, and the round ends in
-      `pr-review.md` per `/gh-writeup` without the unrestored ones.
+      rulings and, on request, in `pr-review.md` per `/gh-writeup` without
+      the unrestored ones.
 3. Follow-up mode, "got a review": Steps 2, 3, 6, then Steps 7 and 8 when
    a ruling changes code. In Step 3: decisions by tier, blockers first,
    each tagged with its tier, the rescaled one of `subagents.md` on a
    repeat review. One per blocker or optional; one for all nits. A review
-   from GitHub ends, after the last pass, in `pr-reply.md` per `/gh-writeup`.
+   from GitHub ends in rulings and, on request, in `pr-reply.md` per
+   `/gh-writeup`.
 4. Issue discussion mode, "discussion on #N": follow `discussion.md` beside
    this file. It replaces Steps 1-8.
 
@@ -44,16 +48,18 @@ session first. `<pstack>` is the `installPath` of `pstack@cursor-plugins` in
 
 ## 1. Frame
 
-- In PR review mode, when reading the PR context, summarize what the
-  author changed and why: Motivation, Approach, Changes, one sentence each.
 - Restate the change in one line with its scope boundary.
+- (PR review) The restatement is instead the PR summary: Motivation,
+  Approach, Changes, one sentence each. Changes carries the boundary.
 - The user's hint ("I'm pretty sure", "I suspect", "I'm leaning toward") is
   a claim for Step 2, not a ruling.
+
+Exit: the change is restated with its boundary, and every hint is a claim.
 
 ## 2. Ground
 
 Report numbered facts, each with its source: path, commit, command, doc URL,
-or measurement. Cover:
+or measurement. The list is its own section of the reply. Cover:
 
 - Owner and precedent predating the branch: what already does this, or the
   search that shows nothing does.
@@ -72,7 +78,8 @@ Exit: the hint has a verdict and every new symbol has a prior-art line.
 
 ## 3. Decide
 
-- Invoke `/mattpocock-skills:grilling`.
+- Invoke `/mattpocock-skills:grilling`. Its first round ends the reply
+  that reports Step 2.
 - Invoke `/mattpocock-skills:domain-modeling` when the repo has a
   `GLOSSARY.md`, `GLOSSARY-MAP.md`, or `docs/adr/`. Its glossary and ADR
   edits are decisions here and land in Step 7, never inline.
@@ -84,30 +91,19 @@ Exit: the hint has a verdict and every new symbol has a prior-art line.
 - Pushback against a ruling needs a repro or prior art. The user's pushback
   asks for facts.
 
-## 4. Sketch, on request
+Exit: no decision open.
 
-- The shape as an artifact that fits one screen: header or API block, ERD,
-  tree, table, per-commit diff. Never a prose description of a shape.
-- Screen it against the rubric and the red flags in `/pstack:architect`.
-  A shape new to the repo gets two whole-shape candidates, compared on
-  interface depth and diff size.
-- Co-editing: when the user edits the artifact (`TODO(claude)` markers,
-  HTML comments in a plan), answer each marker in place and change nothing
-  else.
-- Iterations are versioned (v2, v3); earlier versions stay in the
-  scratchpad.
+## 4-5. Sketch and converge, on request
 
-## 5. Converge, on request
-
-Each launch here needs its own go: a fresh reviewer on the artifact,
-identical prompt per round and blind when designs are compared; a prover for
-math; a comparison table against the old design with row ids. Converged when
-a round finds no defect.
+Until the user asks for a sketch, a shape is a decision in Step 3. The
+request is the go for Step 4 of `sketch.md` beside this file. Step 5 runs
+on its own request. The sketch returns to Step 3 for its ruling.
 
 ## 6. Settle
 
 - One re-list of every decision by number, split by destination: this
-  change, other repo, issues, replies, backlog. Never repeated afterwards.
+  change, other repo, issues, replies, backlog. Its own section of the
+  reply, never repeated afterwards.
 - Every deferral has a destination. A regression or gap found during
   the round is fixed in this change, as its own fix commit placed first.
 - Sequencing contract: commit order, ADR first, the droppable change last,
@@ -123,6 +119,8 @@ a round finds no defect.
   first plan and copied verbatim into every rerun plan. Omit the line only
   when the user ruled out the audit during the round.
 
+Exit: every decision has a destination.
+
 ## 7. Plan and code
 
 - The ruling on the last open decision is the go for plan mode. If plan is
@@ -133,6 +131,9 @@ a round finds no defect.
 - A plan rejection is a late input: fold it and resubmit; it does not reopen
   the round.
 - Plan approval is go, including every launch the plan lists.
+
+Exit: the plan, carrying the audit line unless ruled out, is approved, or
+given inline when skipped, and its commits are in the tree.
 
 ## 8. Audit, after code
 

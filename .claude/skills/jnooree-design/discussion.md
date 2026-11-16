@@ -63,6 +63,8 @@ holds, each citing the F behind it. When no test holds, the answer is
 | Step 2 found the gap | `gap` | a proposal |
 | A change is proposed and Step 2 found no gap | `validate` | a request for a scenario or real failure |
 
+Exit: every P has a ruled class.
+
 ### 3b. Accepted gap
 
 A later grilling round, opened only for a P the user ruled `gap`, once per
@@ -76,6 +78,8 @@ the `<verdict>`, plus `<discussion>`, per `/gh-writeup`'s Point blocks.
   P; otherwise it is dropped.
 - Facts a Proposal needs come from the rest of the `SKILL.md` Step 2 list.
 
+Exit: every gap's three lines are ruled, and no S is open.
+
 ## 4. Settle
 
 Starts with no S open.
@@ -84,3 +88,5 @@ Starts with no S open.
   classes.
 - On request, `issue-<N>-discussion.md` per `/gh-writeup`, or a `gap` as
   `issue.md` with its three labels as the sections.
+
+Exit: every P is re-listed once with its ruled classes.
