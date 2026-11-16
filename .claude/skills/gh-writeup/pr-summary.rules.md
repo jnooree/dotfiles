@@ -28,3 +28,11 @@ Editing a posted PR body:
 - Two modes:
   - "redline" mode, the default: keep the previous content, wrap stale text in `~~`, and add the correction after **EDIT**:.
   - "rewrite" mode, on request: write the body fresh, carrying over whatever in the posted one still holds.
+
+## Posting
+
+On "post", or from `/pr-automerge`, the file becomes the PR body, so the two never differ:
+
+- Rewrite the file first as the exact body. The repo template's checklist, when it has one, comes back above the body with each item ticked by what the session did; the sections stay as the Templates rule picked them.
+- No PR for the branch: `gh pr create` against the base branch, line 1 as the title, line 3 on as the body, ready for review.
+- An existing PR: edit per Editing a posted PR body above, then `gh pr edit --body-file`.

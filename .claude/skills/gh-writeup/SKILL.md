@@ -1,11 +1,11 @@
 ---
 name: gh-writeup
-description: User's conventions for a PR summary, issue draft, issue discussion, PR review reply, or PR review dumped into the worktree for them to paste into GitHub — file placement, length, structure, commit references, and the no-hard-wrap rule. Apply whenever asked to dump, write, or draft a PR summary, PR description, issue, issue discussion, reply to a PR review, or review of a PR, or to post a drafted review.
+description: User's conventions for a PR summary, issue draft, issue discussion, PR review reply, or PR review dumped into the worktree for them to paste into GitHub — file placement, length, structure, commit references, and the no-hard-wrap rule. Apply whenever asked to dump, write, or draft a PR summary, PR description, issue, issue discussion, reply to a PR review, or review of a PR, or to post a drafted review or PR summary.
 ---
 
 # GitHub write-ups
 
-The user creates the PR or issue, or posts the reply, themselves from this file. Do not call `gh` to create or post one, and do not commit the file. The one exception is Posting in `pr-review.rules.md`.
+The user creates the PR or issue, or posts the reply, themselves from this file. Do not call `gh` to create or post one, and do not commit the file. The exceptions are Posting in `pr-review.rules.md` and in `pr-summary.rules.md`.
 
 Read the rules below, then `<name>.rules.md` beside this file, where `<name>.md` is the output file under Output. `issue-<N>-discussion.md` reads `issue-discussion.rules.md`.
 
