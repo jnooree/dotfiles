@@ -21,7 +21,8 @@ with a report; a later "automerge" starts over.
 3. Step 1 again, on the rebased tree.
 4. Push: `git push -u origin <branch>` on the first push, with
    `--force-with-lease --force-if-includes` when the push is not a
-   fast-forward.
+   fast-forward. Then push every other repo whose commits the PR summary
+   will cite, autosquashing its fixups as in step 2.
 5. PR summary per `/gh-writeup`, then its Posting.
 6. `gh pr checks --watch --fail-fast` in the background. When it returns,
    list the checks again: a check named `Cursor Bugbot` means Bugbot is
