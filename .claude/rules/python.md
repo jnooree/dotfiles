@@ -10,6 +10,8 @@ paths:
 - All imports stay at module level, top of file, unconditionally.
   - No `try`/`except ImportError` fallback imports.
   - No conditional (`if ...:`) imports.
+  - No import by name (`importlib.import_module`, `__import__`), no lazy
+    package `__getattr__`; pass module objects, not dotted paths.
 - `csv` is banned. Always use `pandas`.
 - Only deviate when the user explicitly instructs otherwise.
 
