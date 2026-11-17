@@ -17,4 +17,4 @@ arena runners: opus high, inherit-parent
 arena cross-judge pool: opus xhigh, inherit-parent
 swarm workers: inherit-parent
 architect runners: opus high, inherit-parent
-interrogate reviewers: opus xhigh, inherit-parent
+interrogate reviewers: inherit-parent
