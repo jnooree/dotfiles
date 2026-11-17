@@ -1,5 +1,7 @@
 # shellcheck disable=SC1090,SC2034,SC2155
 
+unsetopt equals
+
 # Very likely inside interactive session
 if [[ ! -o interactive && -n ${ZDOTDIR-} ]]; then
 	return
