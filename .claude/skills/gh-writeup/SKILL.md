@@ -21,6 +21,7 @@ Read the rules below, then `<name>.rules.md` beside this file, where `<name>.md`
 - A code reference is a permalink to a line range on the full 40-character SHA, never a branch URL.
   - Same repo: the bare URL at the end of the line, after all the prose of its paragraph or list item, a space between. Several follow in the order the prose cites them. GitHub swaps each for the code snippet where it stands, so one before the end splits the prose.
   - Other repo: a link inside the sentence, on the words that name the code, or `[<file>#L<start>-L<end>](<url>)` when none fit. It never renders as a snippet.
+- A PR summary, review, or reply never permalinks the PR's own diff. A permalink is only for context outside the hunks.
 - Link issues and PRs as `#N` in the same repo, `<owner>/<repo>#N` otherwise. Commits are bare SHAs, `<owner>/<repo>@<sha>` across repos. Never put any of these in backticks, because that stops GitHub from auto-linking them.
 - English unless instructed otherwise.
 
