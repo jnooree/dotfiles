@@ -49,3 +49,18 @@ Shared by PR reply and PR review.
   - One plain sentence first before the bullet points, that says why they are here, such as `One review item does not attach to a file, so it is presented here inline:`.
   - Each bullet is `- **<subject>**: ` followed by what a block's body line carries, the subject a short sentence-case name for what the point is about.
   - Its discussion nests under the bullet, even a single sentence.
+
+## Quote replies
+
+Shared by issue draft and issue discussion.
+
+A quote reply cites a comment or review point from another issue or PR thread. GitHub only builds it in the web UI, so write it by hand. `> ` on every quoted line, the original markdown kept, then the attribution line. The login and permalink are `user.login` and `html_url` of the comment from `gh api`.
+
+The quote is verbatim. Every departure is marked in square brackets, as in print: `*[...]*` for a cut, "[O]ne" for a changed letter, `[sic]` after an error kept from the original, "[that is]" for a gloss supplied.
+
+```
+> <quoted lines, verbatim>
+> - <a list item stays a list item>
+
+_Originally posted by @<login> in <html_url>_
+```
