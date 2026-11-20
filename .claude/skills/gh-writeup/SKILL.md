@@ -39,3 +39,13 @@ Shared by PR reply, PR review, and issue discussion.
 - `<tag>` is a short tag that tells apart points on the same or nearby lines. A point with no line gets the tag alone.
 - The line after `<verdict>` or `<tier>`, or the `<answer>` line, is at most 80 characters, not counting markup.
 - `<discussion>`: single-sentence bullets, never more than 3, the fewer the better; a single bullet is written as a plain paragraph. Add one only when the line above would exceed its limit, or on the trigger the kind names.
+
+### PR points
+
+Shared by PR reply and PR review.
+
+- The `## ` header is the anchor that locates the block. It is for the user only: never posted, by hand or per a kind's Posting.
+- Inline points are points that anchor to no file, such as the PR description, the commit history, or a request in a review's summary comment.
+  - One plain sentence first before the bullet points, that says why they are here, such as `One review item does not attach to a file, so it is presented here inline:`.
+  - Each bullet is `- **<subject>**: ` followed by what a block's body line carries, the subject a short sentence-case name for what the point is about.
+  - Its discussion nests under the bullet, even a single sentence.
