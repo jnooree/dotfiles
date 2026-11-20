@@ -5,6 +5,8 @@ No title. The headline first, when the review has one, then one block per review
 ```
 <headline: only when the review has a summary comment>
 
+<inline points: only when the summary comment makes requests>
+
 ## `<path>:<line>` (<tag>)
 
 <verdict> <summary>
@@ -14,6 +16,7 @@ No title. The headline first, when the review has one, then one block per review
 
 - Headline: one or two friendly sentences to the reviewer that answer the summary comment: the round's outcome and the response to its main ask. Never a per-point recap, and no verdict.
 - Header: the point's `path:line` and `<tag>`.
+- `<inline points>`: per PR points in `SKILL.md`, each `- **<subject>**: <verdict> <summary>`, the subject the reviewer's own when the review named one.
 - `<verdict>` choices:
   - `Fixed in <sha>:`, also when fixed by another approach; the summary then names it.
   - `Partly fixed in <sha>:`, the summary names what remains and why. Append `; deferred to #N` when an issue tracks the rest.

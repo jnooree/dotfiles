@@ -26,9 +26,7 @@ A point about lines the PR changes is a block at that site, or a group when it s
   - Each is `- **[<keyword>]**: <point>`, the keyword a short kebab-case name for the pattern, such as `xref` or `triple-quote`.
   - Overflow nests under the declaration as discussion bullets; a fence never does.
   - Every site is still its own block, written `<tier> **[<keyword>]**` plus only what is specific to that site, often nothing but a suggestion. Tiers may differ between sites.
-- `<inline points>`: points with no file range to anchor to, such as the commit history or the PR description.
-  - One plain sentence first that says why they are here, such as `One review item does not attach to a file, so it is presented here inline:`.
-  - Each is `- **<subject>**: <tier> <point>`, the subject a short sentence-case name for what the point is about. Its discussion nests under the bullet.
+- `<inline points>`: per PR points in `SKILL.md`, each `- **<subject>**: <tier> <point>`.
 
 ## Points
 
@@ -46,7 +44,6 @@ A point about lines the PR changes is a block at that site, or a group when it s
 ## Posting
 
 - When user requests "post", it means turning the latest round into a pending GitHub review batch.
-- Headers are for the user, so omitted when posting to GitHub.
 - The headline is never posted. The user pastes it when submitting.
 - Post one block at a time, in draft order. Stop and report on an existing pending review or a block GitHub rejects, and continue from the next block only when told.
 - Never submit the review even when requested.
