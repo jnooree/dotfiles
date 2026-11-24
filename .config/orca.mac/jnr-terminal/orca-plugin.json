@@ -1,0 +1,17 @@
+{
+  "manifestVersion": 2,
+  "id": "jnr-terminal",
+  "name": "JNR Terminal",
+  "version": "0.1.0",
+  "description": "Terminal colors of the JNR iTerm2 profile, light and dark.",
+  "engines": {
+    "orca": ">=1.4.246"
+  },
+  "execution": "data",
+  "contributes": {
+    "terminalThemes": [
+      { "id": "jnr-light", "title": "JNR Light", "path": "terminal/light.json" },
+      { "id": "jnr-dark", "title": "JNR Dark", "path": "terminal/dark.json" }
+    ]
+  }
+}
