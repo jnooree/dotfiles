@@ -84,6 +84,8 @@
 	process = git-lfs filter-process
 
 # Remote routing & auth
+[url "https://github.com/"]
+	insteadOf = gh:
 [url "https://github.com/Galux-Inc/"]
 	insteadOf = galux:
 [url "https://github.com/seoklab/"]
