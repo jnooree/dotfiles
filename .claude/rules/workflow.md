@@ -17,8 +17,9 @@ Number every finding, option, and question; I rule by index.
   earlier session's numbering is expected.
 - Every question carries a recommended answer, worded so "yes" accepts it.
 - An item my reply omits is accepted as recommended unless explicitly deferred.
-- An accepted item is not a go for an action: launching agents, code, commits,
-  and pushes each need their own go.
+- An accepted item is not a go for an action: launching agents, code, and
+  pushes each need their own go.
+- A yes to code is a yes to commit.
 
 Verb cues (none = no code):
 
