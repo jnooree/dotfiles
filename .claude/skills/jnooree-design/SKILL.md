@@ -147,3 +147,7 @@ given inline when skipped, and its commits are in the tree.
 - A sequencing ruling by the user (plan skipped, coder count, audit ruled
   out) holds for every rerun in the round until the user changes it.
   A no-coder the plan chose by brief length is re-decided per plan.
+
+Exit: an audit pass changes no code and the user accepts the report. In
+design mode, when not on the base branch, write `pr-summary.md` per
+`/gh-writeup`.
